@@ -31,19 +31,20 @@ router.post('/register/coach', (req, res, next) => {
 
   const queryText = `INSERT INTO "user" (username, password, first_name, last_name, city, email, dob, gender, role_id, strava_id)
     VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10) RETURNING id`;
+  const queryArray = [
+    username,
+    password,
+    first_name,
+    last_name,
+    city,
+    email,
+    dob,
+    gender,
+    role_id,
+    strava_id,
+  ];
   pool
-    .query(queryText, [
-      username,
-      password,
-      first_name,
-      last_name,
-      city,
-      email,
-      dob,
-      gender,
-      role_id,
-      strava_id,
-    ])
+    .query(queryText, queryArray)
     .then(() => res.sendStatus(201))
     .catch((err) => {
       console.log('User registration failed: ', err);
@@ -65,19 +66,20 @@ router.post('/register/athlete', (req, res, next) => {
 
   const queryText = `INSERT INTO "user" (username, password, first_name, last_name, city, email, dob, gender, role_id, strava_id)
     VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10) RETURNING id`;
+  const queryArray = [
+    username,
+    password,
+    first_name,
+    last_name,
+    city,
+    email,
+    dob,
+    gender,
+    role_id,
+    strava_id,
+  ];
   pool
-    .query(queryText, [
-      username,
-      password,
-      first_name,
-      last_name,
-      city,
-      email,
-      dob,
-      gender,
-      role_id,
-      strava_id,
-    ])
+    .query(queryText, queryArray)
     .then(() => res.sendStatus(201))
     .catch((err) => {
       console.log('User registration failed: ', err);
@@ -85,6 +87,7 @@ router.post('/register/athlete', (req, res, next) => {
     });
 });
 
+//updates athlete registration after the coach sends a link to the athlete
 router.put('/register/athlete/:id', (req, res) => {
   // PUT route code here
   const queryText = `UPDATE "user" SET username = $1, password = $2, city = $3, dob = $4, gender = $5, strava_id = $6 WHERE "id" = $7;`;
@@ -97,6 +100,21 @@ router.put('/register/athlete/:id', (req, res) => {
     req.body.strava_id,
     req.params.id,
   ];
+
+  pool
+    .query(queryText, queryArray)
+    .then((dbResponse) => {
+      res.sendStatus(200);
+    })
+    .catch((err) => {
+      console.log(err);
+      res.sendStatus(500);
+    });
+});
+
+router.delete('/delete/athlete/:id', (req, res) => {
+  const queryText = `DELETE FROM "user" WHERE id=$1;`;
+  const queryArray = [req.params.id];
 
   pool
     .query(queryText, queryArray)
