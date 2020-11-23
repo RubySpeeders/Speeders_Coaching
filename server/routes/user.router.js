@@ -90,7 +90,7 @@ router.post('/register/athlete', (req, res, next) => {
 //updates athlete registration after the coach sends a link to the athlete
 router.put('/register/athlete/:id', (req, res) => {
   // PUT route code here
-  const queryText = `UPDATE "user" SET username = $1, password = $2, city = $3, dob = $4, gender = $5, strava_id = $6 WHERE "id" = $7;`;
+  const queryText = `UPDATE "user" SET username=$1, password=$2, city=$3, dob=$4, gender=$5, strava_id=$6 WHERE "id"=$7;`;
   const queryArray = [
     req.body.username,
     encryptLib.encryptPassword(req.body.password),
