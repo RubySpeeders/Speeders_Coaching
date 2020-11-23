@@ -85,6 +85,30 @@ router.post('/register/athlete', (req, res, next) => {
     });
 });
 
+router.put('/register/athlete/:id', (req, res) => {
+  // PUT route code here
+  const queryText = `UPDATE "user" SET username = $1, password = $2, city = $3, dob = $4, gender = $5, strava_id = $6 WHERE "id" = $7;`;
+  const queryArray = [
+    req.body.username,
+    encryptLib.encryptPassword(req.body.password),
+    req.body.city,
+    req.body.dob,
+    req.body.gender,
+    req.body.strava_id,
+    req.params.id,
+  ];
+
+  pool
+    .query(queryText, queryArray)
+    .then((dbResponse) => {
+      res.sendStatus(200);
+    })
+    .catch((err) => {
+      console.log(err);
+      res.sendStatus(500);
+    });
+});
+
 // Handles login form authenticate/login POST
 // userStrategy.authenticate('local') is middleware that we run on this route
 // this middleware will run our POST if successful
