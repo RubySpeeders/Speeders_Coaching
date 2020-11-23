@@ -8,6 +8,9 @@ const userStrategy = require('../strategies/user.strategy');
 
 const router = express.Router();
 
+//custom imports
+const randomNumber = require('../modules/randomKeyGenerator');
+
 // Handles Ajax request for user information if user is authenticated
 router.get('/', rejectUnauthenticated, (req, res) => {
   // Send back user object from the session (previously queried from the database)
@@ -81,10 +84,8 @@ router.post('/register/athlete', (req, res, next) => {
   pool
     .query(queryText, queryArray)
     .then((dbResponse) => {
-      //console.log(req.user.id);
-      //res.sendStatus(201);
       const pendingStatus = 1;
-      const temporary_key = 12345;
+      const temporary_key = randomNumber();
       const newAthleteId = dbResponse.rows[0].id;
       const queryText = `INSERT INTO "invite" (coach_id, athlete_id, status, temporary_key) VALUES ($1, $2, $3, $4);`;
       const queryArray = [
@@ -134,6 +135,7 @@ router.put('/register/athlete/:id', (req, res) => {
     });
 });
 
+//deletes an athlete
 router.delete('/delete/athlete/:id', (req, res) => {
   const queryText = `DELETE FROM "user" WHERE id=$1;`;
   const queryArray = [req.params.id];
