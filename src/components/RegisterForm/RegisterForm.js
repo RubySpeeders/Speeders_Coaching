@@ -2,6 +2,18 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import mapStoreToProps from '../../redux/mapStoreToProps';
 
+//MATERIAL-UI imports
+import {
+  Container,
+  Button,
+  Grid,
+  TextField,
+  Select,
+  FormControl,
+  InputLabel,
+  MenuItem,
+} from '@material-ui/core';
+
 class RegisterForm extends Component {
   state = {
     first_name: '',
@@ -17,6 +29,9 @@ class RegisterForm extends Component {
     this.props.dispatch({
       type: 'REGISTER',
       payload: {
+        first_name: this.state.first_name,
+        last_name: this.state.last_name,
+        email: this.state.email,
         username: this.state.username,
         password: this.state.password,
       },
@@ -31,80 +46,101 @@ class RegisterForm extends Component {
 
   render() {
     return (
-      <form className="formPanel" onSubmit={this.registerUser}>
-        <h2>Register User</h2>
-        {this.props.store.errors.registrationMessage && (
-          <h3 className="alert" role="alert">
-            {this.props.store.errors.registrationMessage}
-          </h3>
-        )}
-        <div>
-          <label htmlFor="first_name">
-            First Name:
-            <input
+      <Container>
+        <form className="formPanel" onSubmit={this.registerUser}>
+          <h2>Register Coach</h2>
+          {this.props.store.errors.registrationMessage && (
+            <h3 className="alert" role="alert">
+              {this.props.store.errors.registrationMessage}
+            </h3>
+          )}
+          <div>
+            <TextField
               placeholder="First Name"
               type="text"
               name="first_name"
               value={this.state.first_name}
               required
+              variant="outlined"
               onChange={this.handleInputChangeFor('first_name')}
             />
-          </label>
-        </div>{' '}
-        <div>
-          <label htmlFor="last_name">
-            Last Name:
-            <input
+          </div>{' '}
+          <div>
+            <TextField
               placeholder="Last Name"
               type="text"
               name="last_name"
               value={this.state.last_name}
               required
+              variant="outlined"
               onChange={this.handleInputChangeFor('last_name')}
             />
-          </label>
-        </div>{' '}
-        <div>
-          <label htmlFor="email">
-            Email:
-            <input
+          </div>{' '}
+          <div>
+            <TextField
               placeholder="email"
               type="text"
               name="email"
               value={this.state.email}
               required
+              variant="outlined"
               onChange={this.handleInputChangeFor('email')}
             />
-          </label>
-        </div>
-        <div>
-          <label htmlFor="username">
-            Username:
-            <input
+          </div>
+          <div>
+            <TextField
+              placeholder="city"
+              type="text"
+              name="email"
+              value={this.state.email}
+              required
+              variant="outlined"
+              onChange={this.handleInputChangeFor('email')}
+            />
+          </div>
+          <div>
+            <TextField
+              placeholder="email"
+              type="text"
+              name="email"
+              value={this.state.email}
+              required
+              variant="outlined"
+              onChange={this.handleInputChangeFor('email')}
+            />
+          </div>
+          <div>
+            <TextField
+              placeholder="username"
               type="text"
               name="username"
               value={this.state.username}
               required
+              variant="outlined"
               onChange={this.handleInputChangeFor('username')}
             />
-          </label>
-        </div>
-        <div>
-          <label htmlFor="password">
-            Password:
-            <input
+          </div>
+          <div>
+            <TextField
+              placeholder="password"
               type="password"
               name="password"
               value={this.state.password}
               required
+              variant="outlined"
               onChange={this.handleInputChangeFor('password')}
             />
-          </label>
-        </div>
-        <div>
-          <input className="btn" type="submit" name="submit" value="Register" />
-        </div>
-      </form>
+          </div>
+          <div>
+            <input
+              className="btn"
+              type="submit"
+              name="submit"
+              value="Register"
+            />
+          </div>
+        </form>
+      </Container>
     );
   }
 }
