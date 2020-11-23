@@ -30,7 +30,7 @@ router.post('/register/coach', (req, res, next) => {
   const strava_id = req.body.strava_id;
 
   const queryText = `INSERT INTO "user" (username, password, first_name, last_name, city, email, dob, gender, role_id, strava_id)
-    VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10) RETURNING id`;
+    VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10) RETURNING id;`;
   const queryArray = [
     username,
     password,
@@ -53,7 +53,7 @@ router.post('/register/coach', (req, res, next) => {
 });
 
 router.post('/register/athlete', (req, res, next) => {
-  const username = 'TBD';
+  const username = req.body.username;
   const password = 'TBD';
   const first_name = req.body.first_name;
   const last_name = req.body.last_name;
@@ -65,7 +65,7 @@ router.post('/register/athlete', (req, res, next) => {
   const strava_id = 'TBD';
 
   const queryText = `INSERT INTO "user" (username, password, first_name, last_name, city, email, dob, gender, role_id, strava_id)
-    VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10) RETURNING id`;
+    VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10) RETURNING id;`;
   const queryArray = [
     username,
     password,
@@ -80,7 +80,29 @@ router.post('/register/athlete', (req, res, next) => {
   ];
   pool
     .query(queryText, queryArray)
-    .then(() => res.sendStatus(201))
+    .then((dbResponse) => {
+      //console.log(req.user.id);
+      //res.sendStatus(201);
+      const pendingStatus = 1;
+      const temporary_key = 12345;
+      const newAthleteId = dbResponse.rows[0].id;
+      const queryText = `INSERT INTO "invite" (coach_id, athlete_id, status, temporary_key) VALUES ($1, $2, $3, $4);`;
+      const queryArray = [
+        req.user.id,
+        newAthleteId,
+        pendingStatus,
+        temporary_key,
+      ];
+      pool
+        .query(queryText, queryArray)
+        .then((result) => {
+          res.sendStatus(201);
+        })
+        .catch((err) => {
+          console.log('User registration failed: ', err);
+          res.sendStatus(500);
+        });
+    })
     .catch((err) => {
       console.log('User registration failed: ', err);
       res.sendStatus(500);
