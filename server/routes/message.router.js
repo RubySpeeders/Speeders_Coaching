@@ -38,4 +38,20 @@ router.post('/', rejectUnauthenticated, (req, res) => {
     });
 });
 
+//delete a message
+router.delete('/:id', (req, res) => {
+  const queryText = `DELETE FROM "messages" WHERE id=$1;`;
+  const queryArrayData = [req.params.id];
+
+  pool
+    .query(queryText, queryArrayData)
+    .then((dbResponse) => {
+      res.sendStatus(200);
+    })
+    .catch((err) => {
+      console.log(err);
+      res.sendStatus(500);
+    });
+});
+
 module.exports = router;
