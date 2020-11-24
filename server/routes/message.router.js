@@ -7,7 +7,9 @@ const {
 
 // get all messages for the message board
 router.get('/', rejectUnauthenticated, (req, res) => {
-  let queryText = 'SELECT * FROM "messages" ORDER BY time_posted;';
+  let queryText = `SELECT message, time_posted, "user".first_name, "user".last_name FROM "messages"
+  JOIN "user" ON "messages".user_id="user".id
+  ORDER BY time_posted;`;
   pool
     .query(queryText)
     .then((dbResponse) => {
@@ -23,7 +25,7 @@ router.get('/', rejectUnauthenticated, (req, res) => {
 router.post('/', (req, res) => {
   const user_id = req.user.id;
   const message = req.body.message;
-  let queryText = `INSERT INTO "messages" (user_id, message) VALUES ($1, $2);`;
+  let queryText = `INSERT INTO "messages" (user_id, message, time_posted) VALUES ($1, $2, CURRENT_TIMESTAMP);`;
   let queryArray = [user_id, message];
   pool
     .query(queryText, queryArray)
