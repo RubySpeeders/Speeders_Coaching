@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import LogOutButton from '../LogOutButton/LogOutButton';
+import LogOutButton from '../../components/LogOutButton/LogOutButton';
 import mapStoreToProps from '../../redux/mapStoreToProps';
 
 //custom component imports
-import CoachHomepage from '../../pages/CoachHomepage/CoachHomepage';
-import AthleteHomepage from '../../pages/AthleteHomepage/AthleteHomepage';
+import CoachHomepage from '../CoachHomepage/CoachHomepage';
+import AthleteHomepage from '../AthleteHomepage/AthleteHomepage';
 
 class UserPage extends Component {
   // this component doesn't do much to start, just renders some user info to the DOM
