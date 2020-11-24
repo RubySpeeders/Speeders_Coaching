@@ -20,6 +20,7 @@ import LoginPage from '../../pages/LoginPage/LoginPage';
 import RegisterPage from '../../pages/RegisterPage/RegisterPage';
 import './App.css';
 import MessageBoard from '../../pages/MessageBoard/MessageBoard';
+import TipsTricks from '../../pages/TipsTricks/TipsTricks';
 
 class App extends Component {
   componentDidMount() {
@@ -92,6 +93,7 @@ class App extends Component {
               authRedirect="/user"
             />
             <Route exact path="/message" component={MessageBoard} />
+            <Route exact path="/tips" component={TipsTricks} />
             {/* If none of the other routes matched, we will show a 404. */}
 
             <Route render={() => <h1>404</h1>} />
