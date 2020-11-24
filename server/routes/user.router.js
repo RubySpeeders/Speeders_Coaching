@@ -97,7 +97,7 @@ router.post('/register/athlete', (req, res, next) => {
       pool
         .query(queryText, queryArray)
         .then((dbResponse) => {
-          const new_athlete_id = dbResponse.rows[0].id;
+          const new_athlete_id = dbResponse.rows[0].athlete_id;
           const rest = 1;
           const long_run = 1;
           const speed = false;
@@ -151,21 +151,65 @@ router.post('/register/athlete', (req, res, next) => {
 //updates athlete registration after the coach sends a link to the athlete
 router.put('/register/athlete/:id', (req, res) => {
   // PUT route code here
+  const username = req.body.username;
+  const password = encryptLib.encryptPassword(req.body.password);
+  const city = req.body.city;
+  const dob = req.body.dob;
+  const gender = req.body.gender;
+  const strava_id = req.body.strava_id;
+  const athlete_id = req.params.id;
   const queryText = `UPDATE "user" SET username=$1, password=$2, city=$3, dob=$4, gender=$5, strava_id=$6 WHERE "id"=$7;`;
   const queryArray = [
-    req.body.username,
-    encryptLib.encryptPassword(req.body.password),
-    req.body.city,
-    req.body.dob,
-    req.body.gender,
-    req.body.strava_id,
-    req.params.id,
+    username,
+    password,
+    city,
+    dob,
+    gender,
+    strava_id,
+    athlete_id,
   ];
 
   pool
     .query(queryText, queryArray)
     .then((dbResponse) => {
-      res.sendStatus(200);
+      const rest = req.body.rest_day;
+      const long_run = req.body.long_run_day;
+      const speed = req.body.speed_work;
+      const history = req.body.run_history;
+      const avg = req.body.avg_weekly_mileage;
+      const injury = req.body.injury;
+      const injury_description = req.body.injury_description;
+      const med = req.body.medication;
+      const med_description = req.body.medication_description;
+      const health = req.body.health_risk_comments;
+      const life = req.body.life_outside_running;
+      const general = req.body.general_comments;
+      const athlete_id = req.params.id;
+      const queryText = `UPDATE "athlete_info" SET rest_day=$1, long_run_day=$2, speed_work=$3, run_history=$4, avg_weekly_mileage=$5, injury=$6, injury_description=$7, medication=$8, medication_description=$9, health_risk_comments=$10, life_outside_running=$11, general_comments=$12 WHERE "id"=$13;`;
+      const queryArray = [
+        rest,
+        long_run,
+        speed,
+        history,
+        avg,
+        injury,
+        injury_description,
+        med,
+        med_description,
+        health,
+        life,
+        general,
+        athlete_id,
+      ];
+      pool
+        .query(queryText, queryArray)
+        .then((dbResponse) => {
+          res.sendStatus(200);
+        })
+        .catch((err) => {
+          console.log(err);
+          res.sendStatus(500);
+        });
     })
     .catch((err) => {
       console.log(err);
