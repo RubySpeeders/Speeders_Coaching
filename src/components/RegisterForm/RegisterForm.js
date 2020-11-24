@@ -12,6 +12,7 @@ import {
   FormControl,
   InputLabel,
   MenuItem,
+  KeyboardDatePicker,
 } from '@material-ui/core';
 
 class RegisterForm extends Component {
@@ -32,6 +33,7 @@ class RegisterForm extends Component {
         first_name: this.state.first_name,
         last_name: this.state.last_name,
         email: this.state.email,
+        dob: this.state.dob,
         username: this.state.username,
         password: this.state.password,
       },
@@ -78,17 +80,6 @@ class RegisterForm extends Component {
           </div>{' '}
           <div>
             <TextField
-              placeholder="email"
-              type="text"
-              name="email"
-              value={this.state.email}
-              required
-              variant="outlined"
-              onChange={this.handleInputChangeFor('email')}
-            />
-          </div>
-          <div>
-            <TextField
               placeholder="city"
               type="text"
               name="email"
@@ -109,6 +100,15 @@ class RegisterForm extends Component {
               onChange={this.handleInputChangeFor('email')}
             />
           </div>
+          {/* <div>
+            <KeyboardDatePicker
+              format="MM/dd/yyyy"
+              required
+              value={this.state.dob}
+              label="dob"
+              onChange={this.handleInputChangeFor('dob')}
+            />
+          </div> */}
           <div>
             <TextField
               placeholder="username"
@@ -132,12 +132,14 @@ class RegisterForm extends Component {
             />
           </div>
           <div>
-            <input
-              className="btn"
+            <Button
               type="submit"
-              name="submit"
-              value="Register"
-            />
+              variant="contained"
+              // name="submit"
+              // value="Register"
+            >
+              Register
+            </Button>
           </div>
         </form>
       </Container>
