@@ -12,7 +12,6 @@ import {
   FormControl,
   InputLabel,
   MenuItem,
-  KeyboardDatePicker,
 } from '@material-ui/core';
 
 class RegisterForm extends Component {
@@ -100,15 +99,18 @@ class RegisterForm extends Component {
               onChange={this.handleInputChangeFor('email')}
             />
           </div>
-          {/* <div>
-            <KeyboardDatePicker
-              format="MM/dd/yyyy"
-              required
-              value={this.state.dob}
+          <div>
+            <TextField
+              id="dob"
               label="dob"
+              type="date"
               onChange={this.handleInputChangeFor('dob')}
+              variant="outlined"
+              InputLabelProps={{
+                shrink: true,
+              }}
             />
-          </div> */}
+          </div>
           <div>
             <TextField
               placeholder="username"
