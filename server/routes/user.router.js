@@ -185,7 +185,7 @@ router.put('/register/athlete/:id', (req, res) => {
       const life = req.body.life_outside_running;
       const general = req.body.general_comments;
       const athlete_id = req.params.id;
-      const queryText = `UPDATE "athlete_info" SET rest_day=$1, long_run_day=$2, speed_work=$3, run_history=$4, avg_weekly_mileage=$5, injury=$6, injury_description=$7, medication=$8, medication_description=$9, health_risk_comments=$10, life_outside_running=$11, general_comments=$12 WHERE "id"=$13;`;
+      const queryText = `UPDATE "athlete_info" SET rest_day=$1, long_run_day=$2, speed_work=$3, run_history=$4, avg_weekly_mileage=$5, injury=$6, injury_description=$7, medication=$8, medication_description=$9, health_risk_comments=$10, life_outside_running=$11, general_comments=$12 WHERE "athlete_id"=$13;`;
       const queryArray = [
         rest,
         long_run,
@@ -219,13 +219,33 @@ router.put('/register/athlete/:id', (req, res) => {
 
 //deletes an athlete
 router.delete('/delete/athlete/:id', (req, res) => {
-  const queryText = `DELETE FROM "user" WHERE id=$1;`;
+  const queryText = `DELETE FROM "invite" WHERE athlete_id=$1;`;
   const queryArray = [req.params.id];
 
   pool
     .query(queryText, queryArray)
     .then((dbResponse) => {
-      res.sendStatus(200);
+      const queryText = `DELETE FROM "athlete_info" WHERE athlete_id=$1;`;
+      const queryArray = [req.params.id];
+      pool
+        .query(queryText, queryArray)
+        .then((dbResponse) => {
+          const queryText = `DELETE FROM "user" WHERE id=$1;`;
+          const queryArray = [req.params.id];
+          pool
+            .query(queryText, queryArray)
+            .then((dbResponse) => {
+              res.sendStatus(200);
+            })
+            .catch((err) => {
+              console.log(err);
+              res.sendStatus(500);
+            });
+        })
+        .catch((err) => {
+          console.log(err);
+          res.sendStatus(500);
+        });
     })
     .catch((err) => {
       console.log(err);
