@@ -86,18 +86,56 @@ router.post('/register/athlete', (req, res, next) => {
     .then((dbResponse) => {
       const pendingStatus = 1;
       const temporary_key = randomNumber();
-      const newAthleteId = dbResponse.rows[0].id;
-      const queryText = `INSERT INTO "invite" (coach_id, athlete_id, status, temporary_key) VALUES ($1, $2, $3, $4);`;
+      const new_athlete_id = dbResponse.rows[0].id;
+      const queryText = `INSERT INTO "invite" (coach_id, athlete_id, status, temporary_key) VALUES ($1, $2, $3, $4) RETURNING athlete_id;`;
       const queryArray = [
         req.user.id,
-        newAthleteId,
+        new_athlete_id,
         pendingStatus,
         temporary_key,
       ];
       pool
         .query(queryText, queryArray)
-        .then((result) => {
-          res.sendStatus(201);
+        .then((dbResponse) => {
+          const new_athlete_id = dbResponse.rows[0].id;
+          const rest = 1;
+          const long_run = 1;
+          const speed = false;
+          const history = 'tbd';
+          const avg = 'tbd';
+          const injury = false;
+          const injury_description = 'tbd';
+          const med = false;
+          const med_description = 'tbd';
+          const health = 'tbd';
+          const life = 'tbd';
+          const general = 'tbd';
+          const queryText = `INSERT INTO "athlete_info" (athlete_id, coach_id, rest_day, long_run_day, speed_work, run_history, avg_weekly_mileage, injury, injury_description, medication, medication_description, health_risk_comments, life_outside_running, general_comments) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14);`;
+          const queryArray = [
+            new_athlete_id,
+            req.user.id,
+            rest,
+            long_run,
+            speed,
+            history,
+            avg,
+            injury,
+            injury_description,
+            med,
+            med_description,
+            health,
+            life,
+            general,
+          ];
+          pool
+            .query(queryText, queryArray)
+            .then((dbResponse) => {
+              res.sendStatus(201);
+            })
+            .catch((err) => {
+              console.log('User registration failed: ', err);
+              res.sendStatus(500);
+            });
         })
         .catch((err) => {
           console.log('User registration failed: ', err);
@@ -150,6 +188,12 @@ router.delete('/delete/athlete/:id', (req, res) => {
       res.sendStatus(500);
     });
 });
+
+//gets all athlete info
+// router.get('/athlete', (req, res) => {
+
+//   const queryText = `SELECT * FROM`
+// });
 
 // Handles login form authenticate/login POST
 // userStrategy.authenticate('local') is middleware that we run on this route
