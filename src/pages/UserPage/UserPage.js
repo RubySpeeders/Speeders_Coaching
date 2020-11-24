@@ -4,8 +4,8 @@ import LogOutButton from '../LogOutButton/LogOutButton';
 import mapStoreToProps from '../../redux/mapStoreToProps';
 
 //custom component imports
-import CoachHomepage from '../CoachHomepage/CoachHomepage';
-import AthleteHomepage from '../AthleteHomepage/AthleteHomepage';
+import CoachHomepage from '../../pages/CoachHomepage/CoachHomepage';
+import AthleteHomepage from '../../pages/AthleteHomepage/AthleteHomepage';
 
 class UserPage extends Component {
   // this component doesn't do much to start, just renders some user info to the DOM
