@@ -31,8 +31,10 @@ class RegisterForm extends Component {
       payload: {
         first_name: this.state.first_name,
         last_name: this.state.last_name,
+        city: this.state.city,
         email: this.state.email,
         dob: this.state.dob,
+        gender: this.state.gender,
         username: this.state.username,
         password: this.state.password,
       },
@@ -40,9 +42,14 @@ class RegisterForm extends Component {
   }; // end registerUser
 
   handleInputChangeFor = (propertyName) => (event) => {
-    this.setState({
-      [propertyName]: event.target.value,
-    });
+    this.setState(
+      {
+        [propertyName]: event.target.value,
+      },
+      () => {
+        console.log(this.state);
+      }
+    );
   };
 
   render() {
@@ -57,7 +64,7 @@ class RegisterForm extends Component {
           )}
           <div>
             <TextField
-              placeholder="First Name"
+              placeholder="first name"
               type="text"
               name="first_name"
               value={this.state.first_name}
@@ -68,7 +75,7 @@ class RegisterForm extends Component {
           </div>{' '}
           <div>
             <TextField
-              placeholder="Last Name"
+              placeholder="last name"
               type="text"
               name="last_name"
               value={this.state.last_name}
@@ -81,11 +88,11 @@ class RegisterForm extends Component {
             <TextField
               placeholder="city"
               type="text"
-              name="email"
-              value={this.state.email}
+              name="city"
+              value={this.state.city}
               required
               variant="outlined"
-              onChange={this.handleInputChangeFor('email')}
+              onChange={this.handleInputChangeFor('city')}
             />
           </div>
           <div>
@@ -104,13 +111,29 @@ class RegisterForm extends Component {
               id="dob"
               label="dob"
               type="date"
+              value={this.state.dob}
               onChange={this.handleInputChangeFor('dob')}
               variant="outlined"
-              InputLabelProps={{
-                shrink: true,
-              }}
             />
           </div>
+          <FormControl variant="outlined">
+            <InputLabel id="gender">Gender</InputLabel>
+            <Select
+              labelId="gender"
+              id="gender"
+              value={this.state.gender}
+              onChange={this.handleInputChangeFor('gender')}
+              label="gender"
+            >
+              <MenuItem value="">
+                <em>None</em>
+              </MenuItem>
+              <MenuItem value={'Female'}>Female</MenuItem>
+              <MenuItem value={'Male'}>Male</MenuItem>
+              <MenuItem value={'Non-binary'}>Non-binary</MenuItem>
+              <MenuItem value={'N/A'}>Prefer not to say</MenuItem>
+            </Select>
+          </FormControl>
           <div>
             <TextField
               placeholder="username"
@@ -140,7 +163,7 @@ class RegisterForm extends Component {
               // name="submit"
               // value="Register"
             >
-              Register
+              Register Coach
             </Button>
           </div>
         </form>
