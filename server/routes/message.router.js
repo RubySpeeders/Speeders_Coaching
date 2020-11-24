@@ -38,6 +38,23 @@ router.post('/', rejectUnauthenticated, (req, res) => {
     });
 });
 
+//edit a message
+router.put('/:id', (req, res) => {
+  const newMessage = req.body.message;
+  const queryText = `UPDATE "messages" SET message=$1, time_posted=CURRENT_TIMESTAMP WHERE id=$2;`;
+  const queryArray = [newMessage, req.params.id];
+
+  pool
+    .query(queryText, queryArray)
+    .then((dbResponse) => {
+      res.sendStatus(200);
+    })
+    .catch((err) => {
+      console.log(err);
+      res.sendStatus(500);
+    });
+});
+
 //delete a message
 router.delete('/:id', (req, res) => {
   const queryText = `DELETE FROM "messages" WHERE id=$1;`;

@@ -57,4 +57,30 @@ router.delete('/:id', (req, res) => {
     });
 });
 
+//edit a tip
+router.put('/:id', (req, res) => {
+  const newTitle = req.body.title;
+  const newArticle = req.body.article_link;
+  const newVideo = req.body.video_link;
+  const newComments = req.body.comments;
+  const queryText = `UPDATE "tips_and_tricks" SET title = $1, article_link = $2, video_link = $3, comments = $4, time_posted=CURRENT_TIMESTAMP WHERE id=$5;`;
+  const queryArray = [
+    newTitle,
+    newArticle,
+    newVideo,
+    newComments,
+    req.params.id,
+  ];
+
+  pool
+    .query(queryText, queryArray)
+    .then((dbResponse) => {
+      res.sendStatus(200);
+    })
+    .catch((err) => {
+      console.log(err);
+      res.sendStatus(500);
+    });
+});
+
 module.exports = router;
