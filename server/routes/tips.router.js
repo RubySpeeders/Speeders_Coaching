@@ -5,10 +5,10 @@ const {
   rejectUnauthenticated,
 } = require('../modules/authentication-middleware');
 
-// get all messages for the message board
+// get all tips & tricks
 router.get('/', rejectUnauthenticated, (req, res) => {
-  let queryText = `SELECT message, time_posted, "user".first_name, "user".last_name FROM "messages"
-  JOIN "user" ON "messages".user_id="user".id
+  let queryText = `SELECT title, article_link, video_link, comments, time_posted, "user".first_name, "user".last_name FROM "tips_and_tricks"
+  JOIN "user" ON "tips_and_tricks".user_id="user".id
   ORDER BY time_posted;`;
   pool
     .query(queryText)
@@ -16,17 +16,20 @@ router.get('/', rejectUnauthenticated, (req, res) => {
       res.send(dbResponse.rows);
     })
     .catch((error) => {
-      console.log('error getting messages', error);
+      console.log('error getting tips & tricks', error);
       res.sendStatus(500);
     });
 });
 
-//  post a message on the message board
+// add another tip & trick
 router.post('/', rejectUnauthenticated, (req, res) => {
   const user_id = req.user.id;
-  const message = req.body.message;
-  let queryText = `INSERT INTO "messages" (user_id, message, time_posted) VALUES ($1, $2, CURRENT_TIMESTAMP);`;
-  let queryArray = [user_id, message];
+  const title = req.body.title;
+  const article_link = req.body.article_link;
+  const video_link = req.body.video_link;
+  const comments = req.body.comments;
+  let queryText = `INSERT INTO "tips_and_tricks" (user_id, title, article_link, video_link, comments, time_posted) VALUES ($1, $2, $3, $4, $5, CURRENT_TIMESTAMP);`;
+  let queryArray = [user_id, title, article_link, video_link, comments];
   pool
     .query(queryText, queryArray)
     .then((dbResponse) => {
