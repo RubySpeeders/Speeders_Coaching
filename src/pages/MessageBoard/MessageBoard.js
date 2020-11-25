@@ -28,6 +28,9 @@ class MessageBoard extends Component {
   postMessage = (e) => {
     e.preventDefault();
     this.props.dispatch({ type: 'POST_MESSAGE', payload: this.state });
+    this.setState({
+      message: '',
+    });
   };
   render() {
     return (
@@ -38,6 +41,7 @@ class MessageBoard extends Component {
             placeholder="write a message!"
             variant="outlined"
             onChange={this.handleChange}
+            value={this.state.message}
           />
           <Button type="submit" variant="contained">
             Post
