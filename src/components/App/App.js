@@ -21,6 +21,8 @@ import RegisterPage from '../../pages/RegisterPage/RegisterPage';
 import './App.css';
 import MessageBoard from '../../pages/MessageBoard/MessageBoard';
 import TipsTricks from '../../pages/TipsTricks/TipsTricks';
+import AthleteRegistrationOne from '../../pages/AthleteRegistration/AthleteRegistration_1';
+import AthleteRegistrationTwo from '../../pages/AthleteRegistration/AthleteRegistration_2';
 
 class App extends Component {
   componentDidMount() {
@@ -92,8 +94,18 @@ class App extends Component {
               component={LandingPage}
               authRedirect="/user"
             />
-            <Route exact path="/message" component={MessageBoard} />
-            <Route exact path="/tips" component={TipsTricks} />
+            <ProtectedRoute exact path="/message" component={MessageBoard} />
+            <ProtectedRoute exact path="/tips" component={TipsTricks} />
+            <Route
+              exact
+              path="/registration/athlete/page1"
+              component={AthleteRegistrationOne}
+            />
+            <Route
+              exact
+              path="/registration/athlete/page2"
+              component={AthleteRegistrationTwo}
+            />
             {/* If none of the other routes matched, we will show a 404. */}
 
             <Route render={() => <h1>404</h1>} />
