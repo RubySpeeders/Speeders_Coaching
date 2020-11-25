@@ -15,21 +15,19 @@ import {
   Typography,
 } from '@material-ui/core';
 
-class AthleteRegistrationTwo extends Component {
-  componentDidMount() {
-    //dispatch to get days of the week for the dropdown
-    this.props.dispatch({ type: 'GET_DAYS' });
-  }
+class AthleteRegistrationFour extends Component {
   state = {
-    rest_day: '',
-    long_run_day: '',
-    speed_work: '',
+    injury: '',
+    injury_description: '',
+    medication: '',
+    medication_description: '',
+    health_risk_comment: '',
   };
 
   handleNext = (e) => {
     e.preventDefault();
     // this.props.dispatch({ type: 'UPDATE_FEELING', payload: this.state });
-    this.props.history.push('/registration/athlete/page3');
+    this.props.history.push('/registration/athlete/page5');
   };
 
   handleInputChangeFor = (propertyName) => (event) => {
@@ -39,17 +37,10 @@ class AthleteRegistrationTwo extends Component {
   };
 
   render() {
-    const day = this.props.store.days.map((item, index) => {
-      return (
-        <MenuItem value={item.id} key={index}>
-          {item.day}
-        </MenuItem>
-      );
-    });
     return (
       <Container>
         <form onSubmit={this.handleNext}>
-          <Typography gutterBottom>Running Details</Typography>
+          <Typography gutterBottom>Health Details</Typography>
           {this.props.store.errors.registrationMessage && (
             <h3 className="alert" role="alert">
               {this.props.store.errors.registrationMessage}
@@ -114,4 +105,4 @@ class AthleteRegistrationTwo extends Component {
   }
 }
 
-export default connect(mapStoreToProps)(AthleteRegistrationTwo);
+export default connect(mapStoreToProps)(AthleteRegistrationFour);

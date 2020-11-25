@@ -48,7 +48,9 @@ router.post('/register/coach', (req, res, next) => {
   ];
   pool
     .query(queryText, queryArray)
-    .then(() => res.sendStatus(201))
+    .then(() => {
+      res.sendStatus(201);
+    })
     .catch((err) => {
       console.log('User registration failed: ', err);
       res.sendStatus(500);
@@ -64,13 +66,7 @@ router.post('/register/athlete', (req, res, next) => {
 
   const queryText = `INSERT INTO "user" (username, first_name, last_name, email, role_id)
     VALUES ($1, $2, $3, $4, $5) RETURNING id;`;
-  const queryArray = [
-    username,
-    first_name,
-    last_name,
-    email,
-    role_id,
-  ];
+  const queryArray = [username, first_name, last_name, email, role_id];
   pool
     .query(queryText, queryArray)
     .then((dbResponse) => {
@@ -87,17 +83,30 @@ router.post('/register/athlete', (req, res, next) => {
       pool
         .query(queryText, queryArray)
         .then((dbResponse) => {
+          const new_athlete_id = dbResponse.rows[0].id;
+          const coach_id = req.user.id;
+          const queryText = `INSERT INTO "athlete_info" (athlete_id, coach_id) VALUES ($1, $2);`;
+          const queryArray = [new_athlete_id, coach_id];
+          pool
+            .query(queryText, queryArray)
+            .then((dbResponse) => {
               res.sendStatus(201);
             })
             .catch((err) => {
-              console.log('User registration failed: ', err);
+              console.log('User registration failed for athlete_info: ', err);
               res.sendStatus(500);
             });
         })
+        .catch((err) => {
+          console.log('User registration failed for invite: ', err);
+          res.sendStatus(500);
+        });
+    })
     .catch((err) => {
-      console.log('User registration failed: ', err);
+      console.log('User registration failed for user: ', err);
       res.sendStatus(500);
     });
+});
 
 //updates athlete registration after the coach sends a link to the athlete
 router.put('/register/athlete/:id', (req, res) => {
@@ -119,49 +128,86 @@ router.put('/register/athlete/:id', (req, res) => {
     strava_id,
     athlete_id,
   ];
-
   pool
     .query(queryText, queryArray)
     .then((dbResponse) => {
-      const rest = req.body.rest_day;
-      const long_run = req.body.long_run_day;
-      const speed = req.body.speed_work;
-      const history = req.body.run_history;
-      const avg = req.body.avg_weekly_mileage;
-      const injury = req.body.injury;
-      const injury_description = req.body.injury_description;
-      const med = req.body.medication;
-      const med_description = req.body.medication_description;
-      const health = req.body.health_risk_comments;
-      const life = req.body.life_outside_running;
-      const general = req.body.general_comments;
-      const athlete_id = req.params.id;
-      const queryText = `UPDATE "athlete_info" SET rest_day=$1, long_run_day=$2, speed_work=$3, run_history=$4, avg_weekly_mileage=$5, injury=$6, injury_description=$7, medication=$8, medication_description=$9, health_risk_comments=$10, life_outside_running=$11, general_comments=$12 WHERE "athlete_id"=$13;`;
-      const queryArray = [
-        rest,
-        long_run,
-        speed,
-        history,
-        avg,
-        injury,
-        injury_description,
-        med,
-        med_description,
-        health,
-        life,
-        general,
-        athlete_id,
-      ];
-      pool
-        .query(queryText, queryArray)
-        .then((dbResponse) => {
+      res.sendStatus(200);
+    })
+    .catch((err) => {
+      console.log(err);
+      res.sendStatus(500);
+    });
+});
 
-          res.sendStatus(200);
-        })
-        .catch((err) => {
-          console.log(err);
-          res.sendStatus(500);
-        });
+//sends new athlete_info data when athlete registers.
+router.post('/register/athlete/personaldetails', (req, res, next) => {
+  const rest_day = req.body.rest_day;
+  const long_run_day = req.body.long_run_day;
+  const speed_work = req.body.speed_work;
+  const run_history = req.body.run_history;
+  const avg_weekly_mileage = req.body.avg_weekly_mileage;
+  const injury = req.body.injury;
+  const injury_description = req.body.injury_description;
+  const medication = req.body.medication;
+  const medication_description = req.body.medication_description;
+  const health_risk_comments = req.body.health_risk_comments;
+  const life_outside_running = req.body.life_outside_running;
+  const general_comments = req.body.general_comments;
+
+  const queryText = `INSERT INTO "athlete_info" (rest_day, long_run_day, speed_work, run_history, avg_weekly_mileage, injury, injury_description, medication, medication_description, health_risk_comments, life_outside_running, general_comments)
+    VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12) RETURNING id;`;
+  const queryArray = [
+    rest_day,
+    long_run_day,
+    speed_work,
+    run_history,
+    avg_weekly_mileage,
+    injury,
+    injury_description,
+    medication,
+    medication_description,
+    health_risk_comments,
+    life_outside_running,
+    general_comments,
+  ];
+  pool
+    .query(queryText, queryArray)
+    .then((dbResponse) => {
+      //get the id from the return from above query
+      res.sendStatus(201);
+    })
+    .catch((err) => {
+      console.log('massive error', err);
+      res.sendStatus(500);
+    });
+});
+
+router.put('/register/athlete/page3', (req, res) => {
+  try {
+    const athlete_info_id = dbResponse.rows[0].id;
+    const athlete_exercise_array = [];
+    //iterate through the array of checked off other exercises
+    for (let i = 0; i < req.body.other_exercise.length; i++) {
+      const queryText = `INSERT INTO "athlete_other_exercise" (athlete_info_id, other_exercise_id) VALUES ($1, $2);`;
+      const queryArray = [athlete_info_id, req.body.other_exercise[i]];
+
+      athlete_exercise_array.push(pool.query(queryText, queryArray));
+    }
+    Promise.all(athlete_exercise_array);
+  } catch (err) {
+    console.log('first query post', err);
+    res.sendStatus(500);
+  }
+});
+
+//updates invite from pending to completed after registration is complete
+router.put('/register/athlete/:id', (req, res) => {
+  const queryText = `UPDATE "invite" SET status=2 WHERE "athlete_id"=$1;`;
+  const queryArray = [req.params.id];
+  pool
+    .query(queryText, queryArray)
+    .then((dbResponse) => {
+      res.sendStatus(200);
     })
     .catch((err) => {
       console.log(err);

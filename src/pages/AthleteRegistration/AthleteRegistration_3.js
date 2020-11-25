@@ -5,9 +5,13 @@ import mapStoreToProps from '../../redux/mapStoreToProps';
 //MATERIAL-UI imports
 import {
   Container,
+  Typography,
   Button,
   Grid,
   TextField,
+  FormGroup,
+  Checkbox,
+  FormControlLabel,
   Select,
   FormControl,
   InputLabel,
@@ -28,7 +32,7 @@ class AthleteRegistrationThree extends Component {
   handleNext = (e) => {
     e.preventDefault();
     // this.props.dispatch({ type: 'UPDATE_FEELING', payload: this.state });
-    this.props.history.push('/registration/athlete/page3');
+    this.props.history.push('/registration/athlete/page4');
   };
 
   handleInputChangeFor = (propertyName) => (event) => {
@@ -37,18 +41,25 @@ class AthleteRegistrationThree extends Component {
     });
   };
 
+  handleChangeForChecks = (propertyName) => (event) => {
+    this.setState({
+      ...this.state,
+      [event.target.name]: event.target.checked,
+    });
+  };
+
   render() {
     return (
       <Container>
         <form onSubmit={this.handleNext}>
-          <h2>Fun Stuff</h2>
+          <Typography gutterBottom>Fun Stuff</Typography>
           {this.props.store.errors.registrationMessage && (
             <h3 className="alert" role="alert">
               {this.props.store.errors.registrationMessage}
             </h3>
           )}
 
-          <FormControl variant="outlined">
+          <FormControl variant="outlined" fullWidth>
             <InputLabel id="rest-day">
               How long have you been running?
             </InputLabel>
@@ -104,26 +115,20 @@ class AthleteRegistrationThree extends Component {
                 <em>20+ miles</em>
               </MenuItem>
             </Select>
-            <InputLabel id="speed">Speed Work</InputLabel>
-            <Select
-              fullWidth
-              labelId="speed"
-              value={this.state.speed_work}
-              onChange={this.handleInputChangeFor('speed_work')}
-              label="speed_work"
-            >
-              <MenuItem value="">
-                <em>None</em>
-              </MenuItem>
-              <MenuItem value={'Yes, loads of it!'}>Yes, loads of it!</MenuItem>
-              <MenuItem value={'Never heard of it.'}>
-                Never heard of it.
-              </MenuItem>
-              <MenuItem value={'Some - I have heard of it but never tried it.'}>
-                Some - I have heard of it but never tried it.
-              </MenuItem>
-            </Select>
           </FormControl>
+          <FormGroup row>
+            <FormControlLabel
+              control={
+                <Checkbox
+                  // checked={this.state.checkedB}
+                  onChange={this.handleChangeForChecks}
+                  name="checkedB"
+                  color="primary"
+                />
+              }
+              label="Primary"
+            />
+          </FormGroup>
           <div>
             <Button type="submit" variant="contained">
               Next
