@@ -23,6 +23,7 @@ import MessageBoard from '../../pages/MessageBoard/MessageBoard';
 import TipsTricks from '../../pages/TipsTricks/TipsTricks';
 import AthleteRegistrationOne from '../../pages/AthleteRegistration/AthleteRegistration_1';
 import AthleteRegistrationTwo from '../../pages/AthleteRegistration/AthleteRegistration_2';
+import AthleteRegistrationThree from '../../pages/AthleteRegistration/AthleteRegistration_3';
 
 class App extends Component {
   componentDidMount() {
@@ -105,6 +106,11 @@ class App extends Component {
               exact
               path="/registration/athlete/page2"
               component={AthleteRegistrationTwo}
+            />
+            <Route
+              exact
+              path="/registration/athlete/page3"
+              component={AthleteRegistrationThree}
             />
             {/* If none of the other routes matched, we will show a 404. */}
 

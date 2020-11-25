@@ -4,9 +4,10 @@ import { all } from 'redux-saga/effects';
 import loginSaga from './login.saga';
 import registrationSaga from './registration.saga';
 import userSaga from './user.saga';
-import messageSaga from './messages.saga';
+import getMessagesSaga from './getMessages.saga';
 import tipsSaga from './tips.saga';
 import daysSaga from './days.saga';
+import postMessagesSaga from './postMessages.saga';
 
 // rootSaga is the primary saga.
 // It bundles up all of the other sagas so our project can use them.
@@ -20,8 +21,9 @@ export default function* rootSaga() {
     loginSaga(), // login saga is now registered
     registrationSaga(),
     userSaga(),
-    messageSaga(),
+    getMessagesSaga(),
     tipsSaga(),
     daysSaga(),
+    postMessagesSaga(),
   ]);
 }

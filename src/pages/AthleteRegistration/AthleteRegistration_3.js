@@ -14,7 +14,7 @@ import {
   MenuItem,
 } from '@material-ui/core';
 
-class AthleteRegistrationTwo extends Component {
+class AthleteRegistrationThree extends Component {
   componentDidMount() {
     //dispatch to get days of the week for the dropdown
     this.props.dispatch({ type: 'GET_DAYS' });
@@ -38,17 +38,10 @@ class AthleteRegistrationTwo extends Component {
   };
 
   render() {
-    const day = this.props.store.days.map((item, index) => {
-      return (
-        <MenuItem value={item.id} key={index}>
-          {item.day}
-        </MenuItem>
-      );
-    });
     return (
       <Container>
         <form onSubmit={this.handleNext}>
-          <h2>Running Details</h2>
+          <h2>Fun Stuff</h2>
           {this.props.store.errors.registrationMessage && (
             <h3 className="alert" role="alert">
               {this.props.store.errors.registrationMessage}
@@ -56,31 +49,60 @@ class AthleteRegistrationTwo extends Component {
           )}
 
           <FormControl variant="outlined">
-            <InputLabel id="rest-day">Preferred Rest Day</InputLabel>
+            <InputLabel id="rest-day">
+              How long have you been running?
+            </InputLabel>
             <Select
               fullWidth
-              labelId="rest-day"
-              value={this.state.rest_day}
-              onChange={this.handleInputChangeFor('rest_day')}
-              label="rest_day"
+              labelId="run-history"
+              value={this.state.run_history}
+              onChange={this.handleInputChangeFor('run_history')}
+              label="run_history"
             >
               <MenuItem value="">
                 <em>None</em>
               </MenuItem>
-              {day}
+              <MenuItem value="no experience">
+                <em>No experience</em>
+              </MenuItem>
+              <MenuItem value="1-2 years">
+                <em>1-2 years</em>
+              </MenuItem>
+              <MenuItem value="2-4 years">
+                <em>2-4 years</em>
+              </MenuItem>
+              <MenuItem value="5+ years">
+                <em>5+ years</em>
+              </MenuItem>
             </Select>
-            <InputLabel id="long-run-day">Preferred Long Run Day</InputLabel>
+            <InputLabel id="avg-weekly-miles">
+              How much do you run every week?
+            </InputLabel>
             <Select
               fullWidth
-              labelId="long-run-day"
-              value={this.state.long_run_day}
-              onChange={this.handleInputChangeFor('long_run_day')}
-              label="long_run_day"
+              labelId="avg-weekly-miles"
+              value={this.state.avg_weekly_mileage}
+              onChange={this.handleInputChangeFor('avg_weekly_mileage')}
+              label="avg_weekly_mileage"
             >
               <MenuItem value="">
                 <em>None</em>
               </MenuItem>
-              {day}
+              <MenuItem value="0-5 miles">
+                <em>0-5 miles</em>
+              </MenuItem>
+              <MenuItem value="5-10 miles">
+                <em>5-10 miles</em>
+              </MenuItem>
+              <MenuItem value="10-15 miles">
+                <em>10-15 miles</em>
+              </MenuItem>
+              <MenuItem value="15-20 miles">
+                <em>15-20 miles</em>
+              </MenuItem>
+              <MenuItem value="20+ miles">
+                <em>20+ miles</em>
+              </MenuItem>
             </Select>
             <InputLabel id="speed">Speed Work</InputLabel>
             <Select
@@ -113,4 +135,4 @@ class AthleteRegistrationTwo extends Component {
   }
 }
 
-export default connect(mapStoreToProps)(AthleteRegistrationTwo);
+export default connect(mapStoreToProps)(AthleteRegistrationThree);
