@@ -58,6 +58,7 @@ class AthleteRegistrationTwo extends Component {
           <FormControl variant="outlined">
             <InputLabel id="rest-day">Preferred Rest Day</InputLabel>
             <Select
+              autoWidth="true"
               labelId="rest-day"
               value={this.state.rest_day}
               onChange={this.handleInputChangeFor('rest_day')}
@@ -70,6 +71,7 @@ class AthleteRegistrationTwo extends Component {
             </Select>
             <InputLabel id="long-run-day">Preferred Long Run Day</InputLabel>
             <Select
+              autoWidth="true"
               labelId="long-run-day"
               value={this.state.long_run_day}
               onChange={this.handleInputChangeFor('long_run_day')}
@@ -82,6 +84,7 @@ class AthleteRegistrationTwo extends Component {
             </Select>
             <InputLabel id="speed">Speed Work</InputLabel>
             <Select
+              labelWidth={10}
               labelId="speed"
               value={this.state.speed_work}
               onChange={this.handleInputChangeFor('speed_work')}
