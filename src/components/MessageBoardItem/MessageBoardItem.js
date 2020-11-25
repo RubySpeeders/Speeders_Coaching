@@ -4,7 +4,6 @@ import { withRouter } from 'react-router-dom';
 
 //Material-UI imports
 import {
-  Avatar,
   Card,
   CardHeader,
   CardActionArea,
@@ -18,7 +17,7 @@ class MessageBoardItem extends Component {
       <Card>
         <CardContent>
           <Typography>{this.props.messages.message}</Typography>
-          <Typography>User: {this.props.messages.first_name}</Typography>
+          <Typography>Runner: {this.props.messages.first_name}</Typography>
         </CardContent>
       </Card>
     );

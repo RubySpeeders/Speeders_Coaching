@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import mapStoreToProps from '../../redux/mapStoreToProps';
+import { withRouter } from 'react-router-dom';
 
 //Material-UI imports
 import {
   AppBar,
   Tabs,
-  Container,
   Button,
   Grid,
   TextField,
@@ -14,6 +14,8 @@ import {
   FormControl,
   InputLabel,
   MenuItem,
+  Container,
+  Typography,
   Drawer,
   List,
   ListItem,
@@ -21,10 +23,16 @@ import {
 } from '@material-ui/core';
 
 class CoachHomepage extends Component {
+  messageBoard = (e) => {
+    this.props.history.push('/message');
+  };
   render() {
     return (
-      <div>
-        <h3>Coach PAGE</h3>
+      <Container>
+        <Typography variant="h3" component="h3">
+          Coach PAGE
+        </Typography>
+        <button onClick={this.messageBoard}>Messages</button>
         <Drawer>
           <List>
             <ListItem>
@@ -32,9 +40,9 @@ class CoachHomepage extends Component {
             </ListItem>
           </List>
         </Drawer>
-      </div>
+      </Container>
     );
   }
 }
 
-export default connect(mapStoreToProps)(CoachHomepage);
+export default withRouter(connect(mapStoreToProps)(CoachHomepage));

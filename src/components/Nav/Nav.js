@@ -5,6 +5,9 @@ import LogOutButton from '../LogOutButton/LogOutButton';
 import './Nav.css';
 import mapStoreToProps from '../../redux/mapStoreToProps';
 
+//material-ui imports
+import { Typography } from '@material-ui/core';
+
 const Nav = (props) => {
   let loginLinkData = {
     path: '/login',
@@ -19,7 +22,9 @@ const Nav = (props) => {
   return (
     <div className="nav">
       <Link to="/home">
-        <h2 className="nav-title">Speeders Coaching</h2>
+        <Typography component="h2" variant="h3">
+          Speeders Coaching
+        </Typography>
       </Link>
       <div className="nav-right">
         <Link className="nav-link" to={loginLinkData.path}>

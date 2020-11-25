@@ -57,29 +57,19 @@ router.post('/register/coach', (req, res, next) => {
 
 router.post('/register/athlete', (req, res, next) => {
   const username = req.body.username;
-  const password = 'TBD';
   const first_name = req.body.first_name;
   const last_name = req.body.last_name;
-  const city = 'TBD';
   const email = req.body.email;
-  const dob = '01/01/01';
-  const gender = 'TBD';
   const role_id = 2;
-  const strava_id = 'TBD';
 
-  const queryText = `INSERT INTO "user" (username, password, first_name, last_name, city, email, dob, gender, role_id, strava_id)
-    VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10) RETURNING id;`;
+  const queryText = `INSERT INTO "user" (username, first_name, last_name, email, role_id)
+    VALUES ($1, $2, $3, $4, $5) RETURNING id;`;
   const queryArray = [
     username,
-    password,
     first_name,
     last_name,
-    city,
     email,
-    dob,
-    gender,
     role_id,
-    strava_id,
   ];
   pool
     .query(queryText, queryArray)
@@ -97,39 +87,6 @@ router.post('/register/athlete', (req, res, next) => {
       pool
         .query(queryText, queryArray)
         .then((dbResponse) => {
-          const new_athlete_id = dbResponse.rows[0].athlete_id;
-          const rest = 1;
-          const long_run = 1;
-          const speed = false;
-          const history = 'tbd';
-          const avg = 'tbd';
-          const injury = false;
-          const injury_description = 'tbd';
-          const med = false;
-          const med_description = 'tbd';
-          const health = 'tbd';
-          const life = 'tbd';
-          const general = 'tbd';
-          const queryText = `INSERT INTO "athlete_info" (athlete_id, coach_id, rest_day, long_run_day, speed_work, run_history, avg_weekly_mileage, injury, injury_description, medication, medication_description, health_risk_comments, life_outside_running, general_comments) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14);`;
-          const queryArray = [
-            new_athlete_id,
-            req.user.id,
-            rest,
-            long_run,
-            speed,
-            history,
-            avg,
-            injury,
-            injury_description,
-            med,
-            med_description,
-            health,
-            life,
-            general,
-          ];
-          pool
-            .query(queryText, queryArray)
-            .then((dbResponse) => {
               res.sendStatus(201);
             })
             .catch((err) => {
@@ -137,16 +94,10 @@ router.post('/register/athlete', (req, res, next) => {
               res.sendStatus(500);
             });
         })
-        .catch((err) => {
-          console.log('User registration failed: ', err);
-          res.sendStatus(500);
-        });
-    })
     .catch((err) => {
       console.log('User registration failed: ', err);
       res.sendStatus(500);
     });
-});
 
 //updates athlete registration after the coach sends a link to the athlete
 router.put('/register/athlete/:id', (req, res) => {
@@ -204,6 +155,7 @@ router.put('/register/athlete/:id', (req, res) => {
       pool
         .query(queryText, queryArray)
         .then((dbResponse) => {
+
           res.sendStatus(200);
         })
         .catch((err) => {

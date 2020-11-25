@@ -55,7 +55,7 @@ class AthleteRegistrationTwo extends Component {
             </h3>
           )}
 
-          <FormControl variant="outlined">
+          <FormControl variant="outlined" fullWidth>
             <InputLabel id="rest-day">Preferred Rest Day</InputLabel>
             <Select
               fullWidth

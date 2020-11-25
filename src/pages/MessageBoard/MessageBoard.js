@@ -3,7 +3,14 @@ import { connect } from 'react-redux';
 import mapStoreToProps from '../../redux/mapStoreToProps';
 
 //Material-UI
-import { Grid, Card, TextField, Button, Typography } from '@material-ui/core';
+import {
+  Container,
+  Grid,
+  Card,
+  TextField,
+  Button,
+  Typography,
+} from '@material-ui/core';
 
 //custom file import
 import MessageBoardItem from '../../components/MessageBoardItem/MessageBoardItem';
@@ -34,27 +41,32 @@ class MessageBoard extends Component {
   };
   render() {
     return (
-      <div>
-        <Typography gutterBottom>Message Board</Typography>
+      <Container>
+        <Typography gutterBottom variant="h4">
+          Message Board
+        </Typography>
         <form onSubmit={this.postMessage}>
           <TextField
             placeholder="write a message!"
             variant="outlined"
+            fullWidth
             onChange={this.handleChange}
             value={this.state.message}
           />
-          <Button type="submit" variant="contained">
-            Post
-          </Button>
+          <div>
+            <Button type="submit" variant="contained">
+              Post
+            </Button>
+          </div>
         </form>
-        <Grid container>
+        <Grid container spacing={4}>
           {this.props.store.messages.map((item, index) => (
-            <Grid item>
+            <Grid key={index} item xs={12}>
               <MessageBoardItem key={index} messages={item} />
             </Grid>
           ))}
         </Grid>
-      </div>
+      </Container>
     );
   }
 }
