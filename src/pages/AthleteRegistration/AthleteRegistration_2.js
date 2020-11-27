@@ -20,6 +20,7 @@ class AthleteRegistrationTwo extends Component {
     //dispatch to get days of the week for the dropdown
     this.props.dispatch({ type: 'GET_DAYS' });
   }
+
   state = {
     rest_day: '',
     long_run_day: '',

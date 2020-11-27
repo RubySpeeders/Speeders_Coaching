@@ -9,10 +9,6 @@ import {
   Typography,
   Grid,
   TextField,
-  Select,
-  FormControl,
-  InputLabel,
-  MenuItem,
 } from '@material-ui/core';
 
 class AddAthlete extends Component {
@@ -24,6 +20,7 @@ class AddAthlete extends Component {
     password: '',
   };
 
+  //coach adds an athlete
   addAthlete = (e) => {
     e.preventDefault();
     this.props.dispatch({
@@ -35,6 +32,7 @@ class AddAthlete extends Component {
         username: this.state.username,
       },
     });
+    //goes back home after adding athlete
     this.props.history.push('/home');
   };
 
@@ -46,14 +44,9 @@ class AddAthlete extends Component {
 
   //captures inputs for registering an athlete
   handleInputChangeFor = (propertyName) => (event) => {
-    this.setState(
-      {
-        [propertyName]: event.target.value,
-      },
-      () => {
-        console.log(this.state);
-      }
-    );
+    this.setState({
+      [propertyName]: event.target.value,
+    });
   };
 
   render() {

@@ -18,6 +18,10 @@ import {
 } from '@material-ui/core';
 
 class CoachHomepage extends Component {
+  componentDidMount() {
+    //get all athletes on page load
+    this.props.dispatch({ type: 'GET_ATHLETES' });
+  }
   //sends user to the message board
   messageBoard = (e) => {
     this.props.history.push('/message');

@@ -3,6 +3,9 @@ import { connect } from 'react-redux';
 import LogOutButton from '../../components/LogOutButton/LogOutButton';
 import mapStoreToProps from '../../redux/mapStoreToProps';
 
+//MATERIAL-UI imports
+import { Typography } from '@material-ui/core';
+
 //custom component imports
 import CoachHomepage from '../CoachHomepage/CoachHomepage';
 import AthleteHomepage from '../AthleteHomepage/AthleteHomepage';
@@ -12,7 +15,9 @@ class UserPage extends Component {
   render() {
     return (
       <div>
-        <h1 id="welcome">Welcome, {this.props.store.user.username}!</h1>
+        <Typography variant="h2" component="h1" id="welcome">
+          Welcome, {this.props.store.user.first_name}!
+        </Typography>
         {this.props.store.user.role_id === 1 ? (
           <CoachHomepage />
         ) : (

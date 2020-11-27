@@ -19,6 +19,7 @@ class MessageBoard extends Component {
   state = {
     message: '',
   };
+
   componentDidMount() {
     this.props.dispatch({
       type: 'GET_MESSAGES',
@@ -39,6 +40,7 @@ class MessageBoard extends Component {
       message: '',
     });
   };
+
   render() {
     return (
       <Container>
