@@ -2,6 +2,9 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import mapStoreToProps from '../../redux/mapStoreToProps';
 
+//Material-UI
+import { Typography, TextField, Grid, Button } from '@material-ui/core';
+
 class LoginForm extends Component {
   state = {
     username: '',
@@ -32,41 +35,45 @@ class LoginForm extends Component {
 
   render() {
     return (
-      <form className="formPanel" onSubmit={this.login}>
-        <h2>Login</h2>
-        {this.props.store.errors.loginMessage && (
-          <h3 className="alert" role="alert">
-            {this.props.store.errors.loginMessage}
-          </h3>
-        )}
-        <div>
-          <label htmlFor="username">
-            Username:
-            <input
+      <Grid container justify="space-evenly">
+        <form className="formPanel" onSubmit={this.login}>
+          <Typography variant="h4" component="h2" gutterBottom>
+            Login
+          </Typography>
+          {this.props.store.errors.loginMessage && (
+            <h3 className="alert" role="alert">
+              {this.props.store.errors.loginMessage}
+            </h3>
+          )}
+          <div>
+            <TextField
+              placeholder="username"
               type="text"
               name="username"
               required
+              variant="outlined"
               value={this.state.username}
               onChange={this.handleInputChangeFor('username')}
             />
-          </label>
-        </div>
-        <div>
-          <label htmlFor="password">
-            Password:
-            <input
+          </div>
+          <div>
+            <TextField
+              placeholder="password"
               type="password"
               name="password"
               required
+              variant="outlined"
               value={this.state.password}
               onChange={this.handleInputChangeFor('password')}
             />
-          </label>
-        </div>
-        <div>
-          <input className="btn" type="submit" name="submit" value="Log In" />
-        </div>
-      </form>
+          </div>
+          <div>
+            <Button variant="outlined" type="submit">
+              Log In
+            </Button>
+          </div>
+        </form>
+      </Grid>
     );
   }
 }

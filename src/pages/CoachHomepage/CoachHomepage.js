@@ -9,11 +9,6 @@ import {
   Tabs,
   Button,
   Grid,
-  TextField,
-  Select,
-  FormControl,
-  InputLabel,
-  MenuItem,
   Container,
   Typography,
   Drawer,
@@ -23,16 +18,24 @@ import {
 } from '@material-ui/core';
 
 class CoachHomepage extends Component {
+  //sends user to the message board
   messageBoard = (e) => {
     this.props.history.push('/message');
   };
+
+  //sends user to the tips & tricks page
+  tipsAndTricks = (e) => {
+    this.props.history.push('/tips');
+  };
+
   render() {
     return (
       <Container>
         <Typography variant="h3" component="h3">
           Coach PAGE
         </Typography>
-        <button onClick={this.messageBoard}>Messages</button>
+        <div onClick={this.messageBoard}>Messages</div>
+        <div onClick={this.tipsAndTricks}>Tips/Tricks</div>
         <Drawer>
           <List>
             <ListItem>
