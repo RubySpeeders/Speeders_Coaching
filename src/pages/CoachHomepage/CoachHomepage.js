@@ -17,6 +17,9 @@ import {
   ListItemText,
 } from '@material-ui/core';
 
+//file imoprts
+import AthleteInfo from '../../components/AthleteInfo/AthleteInfo';
+
 class CoachHomepage extends Component {
   componentDidMount() {
     //get all athletes on page load
@@ -45,6 +48,13 @@ class CoachHomepage extends Component {
         </Typography>
         <div onClick={this.messageBoard}>Messages</div>
         <div onClick={this.tipsAndTricks}>Tips/Tricks</div>
+        <Grid container spacing={4}>
+          {this.props.store.athletes.map((item, index) => (
+            <Grid key={index} item xs={12}>
+              <AthleteInfo key={index} athlete={item} />
+            </Grid>
+          ))}
+        </Grid>
         <Button variant="outlined" onClick={this.addAthlete}>
           Add an Athlete
         </Button>
