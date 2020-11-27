@@ -24,9 +24,7 @@ class AthleteRegistrationThree extends Component {
     this.props.dispatch({ type: 'GET_DAYS' });
   }
   state = {
-    rest_day: '',
-    long_run_day: '',
-    speed_work: '',
+    other_exercise: {},
   };
 
   handleNext = (e) => {
@@ -44,7 +42,10 @@ class AthleteRegistrationThree extends Component {
   handleChangeForChecks = (propertyName) => (event) => {
     this.setState({
       ...this.state,
-      [event.target.name]: event.target.checked,
+      other_exercise: {
+        ...this.state.other_exercise,
+        [propertyName]: event.target.checked,
+      },
     });
   };
 
