@@ -67,45 +67,43 @@ router.post('/register/athlete', (req, res, next) => {
   const queryText = `INSERT INTO "user" (username, first_name, last_name, email, role_id)
     VALUES ($1, $2, $3, $4, $5) RETURNING id;`;
   const queryArray = [username, first_name, last_name, email, role_id];
-  pool
-    .query(queryText, queryArray)
-    .then((dbResponse) => {
-      const pendingStatus = 1;
-      const temporary_key = randomNumber();
-      const new_athlete_id = dbResponse.rows[0].id;
-      const queryText = `INSERT INTO "invite" (coach_id, athlete_id, status, temporary_key) VALUES ($1, $2, $3, $4) RETURNING athlete_id;`;
-      const queryArray = [
-        req.user.id,
-        new_athlete_id,
-        pendingStatus,
-        temporary_key,
-      ];
-      pool
-        .query(queryText, queryArray)
-        .then((dbResponse) => {
-          const new_athlete_id = dbResponse.rows[0].id;
-          const coach_id = req.user.id;
-          const queryText = `INSERT INTO "athlete_info" (athlete_id, coach_id) VALUES ($1, $2);`;
-          const queryArray = [new_athlete_id, coach_id];
-          pool
-            .query(queryText, queryArray)
-            .then((dbResponse) => {
-              res.sendStatus(201);
-            })
-            .catch((err) => {
-              console.log('User registration failed for athlete_info: ', err);
-              res.sendStatus(500);
-            });
-        })
-        .catch((err) => {
-          console.log('User registration failed for invite: ', err);
-          res.sendStatus(500);
-        });
-    })
-    .catch((err) => {
-      console.log('User registration failed for user: ', err);
-      res.sendStatus(500);
-    });
+  pool.query(queryText, queryArray).then((dbResponse) => {
+    const pendingStatus = 1;
+    const temporary_key = randomNumber();
+    const new_athlete_id = dbResponse.rows[0].id;
+    const queryText = `INSERT INTO "invite" (coach_id, athlete_id, status, temporary_key) VALUES ($1, $2, $3, $4) RETURNING athlete_id;`;
+    const queryArray = [
+      req.user.id,
+      new_athlete_id,
+      pendingStatus,
+      temporary_key,
+    ];
+    pool
+      .query(queryText, queryArray)
+      .then((dbResponse) => {
+        const new_athlete_id = dbResponse.rows[0].athlete_id;
+        const coach_id = req.user.id;
+        const queryText = `INSERT INTO "athlete_info" (athlete_id, coach_id) VALUES ($1, $2);`;
+        const queryArray = [new_athlete_id, coach_id];
+        pool
+          .query(queryText, queryArray)
+          .then((dbResponse) => {
+            res.sendStatus(201);
+          })
+          .catch((err) => {
+            console.log('User registration failed for athlete_info: ', err);
+            res.sendStatus(500);
+          });
+      })
+      .catch((err) => {
+        console.log('User registration failed for invite: ', err);
+        res.sendStatus(500);
+      })
+      .catch((err) => {
+        console.log('User registration failed for invite: ', err);
+        res.sendStatus(500);
+      });
+  });
 });
 
 //updates athlete registration after the coach sends a link to the athlete
@@ -140,7 +138,7 @@ router.put('/register/athlete/:id', (req, res) => {
 });
 
 //sends new athlete_info data when athlete registers.
-router.post('/register/athlete/personaldetails', (req, res, next) => {
+router.post('/register/athlete/page2/:id', (req, res, next) => {
   const rest_day = req.body.rest_day;
   const long_run_day = req.body.long_run_day;
   const speed_work = req.body.speed_work;
@@ -173,7 +171,6 @@ router.post('/register/athlete/personaldetails', (req, res, next) => {
   pool
     .query(queryText, queryArray)
     .then((dbResponse) => {
-      //get the id from the return from above query
       res.sendStatus(201);
     })
     .catch((err) => {
@@ -182,18 +179,33 @@ router.post('/register/athlete/personaldetails', (req, res, next) => {
     });
 });
 
-router.put('/register/athlete/page3', (req, res) => {
+router.post('/register/athlete/page3', (req, res) => {
   try {
-    const athlete_info_id = dbResponse.rows[0].id;
-    const athlete_exercise_array = [];
-    //iterate through the array of checked off other exercises
-    for (let i = 0; i < req.body.other_exercise.length; i++) {
-      const queryText = `INSERT INTO "athlete_other_exercise" (athlete_info_id, other_exercise_id) VALUES ($1, $2);`;
-      const queryArray = [athlete_info_id, req.body.other_exercise[i]];
-
-      athlete_exercise_array.push(pool.query(queryText, queryArray));
-    }
-    Promise.all(athlete_exercise_array);
+    console.log(req.user);
+    pool
+      .query(
+        `SELECT "athlete_info".id FROM "athlete_info" WHERE "athlete_id"=$1;`,
+        [req.user.id]
+      )
+      .then((dbResponse) => {
+        console.log(dbResponse.rows);
+        const athlete_info_id = dbResponse.rows[0].id;
+        const other_exercise_list = Object.keys(req.body.other_exercise);
+        const athlete_exercise_array = [];
+        //iterate through the array of checked off other exercises
+        for (let i = 0; i < other_exercise_list.length; i++) {
+          const exercise_key = other_exercise_list[i];
+          const exercise_value = req.body.other_exercise[exercise_key];
+          if (exercise_value) {
+            const queryText = `INSERT INTO "athlete_other_exercise" (athlete_info_id, other_exercise_id) VALUES ($1, $2);`;
+            const queryArray = [athlete_info_id, exercise_key];
+            athlete_exercise_array.push(pool.query(queryText, queryArray));
+          }
+        }
+        Promise.all(athlete_exercise_array).then((dbResponse) => {
+          res.sendStatus(201);
+        });
+      });
   } catch (err) {
     console.log('first query post', err);
     res.sendStatus(500);

@@ -42,7 +42,7 @@ class MessageBoard extends Component {
   render() {
     return (
       <Container>
-        <Typography gutterBottom variant="h4">
+        <Typography gutterBottom variant="h4" component="h3">
           Message Board
         </Typography>
         <form onSubmit={this.postMessage}>

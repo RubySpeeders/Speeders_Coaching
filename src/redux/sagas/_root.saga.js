@@ -7,7 +7,8 @@ import userSaga from './user.saga';
 import getMessagesSaga from './getMessages.saga';
 import tipsSaga from './tips.saga';
 import daysSaga from './days.saga';
-import postMessagesSaga from './postMessages.saga';
+import postMessageSaga from './postMessages.saga';
+import postTipSaga from './postTip.saga';
 
 // rootSaga is the primary saga.
 // It bundles up all of the other sagas so our project can use them.
@@ -24,6 +25,7 @@ export default function* rootSaga() {
     getMessagesSaga(),
     tipsSaga(),
     daysSaga(),
-    postMessagesSaga(),
+    postMessageSaga(),
+    postTipSaga(),
   ]);
 }
