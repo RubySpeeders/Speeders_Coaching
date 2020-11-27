@@ -28,6 +28,11 @@ class CoachHomepage extends Component {
     this.props.history.push('/tips');
   };
 
+  //sends coach to add athlete registration
+  addAthlete = (e) => {
+    this.props.history.push('/register/athlete');
+  };
+
   render() {
     return (
       <Container>
@@ -36,6 +41,9 @@ class CoachHomepage extends Component {
         </Typography>
         <div onClick={this.messageBoard}>Messages</div>
         <div onClick={this.tipsAndTricks}>Tips/Tricks</div>
+        <Button variant="outlined" onClick={this.addAthlete}>
+          Add an Athlete
+        </Button>
         <Drawer>
           <List>
             <ListItem>

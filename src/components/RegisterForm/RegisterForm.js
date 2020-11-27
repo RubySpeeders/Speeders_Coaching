@@ -116,7 +116,7 @@ class RegisterForm extends Component {
               variant="outlined"
             />
           </div>
-          <FormControl variant="outlined">
+          <FormControl variant="outlined" fullWidth>
             <InputLabel id="gender">Gender</InputLabel>
             <Select
               labelId="gender"

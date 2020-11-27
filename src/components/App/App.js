@@ -26,6 +26,7 @@ import AthleteRegistrationTwo from '../../pages/AthleteRegistration/AthleteRegis
 import AthleteRegistrationThree from '../../pages/AthleteRegistration/AthleteRegistration_3';
 
 import { Container } from '@material-ui/core';
+import AddAthlete from '../../pages/AddAthlete/AddAthlete';
 
 class App extends Component {
   componentDidMount() {
@@ -98,6 +99,7 @@ class App extends Component {
                 component={LandingPage}
                 authRedirect="/user"
               />
+              <Route exact path="/register/athlete" component={AddAthlete} />
               <ProtectedRoute exact path="/message" component={MessageBoard} />
               <ProtectedRoute exact path="/tips" component={TipsTricks} />
               <Route
