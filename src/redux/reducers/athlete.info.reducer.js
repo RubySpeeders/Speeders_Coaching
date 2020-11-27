@@ -1,6 +1,6 @@
 // Used to store athlete info returned from the server
 
-const messages = (state = [], action) => {
+const athletes = (state = [], action) => {
   switch (action.type) {
     case 'SET_ATHLETES':
       return action.payload;
@@ -9,4 +9,4 @@ const messages = (state = [], action) => {
   }
 };
 
-export default messages;
+export default athletes;

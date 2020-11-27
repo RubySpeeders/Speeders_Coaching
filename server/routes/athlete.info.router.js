@@ -7,7 +7,7 @@ const {
 
 // get all messages for the message board
 router.get('/', rejectUnauthenticated, (req, res) => {
-  let queryText = ` SELECT * FROM "user" WHERE "role_id" = 2;`;
+  let queryText = ` SELECT * FROM "user" WHERE "role_id" = 2 ORDER BY "last_name";`;
 
   pool
     .query(queryText)
