@@ -1,6 +1,21 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import mapStoreToProps from '../../redux/mapStoreToProps';
+import { withRouter } from 'react-router-dom';
+
+//Material-UI imports
+import {
+  AppBar,
+  Tabs,
+  Button,
+  Grid,
+  Container,
+  Typography,
+  Drawer,
+  List,
+  ListItem,
+  ListItemText,
+} from '@material-ui/core';
 
 class AthleteHomepage extends Component {
   //sends user to the message board
@@ -15,7 +30,7 @@ class AthleteHomepage extends Component {
   render() {
     return (
       <div>
-        <h3>Athlete PAGE</h3>
+        <Typography component="h3">Athlete PAGE</Typography>
         <div onClick={this.messageBoard}>Messages</div>
         <div onClick={this.tipsAndTricks}>Tips/Tricks</div>
       </div>
@@ -23,4 +38,4 @@ class AthleteHomepage extends Component {
   }
 }
 
-export default connect(mapStoreToProps)(AthleteHomepage);
+export default withRouter(connect(mapStoreToProps)(AthleteHomepage));
