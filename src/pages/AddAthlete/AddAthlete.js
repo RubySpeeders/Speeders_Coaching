@@ -24,27 +24,18 @@ class AddAthlete extends Component {
     password: '',
   };
 
-  // registerUser = (event) => {
-  //   event.preventDefault();
-
-  //   this.props.dispatch({
-  //     type: 'REGISTER',
-  //     payload: {
-  //       first_name: this.state.first_name,
-  //       last_name: this.state.last_name,
-  //       city: this.state.city,
-  //       email: this.state.email,
-  //       dob: this.state.dob,
-  //       gender: this.state.gender,
-  //       username: this.state.username,
-  //       password: this.state.password,
-  //     },
-  //   });
-  // }; // end registerUser
-  handleNext = (e) => {
+  addAthlete = (e) => {
     e.preventDefault();
-    // this.props.dispatch({ type: 'UPDATE_FEELING', payload: this.state });
-    this.props.history.push('/registration/athlete/page2');
+    this.props.dispatch({
+      type: 'ADD_ATHLETE',
+      payload: {
+        first_name: this.state.first_name,
+        last_name: this.state.last_name,
+        email: this.state.email,
+        username: this.state.username,
+      },
+    });
+    this.props.history.push('/home');
   };
 
   //takes user back to homepage
@@ -69,7 +60,7 @@ class AddAthlete extends Component {
     return (
       <Container>
         <Grid container justify="space-evenly">
-          <form className="formPanel" onSubmit={this.handleNext}>
+          <form className="formPanel" onSubmit={this.addAthlete}>
             <Typography>Register an Athlete!</Typography>
             {this.props.store.errors.registrationMessage && (
               <h3 className="alert" role="alert">
@@ -130,7 +121,7 @@ class AddAthlete extends Component {
               </Button>
 
               <Button type="submit" variant="contained">
-                Next
+                Add Athlete
               </Button>
             </div>
           </form>

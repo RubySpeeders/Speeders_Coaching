@@ -3,6 +3,7 @@ import { all } from 'redux-saga/effects';
 // SAGAS
 import loginSaga from './login.saga';
 import registrationSaga from './registration.saga';
+import addAthleteSaga from './addAthlete.saga';
 import userSaga from './user.saga';
 import getMessagesSaga from './getMessages.saga';
 import tipsSaga from './tips.saga';
@@ -27,5 +28,6 @@ export default function* rootSaga() {
     daysSaga(),
     postMessageSaga(),
     postTipSaga(),
+    addAthleteSaga(),
   ]);
 }
