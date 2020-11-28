@@ -5,6 +5,7 @@ import messages from './messages.reducer';
 import tips from './tips.reducer';
 import days from './days.reducer';
 import athletes from './athlete.info.reducer';
+import races from './races.reducer';
 
 // rootReducer is the primary reducer for our entire project
 // It bundles up all of the other reducers so our project can use them.
@@ -19,6 +20,7 @@ const rootReducer = combineReducers({
   tips,
   days,
   athletes,
+  races,
 });
 
 export default rootReducer;

@@ -12,6 +12,7 @@ import postMessageSaga from './postMessages.saga';
 import postTipSaga from './postTip.saga';
 import getAthletesSaga from './getAthletes.saga';
 import deleteAthleteSaga from './delete.athlete.saga';
+import getRacesSaga from './races.saga';
 
 // rootSaga is the primary saga.
 // It bundles up all of the other sagas so our project can use them.
@@ -33,5 +34,6 @@ export default function* rootSaga() {
     addAthleteSaga(),
     getAthletesSaga(),
     deleteAthleteSaga(),
+    getRacesSaga(),
   ]);
 }

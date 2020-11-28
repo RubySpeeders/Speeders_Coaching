@@ -20,12 +20,16 @@ import {
 
 class AthleteRegistrationThree extends Component {
   componentDidMount() {
-    //dispatch to get days of the week for the dropdown
-    this.props.dispatch({ type: 'GET_DAYS' });
+    //dispatch to get races for the dropdown
+    this.props.dispatch({ type: 'GET_RACES' });
   }
   state = {
     run_history: '',
     avg_weekly_mileage: '',
+    personal_record: {
+      distance: '',
+    },
+    agree: false,
     other_exercise: {},
   };
 
@@ -52,6 +56,13 @@ class AthleteRegistrationThree extends Component {
   };
 
   render() {
+    const races = this.props.store.races.map((item, index) => {
+      return (
+        <MenuItem value={item.id} key={index}>
+          {item.description}
+        </MenuItem>
+      );
+    });
     return (
       <Container>
         <form onSubmit={this.handleNext}>
@@ -135,15 +146,30 @@ class AthleteRegistrationThree extends Component {
             />
           </FormGroup>
           <Typography>If you have any PRs please add them here:</Typography>
+          <FormControl variant="outlined" fullWidth>
+            <InputLabel id="distance">Distance</InputLabel>
+            <Select
+              fullWidth
+              labelId="distance"
+              value={this.state.personal_record.distance}
+              onChange={this.handleInputChangeFor('distance')}
+              label="distance"
+            >
+              <MenuItem value="">
+                <em>None</em>
+              </MenuItem>
+              {races}
+            </Select>
+          </FormControl>
           <Typography>
             I agree to make my strava account public for my coach to access
             data:
           </Typography>
-          <FormGroup row>
+          <FormGroup>
             <FormControlLabel
               control={
                 <Checkbox
-                  // checked={this.state.checkedB}
+                  checked={this.state.agree === true}
                   //onChange={this.handleChangeForChecks}
                   name="checkedB"
                   color="primary"

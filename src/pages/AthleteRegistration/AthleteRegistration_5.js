@@ -10,12 +10,9 @@ import {
   RadioGroup,
   Grid,
   TextField,
-  Select,
   FormControl,
   FormLabel,
   FormControlLabel,
-  InputLabel,
-  MenuItem,
   Typography,
   Box,
 } from '@material-ui/core';
@@ -36,14 +33,9 @@ class AthleteRegistrationFive extends Component {
   };
 
   handleInputChangeFor = (propertyName) => (event) => {
-    this.setState(
-      {
-        [propertyName]: event.target.value,
-      },
-      () => {
-        console.log(this.state);
-      }
-    );
+    this.setState({
+      [propertyName]: event.target.value,
+    });
   };
 
   render() {
