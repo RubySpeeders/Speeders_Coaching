@@ -11,60 +11,55 @@ import {
   Grid,
   Container,
   Typography,
-  Drawer,
-  List,
-  ListItem,
-  ListItemText,
+  TableContainer,
+  Table,
+  TableHead,
+  TableBody,
+  TableCell,
 } from '@material-ui/core';
 
 //file imoprts
 import AthleteInfo from '../../components/AthleteInfo/AthleteInfo';
+import CoachSidebar from '../../components/CoachSidebar/CoachSidebar';
 
 class CoachHomepage extends Component {
   componentDidMount() {
     //get all athletes on page load
     this.props.dispatch({ type: 'GET_ATHLETES' });
   }
-  //sends user to the message board
-  messageBoard = (e) => {
-    this.props.history.push('/message');
-  };
-
-  //sends user to the tips & tricks page
-  tipsAndTricks = (e) => {
-    this.props.history.push('/tips');
-  };
-
-  //sends coach to add athlete registration
-  addAthlete = (e) => {
-    this.props.history.push('/register/athlete');
-  };
 
   render() {
     return (
       <Container>
-        <Typography variant="h3" component="h3">
-          Coach PAGE
-        </Typography>
-        <div onClick={this.messageBoard}>Messages</div>
-        <div onClick={this.tipsAndTricks}>Tips/Tricks</div>
         <Grid container spacing={4}>
-          {this.props.store.athletes.map((item, index) => (
-            <Grid key={index} item xs={12}>
-              <AthleteInfo key={index} athlete={item} />
-            </Grid>
-          ))}
+          <CoachSidebar />
+          <Grid item>
+            <Typography variant="h4" component="h3">
+              Your Athletes
+            </Typography>
+
+            <TableContainer>
+              <Table>
+                <TableHead>
+                  <TableCell>
+                    <Typography>Athlete</Typography>
+                  </TableCell>
+                  <TableCell>
+                    <Typography>Gender</Typography>
+                  </TableCell>
+                  <TableCell>
+                    <Typography>Actions</Typography>
+                  </TableCell>
+                </TableHead>
+                <TableBody>
+                  {this.props.store.athletes.map((item, index) => (
+                    <AthleteInfo key={index} athlete={item} />
+                  ))}
+                </TableBody>
+              </Table>
+            </TableContainer>
+          </Grid>
         </Grid>
-        <Button variant="outlined" onClick={this.addAthlete}>
-          Add an Athlete
-        </Button>
-        <Drawer>
-          <List>
-            <ListItem>
-              <ListItemText primary="test" />
-            </ListItem>
-          </List>
-        </Drawer>
       </Container>
     );
   }

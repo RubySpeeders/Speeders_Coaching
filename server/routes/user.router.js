@@ -229,13 +229,14 @@ router.put('/register/athlete/:id', (req, res) => {
 
 //deletes an athlete
 router.delete('/delete/athlete/:id', (req, res) => {
-  const queryText = `DELETE FROM "invite" WHERE athlete_id=$1;`;
+  const queryText = `DELETE FROM "invite" WHERE athlete_id=$1 RETURNING "athlete_id";`;
   const queryArray = [req.params.id];
 
   pool
     .query(queryText, queryArray)
     .then((dbResponse) => {
-      const queryText = `DELETE FROM "athlete_info" WHERE athlete_id=$1;`;
+      console.log(dbResponse.rows[0]);
+      const queryText = `DELETE FROM "athlete_info" JOIN "athlete_other_exercise" ON "athlete_info".id = "athlete_other_exercise".athlete_info_id;`;
       const queryArray = [req.params.id];
       pool
         .query(queryText, queryArray)

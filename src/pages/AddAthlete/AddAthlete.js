@@ -25,12 +25,7 @@ class AddAthlete extends Component {
     e.preventDefault();
     this.props.dispatch({
       type: 'ADD_ATHLETE',
-      payload: {
-        first_name: this.state.first_name,
-        last_name: this.state.last_name,
-        email: this.state.email,
-        username: this.state.username,
-      },
+      payload: this.state,
     });
     //goes back home after adding athlete
     this.props.history.push('/home');

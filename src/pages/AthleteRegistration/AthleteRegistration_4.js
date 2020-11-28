@@ -6,10 +6,14 @@ import mapStoreToProps from '../../redux/mapStoreToProps';
 import {
   Container,
   Button,
+  Radio,
+  RadioGroup,
   Grid,
   TextField,
   Select,
   FormControl,
+  FormLabel,
+  FormControlLabel,
   InputLabel,
   MenuItem,
   Typography,
@@ -21,7 +25,7 @@ class AthleteRegistrationFour extends Component {
     injury_description: '',
     medication: '',
     medication_description: '',
-    health_risk_comment: '',
+    health_risk_comments: '',
   };
 
   handleNext = (e) => {
@@ -31,68 +35,98 @@ class AthleteRegistrationFour extends Component {
   };
 
   handleInputChangeFor = (propertyName) => (event) => {
-    this.setState({
-      [propertyName]: event.target.value,
-    });
+    this.setState(
+      {
+        [propertyName]: event.target.value,
+      },
+      () => {
+        console.log(this.state);
+      }
+    );
   };
 
   render() {
     return (
       <Container>
         <form onSubmit={this.handleNext}>
-          <Typography gutterBottom>Health Details</Typography>
-          {this.props.store.errors.registrationMessage && (
-            <h3 className="alert" role="alert">
-              {this.props.store.errors.registrationMessage}
-            </h3>
-          )}
+          <FormControl>
+            <Grid container spacing={6}>
+              <Grid item xs={6}>
+                <FormLabel>Are you currently injured?</FormLabel>
+                <RadioGroup>
+                  <FormControlLabel
+                    checked={this.state.injury === true}
+                    onChange={this.handleInputChangeFor('injury')}
+                    value={true}
+                    control={<Radio />}
+                    label="yes"
+                  />
+                  <FormControlLabel
+                    checked={this.state.injury === false}
+                    onChange={this.handleInputChangeFor('injury')}
+                    value={false}
+                    control={<Radio />}
+                    label="no"
+                  />
+                </RadioGroup>
+              </Grid>
 
-          <FormControl variant="outlined" fullWidth>
-            <InputLabel id="rest-day">Preferred Rest Day</InputLabel>
-            <Select
-              fullWidth
-              labelId="rest-day"
-              value={this.state.rest_day}
-              onChange={this.handleInputChangeFor('rest_day')}
-              label="rest_day"
-            >
-              <MenuItem value="">
-                <em>None</em>
-              </MenuItem>
-              {day}
-            </Select>
-            <InputLabel id="long-run-day">Preferred Long Run Day</InputLabel>
-            <Select
-              fullWidth
-              labelId="long-run-day"
-              value={this.state.long_run_day}
-              onChange={this.handleInputChangeFor('long_run_day')}
-              label="long_run_day"
-            >
-              <MenuItem value="">
-                <em>None</em>
-              </MenuItem>
-              {day}
-            </Select>
-            <InputLabel id="speed">Speed Work</InputLabel>
-            <Select
-              fullWidth
-              labelId="speed"
-              value={this.state.speed_work}
-              onChange={this.handleInputChangeFor('speed_work')}
-              label="speed_work"
-            >
-              <MenuItem value="">
-                <em>None</em>
-              </MenuItem>
-              <MenuItem value={'Yes, loads of it!'}>Yes, loads of it!</MenuItem>
-              <MenuItem value={'Never heard of it.'}>
-                Never heard of it.
-              </MenuItem>
-              <MenuItem value={'Some - I have heard of it but never tried it.'}>
-                Some - I have heard of it but never tried it.
-              </MenuItem>
-            </Select>
+              <Grid item xs={6}>
+                <TextField
+                  placeholder="If currently injured, describe your injury, date of onset, and severity."
+                  type="text"
+                  name="injury_description"
+                  value={this.state.injury_description}
+                  variant="outlined"
+                  multiline
+                  rows={4}
+                  onChange={this.handleInputChangeFor('injury_description')}
+                />
+              </Grid>
+            </Grid>
+            <Grid container spacing={6}>
+              <Grid item xs={6}>
+                <FormLabel>Are you currently taking any medications?</FormLabel>
+                <RadioGroup>
+                  <FormControlLabel
+                    checked={this.state.medication === true}
+                    onChange={this.handleInputChangeFor('medication')}
+                    value={true}
+                    control={<Radio />}
+                    label="yes"
+                  />
+                  <FormControlLabel
+                    checked={this.state.medication === false}
+                    onChange={this.handleInputChangeFor('medication')}
+                    value={false}
+                    control={<Radio />}
+                    label="no"
+                  />
+                </RadioGroup>
+              </Grid>
+              <Grid item xs={6}>
+                <TextField
+                  placeholder="If currently taking medication, please describe how often and how long you have been taking."
+                  type="text"
+                  name="medication_description"
+                  value={this.state.medication_description}
+                  variant="outlined"
+                  multiline
+                  rows={4}
+                  onChange={this.handleInputChangeFor('medication_description')}
+                />
+              </Grid>
+            </Grid>
+            <TextField
+              placeholder="Are there any other health risks you want me to know about?"
+              type="text"
+              name="health_risk_comments"
+              value={this.state.health_risk_comments}
+              variant="outlined"
+              multiline
+              rows={4}
+              onChange={this.handleInputChangeFor('health_risk_comments')}
+            />
           </FormControl>
           <div>
             <Button type="submit" variant="contained">

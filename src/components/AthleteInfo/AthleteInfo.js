@@ -3,27 +3,51 @@ import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 
 //Material-UI imports
-import { Button, Card, CardContent, Typography } from '@material-ui/core';
+import {
+  Button,
+  Card,
+  CardContent,
+  Typography,
+  Table,
+  TableBody,
+  TableCell,
+  TableContainer,
+  TableHead,
+  TableRow,
+} from '@material-ui/core';
 
-class MessageBoardItem extends Component {
+class AthleteInfo extends Component {
+  //delete an athlete
   deleteAthlete = (e) => {
-    console.log(this.props.match.params);
-    //this.props.dispatch({ type: 'DELETE_ATHLETE', payload: this.props.match.params.id });
+    this.props.dispatch({
+      type: 'DELETE_ATHLETE',
+      payload: this.props.athlete.id,
+    });
   };
+
+  //go to details of specific athlete
+  handleDetails = (e) => {
+    console.log('details clicked');
+  };
+
   render() {
     return (
-      <Card>
-        <CardContent>
-          <Typography>{this.props.athlete.first_name}</Typography>
-          <Typography>{this.props.athlete.last_name}</Typography>
+      <TableRow>
+        <TableCell>
+          <Typography>
+            {this.props.athlete.first_name} {this.props.athlete.last_name}
+          </Typography>
+        </TableCell>
+        <TableCell>
           <Typography>{this.props.athlete.gender}</Typography>
-          <Button variant="outlined" onClick={this.deleteAthlete}>
-            Delete
-          </Button>
-        </CardContent>
-      </Card>
+        </TableCell>
+        <TableCell>
+          <Button onClick={this.handleDetails}>Details</Button>
+          <Button onClick={this.deleteAthlete}>Delete</Button>
+        </TableCell>
+      </TableRow>
     );
   }
 }
 
-export default withRouter(connect()(MessageBoardItem));
+export default withRouter(connect()(AthleteInfo));

@@ -6,7 +6,7 @@ import './Nav.css';
 import mapStoreToProps from '../../redux/mapStoreToProps';
 
 //material-ui imports
-import { Typography } from '@material-ui/core';
+import { Typography, Box, Container } from '@material-ui/core';
 
 const Nav = (props) => {
   let loginLinkData = {
@@ -21,11 +21,17 @@ const Nav = (props) => {
 
   return (
     <div className="nav">
-      <Link to="/home">
-        <Typography component="h2" variant="h3">
-          Speeders Coaching
-        </Typography>
-      </Link>
+      <Container>
+        <div>
+          <Box variant="h3" fontSize={56} fontStyle="italic">
+            Speeders
+          </Box>
+          <Typography component="h2" variant="h3">
+            coaching
+          </Typography>
+        </div>
+      </Container>
+
       <div className="nav-right">
         <Link className="nav-link" to={loginLinkData.path}>
           {/* Show this link if they are logged in or not,

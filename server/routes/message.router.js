@@ -9,7 +9,7 @@ const {
 router.get('/', rejectUnauthenticated, (req, res) => {
   let queryText = `SELECT message, time_posted, "user".first_name, "user".last_name FROM "messages"
   JOIN "user" ON "messages".user_id="user".id
-  ORDER BY time_posted;`;
+  ORDER BY time_posted DESC;`;
   pool
     .query(queryText)
     .then((dbResponse) => {

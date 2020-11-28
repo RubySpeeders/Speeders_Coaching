@@ -24,8 +24,8 @@ class TipsTricks extends Component {
           Tips &amp; Tricks
         </Typography>
         <Tabs>
-          <Tab label="Strides" />
-          <Tab label="Add a new tip" />
+          <Tab label="Strides" index={0} />
+          <Tab label="Add a new tip" index={1} />
         </Tabs>
         <AddNewTip />
         <Grid container>

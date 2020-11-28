@@ -24,6 +24,7 @@ import TipsTricks from '../../pages/TipsTricks/TipsTricks';
 import AthleteRegistrationOne from '../../pages/AthleteRegistration/AthleteRegistration_1';
 import AthleteRegistrationTwo from '../../pages/AthleteRegistration/AthleteRegistration_2';
 import AthleteRegistrationThree from '../../pages/AthleteRegistration/AthleteRegistration_3';
+import AthleteRegistrationFour from '../../pages/AthleteRegistration/AthleteRegistration_4';
 
 import { Container } from '@material-ui/core';
 import AddAthlete from '../../pages/AddAthlete/AddAthlete';
@@ -99,7 +100,11 @@ class App extends Component {
                 component={LandingPage}
                 authRedirect="/user"
               />
-              <Route exact path="/register/athlete" component={AddAthlete} />
+              <ProtectedRoute
+                exact
+                path="/register/athlete"
+                component={AddAthlete}
+              />
               <ProtectedRoute exact path="/message" component={MessageBoard} />
               <ProtectedRoute exact path="/tips" component={TipsTricks} />
               <Route
@@ -116,6 +121,11 @@ class App extends Component {
                 exact
                 path="/registration/athlete/page3"
                 component={AthleteRegistrationThree}
+              />
+              <Route
+                exact
+                path="/registration/athlete/page4"
+                component={AthleteRegistrationFour}
               />
               {/* If none of the other routes matched, we will show a 404. */}
 
