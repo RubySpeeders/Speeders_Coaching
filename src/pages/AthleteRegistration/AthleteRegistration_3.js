@@ -134,6 +134,25 @@ class AthleteRegistrationThree extends Component {
               label="5K"
             />
           </FormGroup>
+          <Typography>If you have any PRs please add them here:</Typography>
+          <Typography>
+            I agree to make my strava account public for my coach to access
+            data:
+          </Typography>
+          <FormGroup row>
+            <FormControlLabel
+              control={
+                <Checkbox
+                  // checked={this.state.checkedB}
+                  //onChange={this.handleChangeForChecks}
+                  name="checkedB"
+                  color="primary"
+                />
+              }
+              label="I agree"
+            />
+          </FormGroup>
+          <TextField variant="outlined" placeholder="Enter your strava id" />
           <div>
             <Button type="submit" variant="contained">
               Next

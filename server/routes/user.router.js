@@ -264,20 +264,6 @@ router.delete('/delete/athlete/:id', (req, res) => {
     });
 });
 
-//gets all days of the week
-router.get('/register/days', (req, res) => {
-  let queryText = `SELECT * FROM "days_of_week"`;
-  pool
-    .query(queryText)
-    .then((dbResponse) => {
-      res.send(dbResponse.rows);
-    })
-    .catch((error) => {
-      console.log('error getting days of the week', error);
-      res.sendStatus(500);
-    });
-});
-
 //gets all athlete info
 // router.get('/athlete', (req, res) => {
 

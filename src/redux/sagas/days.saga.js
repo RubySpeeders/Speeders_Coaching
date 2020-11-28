@@ -4,7 +4,7 @@ import axios from 'axios';
 function* getDays(action) {
   try {
     //axios call to get all days
-    const response = yield axios.get('/api/user/register/days');
+    const response = yield axios.get('/api/days');
     console.log(response.data);
     yield put({
       type: 'SET_DAYS',

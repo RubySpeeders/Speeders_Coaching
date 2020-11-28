@@ -10,12 +10,9 @@ import {
   RadioGroup,
   Grid,
   TextField,
-  Select,
   FormControl,
   FormLabel,
   FormControlLabel,
-  InputLabel,
-  MenuItem,
   Typography,
   Box,
 } from '@material-ui/core';
