@@ -12,6 +12,7 @@ import {
   FormControl,
   InputLabel,
   MenuItem,
+  Typography,
 } from '@material-ui/core';
 
 class RegisterForm extends Component {
@@ -55,12 +56,12 @@ class RegisterForm extends Component {
   render() {
     return (
       <Container>
+        <Typography component="h2">Register Coach</Typography>
         <form className="formPanel" onSubmit={this.registerUser}>
-          <h2>Register Coach</h2>
           {this.props.store.errors.registrationMessage && (
-            <h3 className="alert" role="alert">
+            <Typography component="h3" className="alert" role="alert">
               {this.props.store.errors.registrationMessage}
-            </h3>
+            </Typography>
           )}
           <div>
             <TextField

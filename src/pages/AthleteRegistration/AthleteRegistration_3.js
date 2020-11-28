@@ -7,6 +7,7 @@ import {
   Container,
   Typography,
   Button,
+  Box,
   Grid,
   TextField,
   FormGroup,
@@ -179,11 +180,11 @@ class AthleteRegistrationThree extends Component {
             />
           </FormGroup>
           <TextField variant="outlined" placeholder="Enter your strava id" />
-          <div>
+          <Box m={2}>
             <Button type="submit" variant="contained">
               Next
             </Button>
-          </div>
+          </Box>
         </form>
       </Container>
     );

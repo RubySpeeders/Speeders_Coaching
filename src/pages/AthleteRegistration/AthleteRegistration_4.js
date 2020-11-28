@@ -13,7 +13,6 @@ import {
   FormControl,
   FormLabel,
   FormControlLabel,
-  Typography,
   Box,
 } from '@material-ui/core';
 
@@ -126,11 +125,11 @@ class AthleteRegistrationFour extends Component {
               onChange={this.handleInputChangeFor('health_risk_comments')}
             />
           </FormControl>
-          <div>
+          <Box m={2}>
             <Button type="submit" variant="contained">
               Next
             </Button>
-          </div>
+          </Box>
         </form>
       </Container>
     );

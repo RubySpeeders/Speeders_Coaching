@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import mapStoreToProps from '../../redux/mapStoreToProps';
 
 //Material-UI
-import { Typography, TextField, Grid, Button } from '@material-ui/core';
+import { Typography, TextField, Grid, Button, Box } from '@material-ui/core';
 
 class LoginForm extends Component {
   state = {
@@ -45,7 +45,7 @@ class LoginForm extends Component {
               {this.props.store.errors.loginMessage}
             </h3>
           )}
-          <div>
+          <Box mb={2}>
             <TextField
               placeholder="username"
               type="text"
@@ -55,7 +55,7 @@ class LoginForm extends Component {
               value={this.state.username}
               onChange={this.handleInputChangeFor('username')}
             />
-          </div>
+          </Box>
           <div>
             <TextField
               placeholder="password"
@@ -67,11 +67,11 @@ class LoginForm extends Component {
               onChange={this.handleInputChangeFor('password')}
             />
           </div>
-          <div>
+          <Box m={2}>
             <Button variant="outlined" type="submit">
               Log In
             </Button>
-          </div>
+          </Box>
         </form>
       </Grid>
     );

@@ -6,24 +6,16 @@ import mapStoreToProps from '../../redux/mapStoreToProps';
 import {
   Container,
   Button,
-  Radio,
-  RadioGroup,
   Grid,
   TextField,
-  FormControl,
-  FormLabel,
-  FormControlLabel,
   Typography,
   Box,
 } from '@material-ui/core';
 
 class AthleteRegistrationFive extends Component {
   state = {
-    injury: '',
-    injury_description: '',
-    medication: '',
-    medication_description: '',
-    health_risk_comments: '',
+    life_outside_running: '',
+    general_comments: '',
   };
 
   handleNext = (e) => {
@@ -43,90 +35,39 @@ class AthleteRegistrationFive extends Component {
       <Container>
         <Typography>More fun stuff!</Typography>
         <form onSubmit={this.handleNext}>
-          <FormControl>
-            <Grid container spacing={6}>
-              <Grid item xs={6}>
-                <FormLabel>Are you currently injured?</FormLabel>
-                <RadioGroup>
-                  <FormControlLabel
-                    checked={this.state.injury === true}
-                    onChange={this.handleInputChangeFor('injury')}
-                    value={true}
-                    control={<Radio />}
-                    label="yes"
-                  />
-                  <FormControlLabel
-                    checked={this.state.injury === false}
-                    onChange={this.handleInputChangeFor('injury')}
-                    value={false}
-                    control={<Radio />}
-                    label="no"
-                  />
-                </RadioGroup>
-              </Grid>
-
-              <Grid item xs={6}>
-                <TextField
-                  placeholder="If currently injured, describe your injury, date of onset, and severity."
-                  type="text"
-                  name="injury_description"
-                  value={this.state.injury_description}
-                  variant="outlined"
-                  multiline
-                  rows={4}
-                  onChange={this.handleInputChangeFor('injury_description')}
-                />
-              </Grid>
+          <Grid container spacing={6}>
+            <Grid item>
+              <TextField
+                placeholder="Describe your life outside of running"
+                type="text"
+                name="life_outside_running"
+                value={this.state.life_outside_running}
+                variant="outlined"
+                multiline
+                rows={4}
+                onChange={this.handleInputChangeFor('life_outside_running')}
+              />
             </Grid>
-            <Grid container spacing={6}>
-              <Grid item xs={6}>
-                <FormLabel>Are you currently taking any medications?</FormLabel>
-                <RadioGroup>
-                  <FormControlLabel
-                    checked={this.state.medication === true}
-                    onChange={this.handleInputChangeFor('medication')}
-                    value={true}
-                    control={<Radio />}
-                    label="yes"
-                  />
-                  <FormControlLabel
-                    checked={this.state.medication === false}
-                    onChange={this.handleInputChangeFor('medication')}
-                    value={false}
-                    control={<Radio />}
-                    label="no"
-                  />
-                </RadioGroup>
-              </Grid>
-              <Grid item xs={6}>
-                <TextField
-                  placeholder="If currently taking medication, please describe how often and how long you have been taking."
-                  type="text"
-                  name="medication_description"
-                  value={this.state.medication_description}
-                  variant="outlined"
-                  multiline
-                  rows={4}
-                  onChange={this.handleInputChangeFor('medication_description')}
-                />
-              </Grid>
+          </Grid>
+          <Grid container spacing={6}>
+            <Grid item>
+              <TextField
+                placeholder="Any other comments or details you want to share"
+                type="text"
+                name="general_comments"
+                value={this.state.general_comments}
+                variant="outlined"
+                multiline
+                rows={4}
+                onChange={this.handleInputChangeFor('general_comments')}
+              />
             </Grid>
-            <TextField
-              placeholder="Are there any other health risks you want me to know about?"
-              type="text"
-              name="health_risk_comments"
-              value={this.state.health_risk_comments}
-              variant="outlined"
-              multiline
-              rows={4}
-              onChange={this.handleInputChangeFor('health_risk_comments')}
-            />
-          </FormControl>
-          <div>
+          </Grid>
+          <Box m={2}>
             <Button type="submit" variant="contained">
               Submit
             </Button>
-          </div>
+          </Box>
         </form>
       </Container>
     );
