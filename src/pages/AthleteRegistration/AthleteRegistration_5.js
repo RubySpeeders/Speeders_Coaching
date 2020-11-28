@@ -20,7 +20,7 @@ import {
   Box,
 } from '@material-ui/core';
 
-class AthleteRegistrationFour extends Component {
+class AthleteRegistrationFive extends Component {
   state = {
     injury: '',
     injury_description: '',
@@ -49,6 +49,7 @@ class AthleteRegistrationFour extends Component {
   render() {
     return (
       <Container>
+        <Typography>More fun stuff!</Typography>
         <form onSubmit={this.handleNext}>
           <FormControl>
             <Grid container spacing={6}>
@@ -131,7 +132,7 @@ class AthleteRegistrationFour extends Component {
           </FormControl>
           <div>
             <Button type="submit" variant="contained">
-              Next
+              Submit
             </Button>
           </div>
         </form>
@@ -140,4 +141,4 @@ class AthleteRegistrationFour extends Component {
   }
 }
 
-export default connect(mapStoreToProps)(AthleteRegistrationFour);
+export default connect(mapStoreToProps)(AthleteRegistrationFive);

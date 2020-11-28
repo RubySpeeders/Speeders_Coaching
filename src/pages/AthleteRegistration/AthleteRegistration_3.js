@@ -24,6 +24,8 @@ class AthleteRegistrationThree extends Component {
     this.props.dispatch({ type: 'GET_DAYS' });
   }
   state = {
+    run_history: '',
+    avg_weekly_mileage: '',
     other_exercise: {},
   };
 
@@ -87,6 +89,8 @@ class AthleteRegistrationThree extends Component {
                 <em>5+ years</em>
               </MenuItem>
             </Select>
+          </FormControl>
+          <FormControl variant="outlined" fullWidth>
             <InputLabel id="avg-weekly-miles">
               How much do you run every week?
             </InputLabel>
@@ -127,7 +131,7 @@ class AthleteRegistrationThree extends Component {
                   color="primary"
                 />
               }
-              label="Primary"
+              label="5K"
             />
           </FormGroup>
           <div>

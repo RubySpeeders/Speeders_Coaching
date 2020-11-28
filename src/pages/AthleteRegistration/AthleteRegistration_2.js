@@ -13,6 +13,7 @@ import {
   InputLabel,
   MenuItem,
   Typography,
+  Box,
 } from '@material-ui/core';
 
 class AthleteRegistrationTwo extends Component {
@@ -71,6 +72,9 @@ class AthleteRegistrationTwo extends Component {
               </MenuItem>
               {day}
             </Select>
+          </FormControl>
+
+          <FormControl variant="outlined" fullWidth>
             <InputLabel id="long-run-day">Preferred Long Run Day</InputLabel>
             <Select
               fullWidth
@@ -84,9 +88,10 @@ class AthleteRegistrationTwo extends Component {
               </MenuItem>
               {day}
             </Select>
+          </FormControl>
+          <FormControl variant="outlined" fullWidth>
             <InputLabel id="speed">Speed Work</InputLabel>
             <Select
-              fullWidth
               labelId="speed"
               value={this.state.speed_work}
               onChange={this.handleInputChangeFor('speed_work')}

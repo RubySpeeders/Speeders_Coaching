@@ -25,6 +25,7 @@ import AthleteRegistrationOne from '../../pages/AthleteRegistration/AthleteRegis
 import AthleteRegistrationTwo from '../../pages/AthleteRegistration/AthleteRegistration_2';
 import AthleteRegistrationThree from '../../pages/AthleteRegistration/AthleteRegistration_3';
 import AthleteRegistrationFour from '../../pages/AthleteRegistration/AthleteRegistration_4';
+import AthleteRegistrationFive from '../../pages/AthleteRegistration/AthleteRegistration_5';
 
 import { Container } from '@material-ui/core';
 import AddAthlete from '../../pages/AddAthlete/AddAthlete';
@@ -126,6 +127,11 @@ class App extends Component {
                 exact
                 path="/registration/athlete/page4"
                 component={AthleteRegistrationFour}
+              />
+              <Route
+                exact
+                path="/registration/athlete/page5"
+                component={AthleteRegistrationFive}
               />
               {/* If none of the other routes matched, we will show a 404. */}
 
