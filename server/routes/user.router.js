@@ -100,7 +100,40 @@ router.post('/register/athlete', rejectUnauthenticated, (req, res, next) => {
                 pool
                   .query(queryText, queryArray)
                   .then((dbResponse) => {
-                    res.sendStatus(201);
+                    // referenced from Myron Schippers' repo on nodemailer
+                    //send a message to the athlete (nodemailer)
+                    const transportConfig = {
+                      service: 'gmail',
+                      auth: {
+                        user: process.env.MAILER_EMAIL,
+                        pass: process.env.MAILER_PASSWORD,
+                      },
+                    };
+                    let transporter = nodemailer.createTransport(
+                      transportConfig
+                    );
+                    // create link url for user
+                    let registerLinkBase = process.env.HOST_ENV;
+                    const registerLink = `${registerLinkBase}/#/register/${temporary_key}`;
+                    const mailOptions = {
+                      from: req.user.email, // sender address
+                      to: email, // list of receivers
+                      subject: 'Welcome to Speeders Coaching', // Subject line
+                      html: `<div>
+                        <h1>Hello, ${first_name}!</h1>
+                        <p>Please finalise your registration to Speeders Coaching by following the link below.</p>
+                        <a href="${registerLink}" target="_blank">Continue Registration</a>
+                      </div>`, // plain text body
+                    };
+
+                    transporter.sendMail(mailOptions, (err, info) => {
+                      if (err != null) {
+                        res.sendStatus(500);
+                        return;
+                      }
+
+                      res.sendStatus(201);
+                    });
                   })
                   .catch((err) => {
                     console.log('error with athlete_info', err);
