@@ -27,7 +27,7 @@ class AddAthlete extends Component {
       payload: this.state,
     });
     //goes back home after adding athlete
-    this.props.history.push('/home');
+    this.props.history.push('/add/athlete/success');
   };
 
   //takes user back to homepage
