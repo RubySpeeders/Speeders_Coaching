@@ -16,6 +16,7 @@ import {
   TableHead,
   TableBody,
   TableCell,
+  TableRow,
 } from '@material-ui/core';
 
 //file imoprts
@@ -41,15 +42,17 @@ class CoachHomepage extends Component {
             <TableContainer>
               <Table>
                 <TableHead>
-                  <TableCell>
-                    <Typography>Athlete</Typography>
-                  </TableCell>
-                  <TableCell>
-                    <Typography>Gender</Typography>
-                  </TableCell>
-                  <TableCell>
-                    <Typography>Actions</Typography>
-                  </TableCell>
+                  <TableRow>
+                    <TableCell>
+                      <Typography>Athlete</Typography>
+                    </TableCell>
+                    <TableCell>
+                      <Typography>Gender</Typography>
+                    </TableCell>
+                    <TableCell>
+                      <Typography>Actions</Typography>
+                    </TableCell>
+                  </TableRow>
                 </TableHead>
                 <TableBody>
                   {this.props.store.athletes.map((item, index) => (

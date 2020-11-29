@@ -48,25 +48,30 @@ class MessageBoard extends Component {
           Message Board
         </Typography>
         <Grid container>
-          <CoachSidebar />
+          <Grid item xs={3}>
+            <CoachSidebar />
+          </Grid>
           <Grid item>
-            <form onSubmit={this.postMessage}>
-              <TextField
-                placeholder="write a message!"
-                variant="outlined"
-                fullWidth
-                onChange={this.handleChange}
-                value={this.state.message}
-              />
-              <div>
-                <Button type="submit" variant="contained">
-                  Post
-                </Button>
-              </div>
-            </form>
+            <Grid container>
+              <Grid item>
+                <form onSubmit={this.postMessage}>
+                  <TextField
+                    placeholder="write a message!"
+                    variant="outlined"
+                    fullWidth
+                    onChange={this.handleChange}
+                    value={this.state.message}
+                  />
+
+                  <Button type="submit" variant="contained">
+                    Post
+                  </Button>
+                </form>
+              </Grid>
+            </Grid>
             <Grid container spacing={4}>
               {this.props.store.messages.map((item, index) => (
-                <Grid key={index} item xs={12}>
+                <Grid item key={index} xs={12}>
                   <MessageBoardItem key={index} messages={item} />
                 </Grid>
               ))}

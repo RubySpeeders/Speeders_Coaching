@@ -8,11 +8,7 @@ import {
   Card,
   CardContent,
   Typography,
-  Table,
-  TableBody,
   TableCell,
-  TableContainer,
-  TableHead,
   TableRow,
 } from '@material-ui/core';
 

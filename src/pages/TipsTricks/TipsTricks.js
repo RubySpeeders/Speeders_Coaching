@@ -27,7 +27,8 @@ class TipsTricks extends Component {
           <Tab label="Strides" index={0} />
           <Tab label="Add a new tip" index={1} />
         </Tabs>
-        <AddNewTip />
+        {this.props.store.user.role_id === 1 ? <AddNewTip /> : <></>}
+
         <Grid container>
           {this.props.store.tips.map((item, index) => (
             <Grid item key={index}>

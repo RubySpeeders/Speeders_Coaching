@@ -11,8 +11,13 @@ import {
   CardContent,
   Typography,
 } from '@material-ui/core';
+import FavoriteIcon from '@material-ui/icons/Favorite';
+import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder';
 
 class MessageBoardItem extends Component {
+  handleLikes = (e) => {
+    console.log('like button clicked!');
+  };
   render() {
     return (
       <Card>
@@ -24,6 +29,7 @@ class MessageBoardItem extends Component {
           ) : (
             <div></div>
           )} */}
+          <FavoriteBorderIcon onClick={this.handleLikes}></FavoriteBorderIcon>
         </CardContent>
       </Card>
     );
