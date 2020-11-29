@@ -32,14 +32,9 @@ class AthleteRegistrationFour extends Component {
   };
 
   handleInputChangeFor = (propertyName) => (event) => {
-    this.setState(
-      {
-        [propertyName]: event.target.value,
-      },
-      () => {
-        console.log(this.state);
-      }
-    );
+    this.setState({
+      [propertyName]: event.target.value,
+    });
   };
 
   render() {
@@ -52,6 +47,8 @@ class AthleteRegistrationFour extends Component {
                 <FormLabel>Are you currently injured?</FormLabel>
                 <RadioGroup>
                   <FormControlLabel
+                    required
+                    type="radio"
                     checked={this.state.injury === true}
                     onChange={this.handleInputChangeFor('injury')}
                     value={true}
@@ -59,6 +56,8 @@ class AthleteRegistrationFour extends Component {
                     label="yes"
                   />
                   <FormControlLabel
+                    required
+                    type="radio"
                     checked={this.state.injury === false}
                     onChange={this.handleInputChangeFor('injury')}
                     value={false}
