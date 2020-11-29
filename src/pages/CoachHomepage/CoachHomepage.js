@@ -55,7 +55,7 @@ class CoachHomepage extends Component {
                   </TableRow>
                 </TableHead>
                 <TableBody>
-                  {this.props.store.athletes.map((item, index) => (
+                  {this.props.store.athletes.athletes.map((item, index) => (
                     <AthleteInfo key={index} athlete={item} />
                   ))}
                 </TableBody>

@@ -8,7 +8,7 @@ import userSaga from './user.saga';
 import daysSaga from './days.saga';
 import messagesSaga from './messages.saga';
 import tipsSaga from './tips.saga';
-import getAthletesSaga from './getAthletes.saga';
+import athletesSaga from './athletes.saga';
 import deleteAthleteSaga from './delete.athlete.saga';
 import getRacesSaga from './races.saga';
 
@@ -28,7 +28,7 @@ export default function* rootSaga() {
     messagesSaga(),
     tipsSaga(),
     addAthleteSaga(),
-    getAthletesSaga(),
+    athletesSaga(),
     deleteAthleteSaga(),
     getRacesSaga(),
   ]);

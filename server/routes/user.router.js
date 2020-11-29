@@ -57,7 +57,8 @@ router.post('/register/coach', (req, res, next) => {
     });
 });
 
-router.post('/register/athlete', (req, res, next) => {
+//coach creates a new athlete
+router.post('/register/athlete', rejectUnauthenticated, (req, res, next) => {
   const username = req.body.username;
   const first_name = req.body.first_name;
   const last_name = req.body.last_name;
