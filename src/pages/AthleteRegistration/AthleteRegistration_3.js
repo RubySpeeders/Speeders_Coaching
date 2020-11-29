@@ -40,7 +40,6 @@ class AthleteRegistrationThree extends Component {
       fiftyK: false,
       hundredK: false,
     },
-    other_exercise: {},
   };
 
   handleNext = (e) => {
@@ -55,29 +54,14 @@ class AthleteRegistrationThree extends Component {
     });
   };
 
-  // handleChangeForChecks = (propertyName) => (event) => {
-  //   this.setState({
-  //     ...this.state,
-  //     other_exercise: {
-  //       ...this.state.other_exercise,
-  //       [propertyName]: event.target.checked,
-  //     },
-  //   });
-  // };
-
   handleChangeForChecks = (propertyName) => (event) => {
-    this.setState(
-      {
-        ...this.state,
-        race_type: {
-          ...this.state.race_type,
-          [propertyName]: event.target.checked,
-        },
+    this.setState({
+      ...this.state,
+      race_type: {
+        ...this.state.race_type,
+        [propertyName]: event.target.checked,
       },
-      () => {
-        console.log(this.state.race_type);
-      }
-    );
+    });
   };
 
   render() {
