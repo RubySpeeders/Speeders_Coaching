@@ -29,6 +29,8 @@ import AthleteRegistrationFive from '../../pages/AthleteRegistration/AthleteRegi
 
 import { Container } from '@material-ui/core';
 import AddAthlete from '../../pages/AddAthlete/AddAthlete';
+import AthleteDetails from '../../pages/AthleteDetails/AthleteDetails';
+import AddAthleteSuccess from '../../pages/AddAthleteSuccess/AddAthleteSuccess';
 
 class App extends Component {
   componentDidMount() {
@@ -101,6 +103,11 @@ class App extends Component {
                 component={LandingPage}
                 authRedirect="/user"
               />
+              <Route
+                exact
+                path="/athlete/details/:id"
+                component={AthleteDetails}
+              />
               <ProtectedRoute
                 exact
                 path="/register/athlete"
@@ -132,6 +139,11 @@ class App extends Component {
                 exact
                 path="/registration/athlete/page5"
                 component={AthleteRegistrationFive}
+              />
+              <Route
+                exact
+                path="/add/athlete/success"
+                component={AddAthleteSuccess}
               />
               {/* If none of the other routes matched, we will show a 404. */}
 

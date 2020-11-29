@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import mapStoreToProps from '../../redux/mapStoreToProps';
 
 //Material-UI
-import { Grid, Tabs, Tab, Typography, TextField } from '@material-ui/core';
+import { Grid, Tabs, Tab, Typography } from '@material-ui/core';
 
 //custom file import
 import TipsTricksItem from '../../components/TipsTricksItem/TipsTricksItem';
@@ -27,7 +27,8 @@ class TipsTricks extends Component {
           <Tab label="Strides" index={0} />
           <Tab label="Add a new tip" index={1} />
         </Tabs>
-        <AddNewTip />
+        {this.props.store.user.role_id === 1 ? <AddNewTip /> : <></>}
+
         <Grid container>
           {this.props.store.tips.map((item, index) => (
             <Grid item key={index}>

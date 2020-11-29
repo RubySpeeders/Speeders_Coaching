@@ -14,6 +14,7 @@ import {
   FormLabel,
   FormControlLabel,
   Box,
+  Typography,
 } from '@material-ui/core';
 
 class AthleteRegistrationFour extends Component {
@@ -32,35 +33,39 @@ class AthleteRegistrationFour extends Component {
   };
 
   handleInputChangeFor = (propertyName) => (event) => {
-    this.setState({
-      [propertyName]: event.target.value,
-    });
+    this.setState(
+      {
+        [propertyName]: event.target.value,
+      },
+      () => {
+        console.log(this.state);
+      }
+    );
   };
 
   render() {
     return (
       <Container>
         <form onSubmit={this.handleNext}>
-          <FormControl>
+          <Typography variant="h4">Health Information</Typography>
+          <FormControl component="fieldset">
             <Grid container spacing={6}>
               <Grid item xs={6}>
-                <FormLabel>Are you currently injured?</FormLabel>
-                <RadioGroup>
+                <FormLabel component="legend">
+                  Are you currently injured?
+                </FormLabel>
+                <RadioGroup onChange={this.handleInputChangeFor('injury')}>
                   <FormControlLabel
                     required
-                    type="radio"
                     checked={this.state.injury === true}
-                    onChange={this.handleInputChangeFor('injury')}
-                    value={true}
+                    value="true"
                     control={<Radio />}
                     label="yes"
                   />
                   <FormControlLabel
                     required
-                    type="radio"
                     checked={this.state.injury === false}
-                    onChange={this.handleInputChangeFor('injury')}
-                    value={false}
+                    value="false"
                     control={<Radio />}
                     label="no"
                   />
@@ -83,17 +88,15 @@ class AthleteRegistrationFour extends Component {
             <Grid container spacing={6}>
               <Grid item xs={6}>
                 <FormLabel>Are you currently taking any medications?</FormLabel>
-                <RadioGroup>
+                <RadioGroup onChange={this.handleInputChangeFor('medication')}>
                   <FormControlLabel
                     checked={this.state.medication === true}
-                    onChange={this.handleInputChangeFor('medication')}
                     value={true}
                     control={<Radio />}
                     label="yes"
                   />
                   <FormControlLabel
                     checked={this.state.medication === false}
-                    onChange={this.handleInputChangeFor('medication')}
                     value={false}
                     control={<Radio />}
                     label="no"

@@ -45,10 +45,12 @@ class AthleteRegistrationOne extends Component {
   render() {
     return (
       <Container>
+        <Typography variant="h4" component="h2">
+          Tell me about yourself!
+        </Typography>
         <Grid container justify="space-evenly">
           <Grid item>
             <form className="formPanel" onSubmit={this.handleNext}>
-              <Typography component="h2">Tell me about yourself!</Typography>
               {this.props.store.errors.registrationMessage && (
                 <h3 className="alert" role="alert">
                   {this.props.store.errors.registrationMessage}

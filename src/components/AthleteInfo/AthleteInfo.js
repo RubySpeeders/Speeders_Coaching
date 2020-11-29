@@ -8,11 +8,7 @@ import {
   Card,
   CardContent,
   Typography,
-  Table,
-  TableBody,
   TableCell,
-  TableContainer,
-  TableHead,
   TableRow,
 } from '@material-ui/core';
 
@@ -27,7 +23,7 @@ class AthleteInfo extends Component {
 
   //go to details of specific athlete
   handleDetails = (e) => {
-    console.log('details clicked');
+    this.props.history.push(`/athlete/details/${this.props.athlete.id}`);
   };
 
   render() {
@@ -37,9 +33,6 @@ class AthleteInfo extends Component {
           <Typography>
             {this.props.athlete.first_name} {this.props.athlete.last_name}
           </Typography>
-        </TableCell>
-        <TableCell>
-          <Typography>{this.props.athlete.gender}</Typography>
         </TableCell>
         <TableCell>
           <Button onClick={this.handleDetails}>Details</Button>

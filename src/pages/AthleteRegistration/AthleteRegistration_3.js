@@ -17,6 +17,7 @@ import {
   FormControl,
   InputLabel,
   MenuItem,
+  FormLabel,
 } from '@material-ui/core';
 
 class AthleteRegistrationThree extends Component {
@@ -31,7 +32,14 @@ class AthleteRegistrationThree extends Component {
       distance: '',
     },
     agree: false,
-    other_exercise: {},
+    race_type: {
+      fiveK: false,
+      tenK: false,
+      half_marathon: false,
+      marathon: false,
+      fiftyK: false,
+      hundredK: false,
+    },
   };
 
   handleNext = (e) => {
@@ -49,8 +57,8 @@ class AthleteRegistrationThree extends Component {
   handleChangeForChecks = (propertyName) => (event) => {
     this.setState({
       ...this.state,
-      other_exercise: {
-        ...this.state.other_exercise,
+      race_type: {
+        ...this.state.race_type,
         [propertyName]: event.target.checked,
       },
     });
@@ -67,7 +75,9 @@ class AthleteRegistrationThree extends Component {
     return (
       <Container>
         <form onSubmit={this.handleNext}>
-          <Typography gutterBottom>Fun Stuff</Typography>
+          <Typography variant="h4" gutterBottom>
+            Fun Stuff
+          </Typography>
           {this.props.store.errors.registrationMessage && (
             <h3 className="alert" role="alert">
               {this.props.store.errors.registrationMessage}
@@ -133,19 +143,72 @@ class AthleteRegistrationThree extends Component {
               </MenuItem>
             </Select>
           </FormControl>
-          <FormGroup row>
-            <FormControlLabel
-              control={
-                <Checkbox
-                  // checked={this.state.checkedB}
-                  onChange={this.handleChangeForChecks}
-                  name="checkedB"
-                  color="primary"
-                />
-              }
-              label="5K"
-            />
-          </FormGroup>
+          <FormControl>
+            <FormLabel>Check all races you have run:</FormLabel>
+            <FormGroup row>
+              <FormControlLabel
+                control={
+                  <Checkbox
+                    checked={this.state.race_type.fiveK === true}
+                    onChange={this.handleChangeForChecks('fiveK')}
+                    name="5K"
+                  />
+                }
+                label="5K"
+              />
+              <FormControlLabel
+                control={
+                  <Checkbox
+                    checked={this.state.race_type.tenK === true}
+                    onChange={this.handleChangeForChecks('tenK')}
+                    name="10K"
+                  />
+                }
+                label="10K"
+              />
+              <FormControlLabel
+                control={
+                  <Checkbox
+                    checked={this.state.race_type.half_marathon === true}
+                    onChange={this.handleChangeForChecks('half_marathon')}
+                    name="half_marathon"
+                  />
+                }
+                label="13.1"
+              />
+
+              <FormControlLabel
+                control={
+                  <Checkbox
+                    checked={this.state.race_type.marathon === true}
+                    onChange={this.handleChangeForChecks('marathon')}
+                    name="marathon"
+                  />
+                }
+                label="26.2"
+              />
+              <FormControlLabel
+                control={
+                  <Checkbox
+                    checked={this.state.race_type.fiftyK === true}
+                    onChange={this.handleChangeForChecks('fiftyK')}
+                    name="50K"
+                  />
+                }
+                label="50K"
+              />
+              <FormControlLabel
+                control={
+                  <Checkbox
+                    checked={this.state.race_type.hundredK === true}
+                    onChange={this.handleChangeForChecks('hundredK')}
+                    name="100K"
+                  />
+                }
+                label="100K"
+              />
+            </FormGroup>
+          </FormControl>
           <Typography>If you have any PRs please add them here:</Typography>
           <FormControl variant="outlined" fullWidth>
             <InputLabel id="distance">Distance</InputLabel>
@@ -162,24 +225,33 @@ class AthleteRegistrationThree extends Component {
               {races}
             </Select>
           </FormControl>
-          <Typography>
-            I agree to make my strava account public for my coach to access
-            data:
-          </Typography>
-          <FormGroup>
-            <FormControlLabel
-              control={
-                <Checkbox
-                  checked={this.state.agree === true}
-                  //onChange={this.handleChangeForChecks}
-                  name="checkedB"
-                  color="primary"
+          <Grid container justify="space-evenly">
+            <Grid item>
+              <Typography>
+                I agree to make my strava account public for my coach to access
+                data:
+              </Typography>
+              <FormGroup>
+                <FormControlLabel
+                  control={
+                    <Checkbox
+                      checked={this.state.agree === true}
+                      //onChange={this.handleChangeForChecks}
+                      name="agree"
+                      color="primary"
+                    />
+                  }
+                  label="I agree"
                 />
-              }
-              label="I agree"
-            />
-          </FormGroup>
-          <TextField variant="outlined" placeholder="Enter your strava id" />
+              </FormGroup>
+            </Grid>
+            <Grid item>
+              <TextField
+                variant="outlined"
+                placeholder="Enter your strava id"
+              />
+            </Grid>
+          </Grid>
           <Box m={2}>
             <Button type="submit" variant="contained">
               Next

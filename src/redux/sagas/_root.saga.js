@@ -5,12 +5,10 @@ import loginSaga from './login.saga';
 import registrationSaga from './registration.saga';
 import addAthleteSaga from './addAthlete.saga';
 import userSaga from './user.saga';
-import getMessagesSaga from './getMessages.saga';
-import tipsSaga from './tips.saga';
 import daysSaga from './days.saga';
-import postMessageSaga from './postMessages.saga';
-import postTipSaga from './postTip.saga';
-import getAthletesSaga from './getAthletes.saga';
+import messagesSaga from './messages.saga';
+import tipsSaga from './tips.saga';
+import athletesSaga from './athletes.saga';
 import deleteAthleteSaga from './delete.athlete.saga';
 import getRacesSaga from './races.saga';
 
@@ -26,13 +24,11 @@ export default function* rootSaga() {
     loginSaga(), // login saga is now registered
     registrationSaga(),
     userSaga(),
-    getMessagesSaga(),
-    tipsSaga(),
     daysSaga(),
-    postMessageSaga(),
-    postTipSaga(),
+    messagesSaga(),
+    tipsSaga(),
     addAthleteSaga(),
-    getAthletesSaga(),
+    athletesSaga(),
     deleteAthleteSaga(),
     getRacesSaga(),
   ]);

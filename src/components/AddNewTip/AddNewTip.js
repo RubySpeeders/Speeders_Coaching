@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
 //Material-UI
-import { Grid, Button, Typography, TextField } from '@material-ui/core';
+import { Box, Grid, Button, Typography, TextField } from '@material-ui/core';
 
 class AddNewTip extends Component {
   state = {
@@ -34,7 +34,7 @@ class AddNewTip extends Component {
     return (
       <Grid container>
         <Grid item xs={12}>
-          <Typography>Add a new tip</Typography>
+          <Typography variant="h6">Add a new tip</Typography>
         </Grid>
         <form onSubmit={this.postTip}>
           <Grid item xs={12}>

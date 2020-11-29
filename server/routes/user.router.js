@@ -5,11 +5,12 @@ const {
 const encryptLib = require('../modules/encryption');
 const pool = require('../modules/pool');
 const userStrategy = require('../strategies/user.strategy');
+const nodemailer = require('nodemailer');
 
 const router = express.Router();
 
 //custom imports
-const randomNumber = require('../modules/randomKeyGenerator');
+const { generateUUID } = require('../services/uuid.service');
 
 // Handles Ajax request for user information if user is authenticated
 router.get('/', rejectUnauthenticated, (req, res) => {
@@ -21,16 +22,18 @@ router.get('/', rejectUnauthenticated, (req, res) => {
 // The only thing different from this and every other post we've seen
 // is that the password gets encrypted before being inserted
 router.post('/register/coach', (req, res, next) => {
-  const username = req.body.username;
+  const {
+    username,
+    first_name,
+    last_name,
+    city,
+    email,
+    dob,
+    gender,
+    strava_id,
+  } = req.body;
   const password = encryptLib.encryptPassword(req.body.password);
-  const first_name = req.body.first_name;
-  const last_name = req.body.last_name;
-  const city = req.body.city;
-  const email = req.body.email;
-  const dob = req.body.dob;
-  const gender = req.body.gender;
   const role_id = 1;
-  const strava_id = req.body.strava_id;
 
   const queryText = `INSERT INTO "user" (username, password, first_name, last_name, city, email, dob, gender, role_id, strava_id)
     VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10) RETURNING id;`;
@@ -57,53 +60,100 @@ router.post('/register/coach', (req, res, next) => {
     });
 });
 
-router.post('/register/athlete', (req, res, next) => {
-  const username = req.body.username;
-  const first_name = req.body.first_name;
-  const last_name = req.body.last_name;
-  const email = req.body.email;
-  const role_id = 2;
-
-  const queryText = `INSERT INTO "user" (username, first_name, last_name, email, role_id)
-    VALUES ($1, $2, $3, $4, $5) RETURNING id;`;
-  const queryArray = [username, first_name, last_name, email, role_id];
-  pool.query(queryText, queryArray).then((dbResponse) => {
-    const pendingStatus = 1;
-    const temporary_key = randomNumber();
-    const new_athlete_id = dbResponse.rows[0].id;
-    const queryText = `INSERT INTO "invite" (coach_id, athlete_id, status, temporary_key) VALUES ($1, $2, $3, $4) RETURNING athlete_id;`;
-    const queryArray = [
-      req.user.id,
-      new_athlete_id,
-      pendingStatus,
-      temporary_key,
-    ];
-    pool
-      .query(queryText, queryArray)
-      .then((dbResponse) => {
-        const new_athlete_id = dbResponse.rows[0].athlete_id;
-        const coach_id = req.user.id;
-        const queryText = `INSERT INTO "athlete_info" (athlete_id, coach_id) VALUES ($1, $2);`;
-        const queryArray = [new_athlete_id, coach_id];
+//coach creates a new athlete
+router.post('/register/athlete', rejectUnauthenticated, (req, res, next) => {
+  const queryText = `SELECT * FROM "user"
+  JOIN "roles" on "user".role_id = "roles".id
+  WHERE "user".id = $1;`;
+  pool
+    .query(queryText, [req.user.id])
+    .then((dbResponse) => {
+      const user = dbResponse.rows[0];
+      if (user.access_level === 1) {
+        //create temporary user
+        const { first_name, last_name, email } = req.body;
+        const role_id = 2;
+        const queryText = `INSERT INTO "user" (first_name, last_name, email, role_id)
+        VALUES ($1, $2, $3, $4) RETURNING id;`;
+        const queryArray = [first_name, last_name, email, role_id];
         pool
           .query(queryText, queryArray)
           .then((dbResponse) => {
-            res.sendStatus(201);
+            //create temporary UUID
+            const temporary_key = generateUUID();
+            const pendingStatus = 1;
+            const new_athlete_id = dbResponse.rows[0].id;
+            const queryText = `INSERT INTO "invite" (coach_id, athlete_id, status, temporary_key) VALUES ($1, $2, $3, $4) RETURNING athlete_id;`;
+            const queryArray = [
+              req.user.id,
+              new_athlete_id,
+              pendingStatus,
+              temporary_key,
+            ];
+            pool
+              .query(queryText, queryArray)
+              .then((dbResponse) => {
+                const new_athlete_id = dbResponse.rows[0].athlete_id;
+                const coach_id = req.user.id;
+                const queryText = `INSERT INTO "athlete_info" (athlete_id, coach_id) VALUES ($1, $2);`;
+                const queryArray = [new_athlete_id, coach_id];
+                pool
+                  .query(queryText, queryArray)
+                  .then((dbResponse) => {
+                    // referenced from Myron Schippers' repo on nodemailer
+                    //send a message to the athlete (nodemailer)
+                    const transportConfig = {
+                      service: 'gmail',
+                      auth: {
+                        user: process.env.MAILER_EMAIL,
+                        pass: process.env.MAILER_PASSWORD,
+                      },
+                    };
+                    let transporter = nodemailer.createTransport(
+                      transportConfig
+                    );
+                    // create link url for user
+                    let registerLinkBase = process.env.HOST_ENV;
+                    const registerLink = `${registerLinkBase}/#/register/${temporary_key}`;
+                    const mailOptions = {
+                      from: req.user.email, // sender address
+                      to: email, // list of receivers
+                      subject: 'Welcome to Speeders Coaching', // Subject line
+                      html: `<div>
+                        <h1>Hello, ${first_name}!</h1>
+                        <p>Please finalise your registration to Speeders Coaching by following the link below.</p>
+                        <a href="${registerLink}" target="_blank">Continue Registration</a>
+                      </div>`, // plain text body
+                    };
+
+                    transporter.sendMail(mailOptions, (err, info) => {
+                      if (err != null) {
+                        res.sendStatus(500);
+                        return;
+                      }
+
+                      res.sendStatus(201);
+                    });
+                  })
+                  .catch((err) => {
+                    console.log('error with athlete_info', err);
+                  });
+              })
+              .catch((err) => {
+                console.log('error with invite', err);
+                res.sendStatus(500);
+              });
           })
           .catch((err) => {
-            console.log('User registration failed for athlete_info: ', err);
+            console.log('error with user', err);
             res.sendStatus(500);
           });
-      })
-      .catch((err) => {
-        console.log('User registration failed for invite: ', err);
-        res.sendStatus(500);
-      })
-      .catch((err) => {
-        console.log('User registration failed for invite: ', err);
-        res.sendStatus(500);
-      });
-  });
+      }
+    })
+    .catch((err) => {
+      console.log(err);
+      res.sendStatus(403);
+    });
 });
 
 //updates athlete registration after the coach sends a link to the athlete

@@ -5,7 +5,7 @@ const {
   rejectUnauthenticated,
 } = require('../modules/authentication-middleware');
 
-// get all messages for the message board
+// get all athletes
 router.get('/', rejectUnauthenticated, (req, res) => {
   let queryText = ` SELECT * FROM "user" WHERE "role_id" = 2 ORDER BY "last_name";`;
 
@@ -16,6 +16,19 @@ router.get('/', rejectUnauthenticated, (req, res) => {
     })
     .catch((error) => {
       console.log('error getting athlete info', error);
+      res.sendStatus(500);
+    });
+});
+
+router.get('/details/:id', (req, res) => {
+  const queryText = `SELECT * FROM "user" WHERE "user".id = $1;`;
+  pool
+    .query(queryText, [req.params.id])
+    .then((result) => {
+      res.send(result.rows);
+    })
+    .catch((err) => {
+      console.log('Error completing SELECT athlete details query', err);
       res.sendStatus(500);
     });
 });
