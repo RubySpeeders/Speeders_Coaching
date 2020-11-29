@@ -5,7 +5,7 @@ const {
   rejectUnauthenticated,
 } = require('../modules/authentication-middleware');
 
-// get all messages for the message board
+// get all athletes
 router.get('/', rejectUnauthenticated, (req, res) => {
   let queryText = ` SELECT * FROM "user" WHERE "role_id" = 2 ORDER BY "last_name";`;
 

@@ -15,8 +15,22 @@ function* getTips(action) {
   }
 }
 
-function* getTipsSaga() {
-  yield takeLatest('GET_TIPS', getTips);
+function* postTip(action) {
+  try {
+    //axios call to add message
+    yield axios.post(`/api/tips`, action.payload);
+    //axios call to get all messages (with new added message)
+    yield put({
+      type: 'GET_TIPS',
+    });
+  } catch (err) {
+    console.log(err);
+  }
 }
 
-export default getTipsSaga;
+function* tipsSaga() {
+  yield takeLatest('GET_TIPS', getTips);
+  yield takeLatest('POST_TIP', postTip);
+}
+
+export default tipsSaga;

@@ -49,9 +49,11 @@ class AthleteRegistrationTwo extends Component {
     });
     return (
       <Container>
+        <Typography variant="h4" gutterBottom>
+          Running Details
+        </Typography>
         <Grid container justify="space-evenly">
           <form onSubmit={this.handleNext}>
-            <Typography gutterBottom>Running Details</Typography>
             {this.props.store.errors.registrationMessage && (
               <h3 className="alert" role="alert">
                 {this.props.store.errors.registrationMessage}

@@ -15,8 +15,22 @@ function* getMessages(action) {
   }
 }
 
-function* getMessagesSaga() {
-  yield takeLatest('GET_MESSAGES', getMessages);
+function* postMessage(action) {
+  try {
+    //axios call to add message
+    yield axios.post(`/api/message`, action.payload);
+    //axios call to get all messages (with new added message)
+    yield put({
+      type: 'GET_MESSAGES',
+    });
+  } catch (err) {
+    console.log(err);
+  }
 }
 
-export default getMessagesSaga;
+function* messagesSaga() {
+  yield takeLatest('GET_MESSAGES', getMessages);
+  yield takeLatest('POST_MESSAGE', postMessage);
+}
+
+export default messagesSaga;

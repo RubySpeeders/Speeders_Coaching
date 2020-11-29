@@ -23,7 +23,7 @@ class AthleteInfo extends Component {
 
   //go to details of specific athlete
   handleDetails = (e) => {
-    console.log('details clicked');
+    this.props.history.push(`/athlete/details/${this.props.athlete.id}`);
   };
 
   render() {

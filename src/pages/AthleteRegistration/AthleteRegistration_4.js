@@ -14,6 +14,7 @@ import {
   FormLabel,
   FormControlLabel,
   Box,
+  Typography,
 } from '@material-ui/core';
 
 class AthleteRegistrationFour extends Component {
@@ -41,6 +42,7 @@ class AthleteRegistrationFour extends Component {
     return (
       <Container>
         <form onSubmit={this.handleNext}>
+          <Typography variant="h4">Health Information</Typography>
           <FormControl>
             <Grid container spacing={6}>
               <Grid item xs={6}>

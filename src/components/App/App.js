@@ -29,6 +29,7 @@ import AthleteRegistrationFive from '../../pages/AthleteRegistration/AthleteRegi
 
 import { Container } from '@material-ui/core';
 import AddAthlete from '../../pages/AddAthlete/AddAthlete';
+import AthleteDetails from '../../pages/AthleteDetails/AthleteDetails';
 
 class App extends Component {
   componentDidMount() {
@@ -100,6 +101,11 @@ class App extends Component {
                 path="/home"
                 component={LandingPage}
                 authRedirect="/user"
+              />
+              <Route
+                exact
+                path="/athlete/details/:id"
+                component={AthleteDetails}
               />
               <ProtectedRoute
                 exact

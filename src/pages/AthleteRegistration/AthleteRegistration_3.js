@@ -75,7 +75,9 @@ class AthleteRegistrationThree extends Component {
     return (
       <Container>
         <form onSubmit={this.handleNext}>
-          <Typography gutterBottom>Fun Stuff</Typography>
+          <Typography variant="h4" gutterBottom>
+            Fun Stuff
+          </Typography>
           {this.props.store.errors.registrationMessage && (
             <h3 className="alert" role="alert">
               {this.props.store.errors.registrationMessage}

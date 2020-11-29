@@ -33,10 +33,10 @@ class AthleteRegistrationFive extends Component {
     general_comments: '',
   };
 
-  handleNext = (e) => {
+  handleSubmit = (e) => {
     e.preventDefault();
-    // this.props.dispatch({ type: 'UPDATE_FEELING', payload: this.state });
-    this.props.history.push('/registration/athlete/page5');
+    this.props.dispatch({ type: 'REGISTER_PAGE_FIVE', payload: this.state });
+    this.props.history.push('/home');
   };
 
   handleInputChangeFor = (propertyName) => (event) => {
@@ -46,113 +46,114 @@ class AthleteRegistrationFive extends Component {
   };
 
   handleChangeForChecks = (propertyName) => (event) => {
-    this.setState(
-      {
-        ...this.state,
-        other_exercise: {
-          ...this.state.other_exercise,
-          [propertyName]: event.target.checked,
-        },
+    this.setState({
+      other_exercise: {
+        ...this.state.other_exercise,
+        [propertyName]: event.target.checked,
       },
-      () => {
-        console.log(this.state.other_exercise);
-      }
-    );
+    });
   };
 
   render() {
     return (
       <Container>
-        <Typography>More fun stuff!</Typography>
-        <form onSubmit={this.handleNext}>
-          <FormControl>
-            <FormLabel>Check all other forms of exercise you enjoy:</FormLabel>
-            <FormGroup row>
-              <FormControlLabel
-                control={
-                  <Checkbox
-                    checked={this.state.other_exercise.yoga === true}
-                    onChange={this.handleChangeForChecks('yoga')}
-                    name="yoga"
+        <Typography variant="h4" gutterBottom>
+          More fun stuff!
+        </Typography>
+        <Grid container justify="space-evenly">
+          <Grid item>
+            <form onSubmit={this.handleSubmit}>
+              <FormControl>
+                <FormLabel>
+                  Check all other forms of exercise you enjoy:
+                </FormLabel>
+                <FormGroup row>
+                  <FormControlLabel
+                    control={
+                      <Checkbox
+                        checked={this.state.other_exercise.yoga === true}
+                        onChange={this.handleChangeForChecks('yoga')}
+                        name="yoga"
+                      />
+                    }
+                    label="yoga"
                   />
-                }
-                label="yoga"
-              />
-              <FormControlLabel
-                control={
-                  <Checkbox
-                    checked={this.state.other_exercise.barre === true}
-                    onChange={this.handleChangeForChecks('barre')}
-                    name="barre"
+                  <FormControlLabel
+                    control={
+                      <Checkbox
+                        checked={this.state.other_exercise.barre === true}
+                        onChange={this.handleChangeForChecks('barre')}
+                        name="barre"
+                      />
+                    }
+                    label="barre"
                   />
-                }
-                label="barre"
-              />
-              <FormControlLabel
-                control={
-                  <Checkbox
-                    checked={this.state.other_exercise.cycling === true}
-                    onChange={this.handleChangeForChecks('cycling')}
-                    name="cycling"
+                  <FormControlLabel
+                    control={
+                      <Checkbox
+                        checked={this.state.other_exercise.cycling === true}
+                        onChange={this.handleChangeForChecks('cycling')}
+                        name="cycling"
+                      />
+                    }
+                    label="cycling"
                   />
-                }
-                label="cycling"
-              />
 
-              <FormControlLabel
-                control={
-                  <Checkbox
-                    checked={this.state.other_exercise.crossfit === true}
-                    onChange={this.handleChangeForChecks('crossfit')}
-                    name="crossfit"
+                  <FormControlLabel
+                    control={
+                      <Checkbox
+                        checked={this.state.other_exercise.crossfit === true}
+                        onChange={this.handleChangeForChecks('crossfit')}
+                        name="crossfit"
+                      />
+                    }
+                    label="crossfit"
                   />
-                }
-                label="crossfit"
-              />
-              <FormControlLabel
-                control={
-                  <Checkbox
-                    checked={this.state.other_exercise.weight_lifting === true}
-                    onChange={this.handleChangeForChecks('weight_lifting')}
-                    name="weight_lifting"
+                  <FormControlLabel
+                    control={
+                      <Checkbox
+                        checked={
+                          this.state.other_exercise.weight_lifting === true
+                        }
+                        onChange={this.handleChangeForChecks('weight_lifting')}
+                        name="weight_lifting"
+                      />
+                    }
+                    label="weight lifting"
                   />
-                }
-                label="weight lifting"
-              />
-              <FormControlLabel
-                control={
-                  <Checkbox
-                    checked={this.state.other_exercise.dance === true}
-                    onChange={this.handleChangeForChecks('dance')}
-                    name="dance"
+                  <FormControlLabel
+                    control={
+                      <Checkbox
+                        checked={this.state.other_exercise.dance === true}
+                        onChange={this.handleChangeForChecks('dance')}
+                        name="dance"
+                      />
+                    }
+                    label="dance"
                   />
-                }
-                label="dance"
-              />
-              <FormControlLabel
-                control={
-                  <Checkbox
-                    checked={this.state.other_exercise.hiit === true}
-                    onChange={this.handleChangeForChecks('hiit')}
-                    name="hiit"
+                  <FormControlLabel
+                    control={
+                      <Checkbox
+                        checked={this.state.other_exercise.hiit === true}
+                        onChange={this.handleChangeForChecks('hiit')}
+                        name="hiit"
+                      />
+                    }
+                    label="HIIT"
                   />
-                }
-                label="HIIT"
-              />
-              <FormControlLabel
-                control={
-                  <Checkbox
-                    checked={this.state.other_exercise.pilates === true}
-                    onChange={this.handleChangeForChecks('pilates')}
-                    name="pilates"
+                  <FormControlLabel
+                    control={
+                      <Checkbox
+                        checked={this.state.other_exercise.pilates === true}
+                        onChange={this.handleChangeForChecks('pilates')}
+                        name="pilates"
+                      />
+                    }
+                    label="pilates"
                   />
-                }
-                label="pilates"
-              />
-            </FormGroup>
-          </FormControl>
-          <Grid container spacing={6}>
-            <Grid item>
+                </FormGroup>
+              </FormControl>
+
               <TextField
                 placeholder="Describe your life outside of running"
                 type="text"
@@ -163,10 +164,7 @@ class AthleteRegistrationFive extends Component {
                 rows={4}
                 onChange={this.handleInputChangeFor('life_outside_running')}
               />
-            </Grid>
-          </Grid>
-          <Grid container spacing={6}>
-            <Grid item>
+
               <TextField
                 placeholder="Any other comments or details you want to share"
                 type="text"
@@ -177,14 +175,15 @@ class AthleteRegistrationFive extends Component {
                 rows={4}
                 onChange={this.handleInputChangeFor('general_comments')}
               />
-            </Grid>
+
+              <Box m={2}>
+                <Button type="submit" variant="contained">
+                  Submit
+                </Button>
+              </Box>
+            </form>
           </Grid>
-          <Box m={2}>
-            <Button type="submit" variant="contained">
-              Submit
-            </Button>
-          </Box>
-        </form>
+        </Grid>
       </Container>
     );
   }
