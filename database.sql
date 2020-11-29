@@ -63,7 +63,7 @@ CREATE TABLE "invite" (
 	"coach_id" INT REFERENCES "user",
 	"athlete_id" INT REFERENCES "user",
 	"status" INT REFERENCES "status",
-	"temporary_key" integer
+	"temporary_key" UUID
 	);
 
 CREATE TABLE "other_exercise" (
