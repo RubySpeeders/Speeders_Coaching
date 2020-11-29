@@ -46,9 +46,7 @@ class CoachHomepage extends Component {
                     <TableCell>
                       <Typography>Athlete</Typography>
                     </TableCell>
-                    <TableCell>
-                      <Typography>Gender</Typography>
-                    </TableCell>
+
                     <TableCell>
                       <Typography>Actions</Typography>
                     </TableCell>

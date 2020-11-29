@@ -24,13 +24,15 @@ class AthleteDetails extends Component {
   };
   render() {
     return (
-      <div>
-        <Typography variant="h4">Athlete Details LOL</Typography>
+      <Container>
+        <Typography variant="h4">Athlete Details</Typography>
         <Typography>
-          {this.props.store.athletes.athleteDetails.first_name}
+          {this.props.store.athletes.athleteDetails.first_name}{' '}
+          {this.props.store.athletes.athleteDetails.last_name}
         </Typography>
+        <Button>Assign a Workout</Button>
         <Button onClick={this.handleBack}>Back</Button>
-      </div>
+      </Container>
     );
   }
 }

@@ -80,7 +80,6 @@ router.post('/register/athlete', rejectUnauthenticated, (req, res, next) => {
           .then((dbResponse) => {
             //create temporary UUID
             const temporary_key = generateUUID();
-            console.log(temporary_key);
             const pendingStatus = 1;
             const new_athlete_id = dbResponse.rows[0].id;
             const queryText = `INSERT INTO "invite" (coach_id, athlete_id, status, temporary_key) VALUES ($1, $2, $3, $4) RETURNING athlete_id;`;

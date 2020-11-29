@@ -35,9 +35,6 @@ class AthleteInfo extends Component {
           </Typography>
         </TableCell>
         <TableCell>
-          <Typography>{this.props.athlete.gender}</Typography>
-        </TableCell>
-        <TableCell>
           <Button onClick={this.handleDetails}>Details</Button>
           <Button onClick={this.deleteAthlete}>Delete</Button>
         </TableCell>
