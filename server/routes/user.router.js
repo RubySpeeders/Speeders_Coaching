@@ -156,6 +156,33 @@ router.post('/register/athlete', rejectUnauthenticated, (req, res, next) => {
     });
 });
 
+// GET a user that has the matched temporary ID
+router.get('/register/temp/:tempId', (req, res) => {
+  // STEP 1: see if there is a user that matches the "tempId"
+  const queryForTempUser = `	SELECT "user".first_name, "user".last_name, "user".email, "invite".temporary_key FROM "user"
+	JOIN "invite" ON "user".id="invite".athlete_id
+    WHERE temporary_key = $1;`;
+  const queryArray = [req.params.tempId];
+  pool
+    .query(queryForTempUser, queryArray)
+    .then((dbResp) => {
+      const tempUser = dbResp.rows[0];
+
+      if (tempUser != null) {
+        // STEP 2: send back user info for matched user
+        res.send(tempUser);
+        return;
+      }
+
+      // STEP 3: if there is no match then send back error 403
+      res.sendStatus(403);
+    })
+    .catch((err) => {
+      logError(err);
+      res.sendStatus(500);
+    });
+});
+
 //updates athlete registration after the coach sends a link to the athlete
 router.put('/register/athlete/:id', (req, res) => {
   // PUT route code here
