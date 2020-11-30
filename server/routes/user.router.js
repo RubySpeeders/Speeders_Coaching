@@ -262,33 +262,31 @@ router.put('/register/athlete/:tempId', (req, res) => {
     });
 });
 
-router.post('/register/athlete/page3', (req, res) => {
+router.post('/register/athlete/:tempId', (req, res) => {
   try {
-    console.log(req.user);
-    pool
-      .query(
-        `SELECT "athlete_info".id FROM "athlete_info" WHERE "athlete_id"=$1;`,
-        [req.user.id]
-      )
-      .then((dbResponse) => {
-        console.log(dbResponse.rows);
-        const athlete_info_id = dbResponse.rows[0].id;
-        const other_exercise_list = Object.keys(req.body.other_exercise);
-        const athlete_exercise_array = [];
-        //iterate through the array of checked off other exercises
-        for (let i = 0; i < other_exercise_list.length; i++) {
-          const exercise_key = other_exercise_list[i];
-          const exercise_value = req.body.other_exercise[exercise_key];
-          if (exercise_value) {
-            const queryText = `INSERT INTO "athlete_other_exercise" (athlete_info_id, other_exercise_id) VALUES ($1, $2);`;
-            const queryArray = [athlete_info_id, exercise_key];
-            athlete_exercise_array.push(pool.query(queryText, queryArray));
-          }
+    const queryText = `SELECT "athlete_info".id, "invite".temporary_key FROM "athlete_info"
+    JOIN "user" on "athlete_info".athlete_id="user".id
+    JOIN "invite" on "user".id="invite".athlete_id WHERE "temporary_key"=$1;`;
+    const queryArray = [req.params.tempId];
+    pool.query(queryText, queryArray).then((dbResponse) => {
+      console.log(dbResponse.rows);
+      const athlete_info_id = dbResponse.rows[0].id;
+      const other_exercise_list = Object.keys(req.body.other_exercise);
+      const athlete_exercise_array = [];
+      //iterate through the array of checked off other exercises
+      for (let i = 0; i < other_exercise_list.length; i++) {
+        const exercise_key = other_exercise_list[i];
+        const exercise_value = req.body.other_exercise[exercise_key];
+        if (exercise_value) {
+          const queryText = `INSERT INTO "athlete_other_exercise" (athlete_info_id, other_exercise_id) VALUES ($1, $2);`;
+          const queryArray = [athlete_info_id, exercise_key];
+          athlete_exercise_array.push(pool.query(queryText, queryArray));
         }
-        Promise.all(athlete_exercise_array).then((dbResponse) => {
-          res.sendStatus(201);
-        });
+      }
+      Promise.all(athlete_exercise_array).then((dbResponse) => {
+        res.sendStatus(201);
       });
+    });
   } catch (err) {
     console.log('first query post', err);
     res.sendStatus(500);

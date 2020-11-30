@@ -18,6 +18,10 @@ import {
 } from '@material-ui/core';
 
 class AthleteRegistrationFive extends Component {
+  componentDidMount() {
+    //dispatch to get all exercise types for checkboxes
+    this.props.dispatch({ type: 'GET_EXERCISES' });
+  }
   state = {
     other_exercise: {
       yoga: false,
