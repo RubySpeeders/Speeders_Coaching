@@ -59,6 +59,21 @@ class AthleteRegistrationFive extends Component {
   };
 
   render() {
+    const other_exercise = this.props.store.exercises.map((item, index) => {
+      return (
+        <FormControlLabel
+          control={
+            <Checkbox
+              value={item.id}
+              checked={this.state.other_exercise.yoga === true}
+              onChange={this.handleChangeForChecks('yoga')}
+              name={item.description}
+            />
+          }
+          label={item.description}
+        />
+      );
+    });
     return (
       <Container>
         <Typography variant="h4" gutterBottom>
@@ -71,91 +86,7 @@ class AthleteRegistrationFive extends Component {
                 <FormLabel>
                   Check all other forms of exercise you enjoy:
                 </FormLabel>
-                <FormGroup row>
-                  <FormControlLabel
-                    control={
-                      <Checkbox
-                        checked={this.state.other_exercise.yoga === true}
-                        onChange={this.handleChangeForChecks('yoga')}
-                        name="yoga"
-                      />
-                    }
-                    label="yoga"
-                  />
-                  <FormControlLabel
-                    control={
-                      <Checkbox
-                        checked={this.state.other_exercise.barre === true}
-                        onChange={this.handleChangeForChecks('barre')}
-                        name="barre"
-                      />
-                    }
-                    label="barre"
-                  />
-                  <FormControlLabel
-                    control={
-                      <Checkbox
-                        checked={this.state.other_exercise.cycling === true}
-                        onChange={this.handleChangeForChecks('cycling')}
-                        name="cycling"
-                      />
-                    }
-                    label="cycling"
-                  />
-
-                  <FormControlLabel
-                    control={
-                      <Checkbox
-                        checked={this.state.other_exercise.crossfit === true}
-                        onChange={this.handleChangeForChecks('crossfit')}
-                        name="crossfit"
-                      />
-                    }
-                    label="crossfit"
-                  />
-                  <FormControlLabel
-                    control={
-                      <Checkbox
-                        checked={
-                          this.state.other_exercise.weight_lifting === true
-                        }
-                        onChange={this.handleChangeForChecks('weight_lifting')}
-                        name="weight_lifting"
-                      />
-                    }
-                    label="weight lifting"
-                  />
-                  <FormControlLabel
-                    control={
-                      <Checkbox
-                        checked={this.state.other_exercise.dance === true}
-                        onChange={this.handleChangeForChecks('dance')}
-                        name="dance"
-                      />
-                    }
-                    label="dance"
-                  />
-                  <FormControlLabel
-                    control={
-                      <Checkbox
-                        checked={this.state.other_exercise.hiit === true}
-                        onChange={this.handleChangeForChecks('hiit')}
-                        name="hiit"
-                      />
-                    }
-                    label="HIIT"
-                  />
-                  <FormControlLabel
-                    control={
-                      <Checkbox
-                        checked={this.state.other_exercise.pilates === true}
-                        onChange={this.handleChangeForChecks('pilates')}
-                        name="pilates"
-                      />
-                    }
-                    label="pilates"
-                  />
-                </FormGroup>
+                <FormGroup row>{other_exercise}</FormGroup>
               </FormControl>
 
               <TextField
