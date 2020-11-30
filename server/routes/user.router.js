@@ -156,106 +156,137 @@ router.post('/register/athlete', rejectUnauthenticated, (req, res, next) => {
     });
 });
 
+// GET a user that has the matched temporary ID
+router.get('/register/athlete/:tempId', (req, res) => {
+  // STEP 1: see if there is a user that matches the "tempId"
+  const queryForTempUser = `	SELECT "user".first_name, "user".last_name, "user".email, "invite".temporary_key FROM "user"
+	JOIN "invite" ON "user".id="invite".athlete_id
+    WHERE temporary_key = $1;`;
+  const queryArray = [req.params.tempId];
+  pool
+    .query(queryForTempUser, queryArray)
+    .then((dbResp) => {
+      const tempUser = dbResp.rows[0];
+
+      if (tempUser != null) {
+        // STEP 2: send back user info for matched user
+        res.send(tempUser);
+        return;
+      }
+
+      // STEP 3: if there is no match then send back error 403
+      res.sendStatus(403);
+    })
+    .catch((err) => {
+      logError(err);
+      res.sendStatus(500);
+    });
+});
+
 //updates athlete registration after the coach sends a link to the athlete
-router.put('/register/athlete/:id', (req, res) => {
+router.put('/register/athlete/:tempId', (req, res) => {
   // PUT route code here
-  const username = req.body.username;
-  const password = encryptLib.encryptPassword(req.body.password);
-  const city = req.body.city;
-  const dob = req.body.dob;
-  const gender = req.body.gender;
-  const strava_id = req.body.strava_id;
-  const athlete_id = req.params.id;
-  const queryText = `UPDATE "user" SET username=$1, password=$2, city=$3, dob=$4, gender=$5, strava_id=$6 WHERE "id"=$7;`;
-  const queryArray = [
+  const {
     username,
-    password,
+    first_name,
+    last_name,
     city,
+    email,
     dob,
     gender,
     strava_id,
-    athlete_id,
-  ];
-  pool
-    .query(queryText, queryArray)
-    .then((dbResponse) => {
-      res.sendStatus(200);
-    })
-    .catch((err) => {
-      console.log(err);
-      res.sendStatus(500);
-    });
-});
-
-//sends new athlete_info data when athlete registers.
-router.post('/register/athlete/page2/:id', (req, res, next) => {
-  const rest_day = req.body.rest_day;
-  const long_run_day = req.body.long_run_day;
-  const speed_work = req.body.speed_work;
-  const run_history = req.body.run_history;
-  const avg_weekly_mileage = req.body.avg_weekly_mileage;
-  const injury = req.body.injury;
-  const injury_description = req.body.injury_description;
-  const medication = req.body.medication;
-  const medication_description = req.body.medication_description;
-  const health_risk_comments = req.body.health_risk_comments;
-  const life_outside_running = req.body.life_outside_running;
-  const general_comments = req.body.general_comments;
-
-  const queryText = `INSERT INTO "athlete_info" (rest_day, long_run_day, speed_work, run_history, avg_weekly_mileage, injury, injury_description, medication, medication_description, health_risk_comments, life_outside_running, general_comments)
-    VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12) RETURNING id;`;
+  } = req.body;
+  const password = encryptLib.encryptPassword(req.body.password);
+  const temporary_key = req.params.tempId;
+  const queryText = `UPDATE "user" SET username=$1, password=$2, first_name=$3, last_name=$4, city=$5, email=$6, dob=$7, gender=$8, strava_id=$9 FROM "invite" WHERE "user".id="invite".athlete_id
+  AND "temporary_key"=$10 RETURNING athlete_id;`;
   const queryArray = [
-    rest_day,
-    long_run_day,
-    speed_work,
-    run_history,
-    avg_weekly_mileage,
-    injury,
-    injury_description,
-    medication,
-    medication_description,
-    health_risk_comments,
-    life_outside_running,
-    general_comments,
+    username,
+    password,
+    first_name,
+    last_name,
+    city,
+    email,
+    dob,
+    gender,
+    strava_id,
+    temporary_key,
   ];
   pool
     .query(queryText, queryArray)
     .then((dbResponse) => {
-      res.sendStatus(201);
+      const {
+        rest_day,
+        long_run_day,
+        speed_work,
+        run_history,
+        avg_weekly_mileage,
+        injury,
+        injury_description,
+        medication,
+        medication_description,
+        health_risk_comments,
+        life_outside_running,
+        general_comments,
+      } = req.body;
+      const athlete_id = dbResponse.rows[0].athlete_id;
+      const queryText = `UPDATE "athlete_info" SET rest_day=$1, long_run_day=$2, speed_work=$3, run_history=$4, avg_weekly_mileage=$5, injury=$6, injury_description=$7, medication=$8, medication_description=$9, health_risk_comments=$10, life_outside_running=$11, general_comments=$12 WHERE athlete_id=$13`;
+      const queryArray = [
+        rest_day,
+        long_run_day,
+        speed_work,
+        run_history,
+        avg_weekly_mileage,
+        injury,
+        injury_description,
+        medication,
+        medication_description,
+        health_risk_comments,
+        life_outside_running,
+        general_comments,
+        athlete_id,
+      ];
+      pool
+        .query(queryText, queryArray)
+        .then((dbResponse) => {
+          res.sendStatus(200);
+        })
+        .catch((err) => {
+          console.log('error in the athlete_info table', err);
+          res.sendStatus(500);
+        });
     })
     .catch((err) => {
-      console.log('massive error', err);
+      console.log('error in the user table', err);
       res.sendStatus(500);
     });
 });
 
-router.post('/register/athlete/page3', (req, res) => {
+router.post('/register/athlete/:tempId', (req, res) => {
   try {
-    console.log(req.user);
-    pool
-      .query(
-        `SELECT "athlete_info".id FROM "athlete_info" WHERE "athlete_id"=$1;`,
-        [req.user.id]
-      )
-      .then((dbResponse) => {
-        console.log(dbResponse.rows);
-        const athlete_info_id = dbResponse.rows[0].id;
-        const other_exercise_list = Object.keys(req.body.other_exercise);
-        const athlete_exercise_array = [];
-        //iterate through the array of checked off other exercises
-        for (let i = 0; i < other_exercise_list.length; i++) {
-          const exercise_key = other_exercise_list[i];
-          const exercise_value = req.body.other_exercise[exercise_key];
-          if (exercise_value) {
-            const queryText = `INSERT INTO "athlete_other_exercise" (athlete_info_id, other_exercise_id) VALUES ($1, $2);`;
-            const queryArray = [athlete_info_id, exercise_key];
-            athlete_exercise_array.push(pool.query(queryText, queryArray));
-          }
+    const queryText = `SELECT "athlete_info".id, "invite".temporary_key FROM "athlete_info"
+    JOIN "user" on "athlete_info".athlete_id="user".id
+    JOIN "invite" on "user".id="invite".athlete_id WHERE "temporary_key"=$1;`;
+    const queryArray = [req.params.tempId];
+    pool.query(queryText, queryArray).then((dbResponse) => {
+      console.log(dbResponse.rows);
+      const athlete_info_id = dbResponse.rows[0].id;
+      const other_exercise_list = Object.keys(req.body.other_exercise);
+      const athlete_exercise_array = [];
+      //iterate through the array of checked off other exercises
+      for (let i = 0; i < other_exercise_list.length; i++) {
+        const exercise_key = other_exercise_list[i];
+        const exercise_value = req.body.other_exercise[exercise_key];
+        if (exercise_value) {
+          const queryText = `INSERT INTO "athlete_other_exercise" (athlete_info_id, other_exercise_id) VALUES ($1, $2);`;
+          const queryArray = [athlete_info_id, exercise_key];
+          athlete_exercise_array.push(pool.query(queryText, queryArray));
         }
-        Promise.all(athlete_exercise_array).then((dbResponse) => {
-          res.sendStatus(201);
-        });
+      }
+      Promise.all(athlete_exercise_array).then((dbResponse) => {
+        res.sendStatus(201);
       });
+    });
   } catch (err) {
     console.log('first query post', err);
     res.sendStatus(500);
