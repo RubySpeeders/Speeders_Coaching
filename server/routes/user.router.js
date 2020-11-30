@@ -284,11 +284,25 @@ router.post('/register/athlete/:tempId', (req, res) => {
         }
       }
       Promise.all(athlete_exercise_array).then((dbResponse) => {
-        res.sendStatus(201);
+        const race_type_list = Object.keys(req.body.race_type);
+        const athlete_race_array = [];
+        //iterate through the array of checked off races
+        for (let i = 0; i < race_type_list.length; i++) {
+          const race_key = race_type_list[i];
+          const race_value = req.body.race_type[race_key];
+          if (race_value) {
+            const queryText = `INSERT INTO "athlete_race" (athlete_info_id, race_id) VALUES ($1, $2);`;
+            const queryArray = [athlete_info_id, race_key];
+            athlete_race_array.push(pool.query(queryText, queryArray));
+          }
+        }
+        Promise.all(athlete_race_array).then((dbResponse) => {
+          res.sendStatus(201);
+        });
       });
     });
   } catch (err) {
-    console.log('first query post', err);
+    console.log('error inserting into junction tables', err);
     res.sendStatus(500);
   }
 });

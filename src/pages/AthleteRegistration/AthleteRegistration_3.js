@@ -33,12 +33,12 @@ class AthleteRegistrationThree extends Component {
     },
     agree: false,
     race_type: {
-      fiveK: false,
-      tenK: false,
-      half_marathon: false,
-      marathon: false,
-      fiftyK: false,
-      hundredK: false,
+      // fiveK: false,
+      // tenK: false,
+      // half_marathon: false,
+      // marathon: false,
+      // fiftyK: false,
+      // hundredK: false,
     },
   };
 
@@ -65,6 +65,21 @@ class AthleteRegistrationThree extends Component {
   };
 
   render() {
+    const race_experience = this.props.store.races.map((item, index) => {
+      return (
+        <FormControlLabel
+          key={index}
+          control={
+            <Checkbox
+              value={item.id}
+              onChange={this.handleChangeForChecks(item.id)}
+              name={item.description}
+            />
+          }
+          label={item.description}
+        />
+      );
+    });
     const races = this.props.store.races.map((item, index) => {
       return (
         <MenuItem value={item.id} key={index}>
@@ -145,69 +160,7 @@ class AthleteRegistrationThree extends Component {
           </FormControl>
           <FormControl>
             <FormLabel>Check all races you have run:</FormLabel>
-            <FormGroup row>
-              <FormControlLabel
-                control={
-                  <Checkbox
-                    checked={this.state.race_type.fiveK === true}
-                    onChange={this.handleChangeForChecks('fiveK')}
-                    name="5K"
-                  />
-                }
-                label="5K"
-              />
-              <FormControlLabel
-                control={
-                  <Checkbox
-                    checked={this.state.race_type.tenK === true}
-                    onChange={this.handleChangeForChecks('tenK')}
-                    name="10K"
-                  />
-                }
-                label="10K"
-              />
-              <FormControlLabel
-                control={
-                  <Checkbox
-                    checked={this.state.race_type.half_marathon === true}
-                    onChange={this.handleChangeForChecks('half_marathon')}
-                    name="half_marathon"
-                  />
-                }
-                label="13.1"
-              />
-
-              <FormControlLabel
-                control={
-                  <Checkbox
-                    checked={this.state.race_type.marathon === true}
-                    onChange={this.handleChangeForChecks('marathon')}
-                    name="marathon"
-                  />
-                }
-                label="26.2"
-              />
-              <FormControlLabel
-                control={
-                  <Checkbox
-                    checked={this.state.race_type.fiftyK === true}
-                    onChange={this.handleChangeForChecks('fiftyK')}
-                    name="50K"
-                  />
-                }
-                label="50K"
-              />
-              <FormControlLabel
-                control={
-                  <Checkbox
-                    checked={this.state.race_type.hundredK === true}
-                    onChange={this.handleChangeForChecks('hundredK')}
-                    name="100K"
-                  />
-                }
-                label="100K"
-              />
-            </FormGroup>
+            <FormGroup row>{race_experience}</FormGroup>
           </FormControl>
           <Typography>If you have any PRs please add them here:</Typography>
           <FormControl variant="outlined" fullWidth>

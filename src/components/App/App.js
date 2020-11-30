@@ -140,11 +140,7 @@ class App extends Component {
                 path="/registration/athlete/page5"
                 component={AthleteRegistrationFive}
               />
-              <Route
-                exact
-                path="/add/athlete/success"
-                component={AddAthleteSuccess}
-              />
+
               {/* If none of the other routes matched, we will show a 404. */}
 
               <Route render={() => <h1>404</h1>} />

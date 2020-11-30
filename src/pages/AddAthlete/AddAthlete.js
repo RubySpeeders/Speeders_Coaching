@@ -2,6 +2,9 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import mapStoreToProps from '../../redux/mapStoreToProps';
 
+//SWEET ALERT
+import Swal from 'sweetalert2';
+
 //MATERIAL-UI imports
 import {
   Box,
@@ -26,8 +29,18 @@ class AddAthlete extends Component {
       type: 'ADD_ATHLETE',
       payload: this.state,
     });
-    //goes back home after adding athlete
-    this.props.history.push('/add/athlete/success');
+    Swal.fire({
+      title: 'Athlete added!',
+      text: `${this.state.first_name} has been added to your list!`,
+      icon: 'success',
+      confirmButtonText: `OK`,
+      allowOutsideClick: false,
+    }).then((result) => {
+      if (result.isConfirmed) {
+        //goes back home after adding athlete
+        this.props.history.push('/home');
+      }
+    });
   };
 
   //takes user back to homepage

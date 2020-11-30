@@ -24,14 +24,14 @@ class AthleteRegistrationFive extends Component {
   }
   state = {
     other_exercise: {
-      yoga: false,
-      barre: false,
-      cycling: false,
-      crossfit: false,
-      weight_lifting: false,
-      dance: false,
-      hiit: false,
-      pilates: false,
+      // yoga: false,
+      // barre: false,
+      // cycling: false,
+      // crossfit: false,
+      // weight_lifting: false,
+      // dance: false,
+      // hiit: false,
+      // pilates: false,
     },
     life_outside_running: '',
     general_comments: '',
@@ -62,11 +62,11 @@ class AthleteRegistrationFive extends Component {
     const other_exercise = this.props.store.exercises.map((item, index) => {
       return (
         <FormControlLabel
+          key={index}
           control={
             <Checkbox
               value={item.id}
-              checked={this.state.other_exercise.yoga === true}
-              onChange={this.handleChangeForChecks('yoga')}
+              onChange={this.handleChangeForChecks(item.id)}
               name={item.description}
             />
           }
