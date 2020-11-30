@@ -7,6 +7,7 @@ import days from './days.reducer';
 import athletes from './athlete.info.reducer';
 import races from './races.reducer';
 import exercises from './exercises.reducer';
+import athleteRegistration from './athlete.registration.reducer';
 
 // rootReducer is the primary reducer for our entire project
 // It bundles up all of the other reducers so our project can use them.
@@ -23,6 +24,7 @@ const rootReducer = combineReducers({
   athletes,
   races,
   exercises,
+  athleteRegistration,
 });
 
 export default rootReducer;

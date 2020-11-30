@@ -2,6 +2,9 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import mapStoreToProps from '../../redux/mapStoreToProps';
 
+//SWEET ALERT
+import Swal from 'sweetalert2';
+
 //MATERIAL-UI imports
 import {
   Container,
@@ -23,23 +26,16 @@ class AthleteRegistrationFive extends Component {
     this.props.dispatch({ type: 'GET_EXERCISES' });
   }
   state = {
-    other_exercise: {
-      // yoga: false,
-      // barre: false,
-      // cycling: false,
-      // crossfit: false,
-      // weight_lifting: false,
-      // dance: false,
-      // hiit: false,
-      // pilates: false,
-    },
+    other_exercise: {},
     life_outside_running: '',
     general_comments: '',
   };
 
   handleSubmit = (e) => {
     e.preventDefault();
-    this.props.dispatch({ type: 'REGISTER_PAGE_FIVE', payload: this.state });
+    //send answers to athlete registration reducer, saved until the last page
+    this.props.dispatch({ type: 'UPDATE_ATHLETE', payload: this.state });
+
     this.props.history.push('/home');
   };
 

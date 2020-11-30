@@ -21,25 +21,22 @@ class AthleteRegistrationOne extends Component {
     first_name: '',
     last_name: '',
     email: '',
+    gender: '',
     username: '',
     password: '',
   };
 
   handleNext = (e) => {
     e.preventDefault();
+    //send answers to athlete registration reducer, saved until the last page
     this.props.dispatch({ type: 'UPDATE_ATHLETE', payload: this.state });
     this.props.history.push('/registration/athlete/page2');
   };
 
   handleInputChangeFor = (propertyName) => (event) => {
-    this.setState(
-      {
-        [propertyName]: event.target.value,
-      },
-      () => {
-        console.log(this.state);
-      }
-    );
+    this.setState({
+      [propertyName]: event.target.value,
+    });
   };
 
   render() {

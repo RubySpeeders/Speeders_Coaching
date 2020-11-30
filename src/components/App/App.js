@@ -8,6 +8,9 @@ import {
 
 import { connect } from 'react-redux';
 
+//MATERIAL-UI imports
+import { Container } from '@material-ui/core';
+
 //custom file imports
 import Nav from '../Nav/Nav';
 import Footer from '../Footer/Footer';
@@ -27,10 +30,8 @@ import AthleteRegistrationThree from '../../pages/AthleteRegistration/AthleteReg
 import AthleteRegistrationFour from '../../pages/AthleteRegistration/AthleteRegistration_4';
 import AthleteRegistrationFive from '../../pages/AthleteRegistration/AthleteRegistration_5';
 
-import { Container } from '@material-ui/core';
 import AddAthlete from '../../pages/AddAthlete/AddAthlete';
 import AthleteDetails from '../../pages/AthleteDetails/AthleteDetails';
-import AddAthleteSuccess from '../../pages/AddAthleteSuccess/AddAthleteSuccess';
 
 class App extends Component {
   componentDidMount() {

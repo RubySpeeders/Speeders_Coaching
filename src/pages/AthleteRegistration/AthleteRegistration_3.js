@@ -32,19 +32,13 @@ class AthleteRegistrationThree extends Component {
       distance: '',
     },
     agree: false,
-    race_type: {
-      // fiveK: false,
-      // tenK: false,
-      // half_marathon: false,
-      // marathon: false,
-      // fiftyK: false,
-      // hundredK: false,
-    },
+    race_type: {},
   };
 
   handleNext = (e) => {
     e.preventDefault();
-    // this.props.dispatch({ type: 'UPDATE_FEELING', payload: this.state });
+    //send answers to athlete registration reducer, saved until the last page
+    this.props.dispatch({ type: 'UPDATE_ATHLETE', payload: this.state });
     this.props.history.push('/registration/athlete/page4');
   };
 
@@ -162,7 +156,7 @@ class AthleteRegistrationThree extends Component {
             <FormLabel>Check all races you have run:</FormLabel>
             <FormGroup row>{race_experience}</FormGroup>
           </FormControl>
-          <Typography>If you have any PRs please add them here:</Typography>
+          {/* <Typography>If you have any PRs please add them here:</Typography>
           <FormControl variant="outlined" fullWidth>
             <InputLabel id="distance">Distance</InputLabel>
             <Select
@@ -177,8 +171,8 @@ class AthleteRegistrationThree extends Component {
               </MenuItem>
               {races}
             </Select>
-          </FormControl>
-          <Grid container justify="space-evenly">
+          </FormControl> */}
+          <Grid container spacing={2} justify="space-evenly">
             <Grid item>
               <Typography>
                 I agree to make my strava account public for my coach to access

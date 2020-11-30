@@ -29,7 +29,8 @@ class AthleteRegistrationTwo extends Component {
 
   handleNext = (e) => {
     e.preventDefault();
-    // this.props.dispatch({ type: 'UPDATE_FEELING', payload: this.state });
+    //send answers to athlete registration reducer, saved until the last page
+    this.props.dispatch({ type: 'UPDATE_ATHLETE', payload: this.state });
     this.props.history.push('/registration/athlete/page3');
   };
 
