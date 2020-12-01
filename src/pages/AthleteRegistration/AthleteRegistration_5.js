@@ -49,6 +49,7 @@ class AthleteRegistrationFive extends Component {
         });
       }
     });
+    this.props.history.push('/home');
   };
 
   handleInputChangeFor = (propertyName) => (event) => {

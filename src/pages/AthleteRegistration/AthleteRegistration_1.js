@@ -20,7 +20,9 @@ class AthleteRegistrationOne extends Component {
   state = {
     first_name: '',
     last_name: '',
+    city: '',
     email: '',
+    dob: '',
     gender: '',
     username: '',
     password: '',

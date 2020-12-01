@@ -46,8 +46,8 @@ class AthleteDetails extends Component {
           {this.props.store.athletes.athleteDetails.first_name}{' '}
           {this.props.store.athletes.athleteDetails.last_name}
         </Typography>
-        <Tabs value={AthleteDetailsTab} onChange={this.handleTabChange}>
-          <Tab label="Athlete Details" />
+        <Tabs onChange={this.handleTabChange}>
+          <Tab label="Athlete Details" children={AthleteDetailsTab} />
           <Tab label="Calendar Workouts" />
           <Tab label="Notes" />
           <Tab label="Contact" />

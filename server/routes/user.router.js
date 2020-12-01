@@ -190,12 +190,13 @@ router.put('/register/athlete/:tempId', (req, res) => {
   console.log(temporary_key);
   const queryText = `SELECT "user".id from "user"
       JOIN "invite" ON "user".id="invite".athlete_id
-      WHERE "temporary_key"=$1 RETURNING "user".id;`;
+      WHERE "temporary_key"=$1;`;
   const queryArray = [temporary_key];
   pool
     .query(queryText, queryArray)
     .then((dbResponse) => {
-      console.log(dbResponse.rows);
+      console.log(dbResponse.rows[0].id);
+      const athlete_id = dbResponse.rows[0].id;
       const {
         username,
         first_name,
@@ -207,8 +208,7 @@ router.put('/register/athlete/:tempId', (req, res) => {
         strava_id,
       } = req.body;
       const password = encryptLib.encryptPassword(req.body.password);
-      const queryText = `UPDATE "user" SET username=$1, password=$2, first_name=$3, last_name=$4, city=$5, email=$6, dob=$7, gender=$8, strava_id=$9 FROM "invite" WHERE "user".id="invite".athlete_id
-          AND temporary_key=$10;`;
+      const queryText = `UPDATE "user" SET username=$1, password=$2, first_name=$3, last_name=$4, city=$5, email=$6, dob=$7, gender=$8, strava_id=$9 WHERE id=$10 RETURNING "user".id;`;
       const queryArray = [
         username,
         password,
@@ -219,11 +219,12 @@ router.put('/register/athlete/:tempId', (req, res) => {
         dob,
         gender,
         strava_id,
-        temporary_key,
+        athlete_id,
       ];
       pool
         .query(queryText, queryArray)
         .then((dbResponse) => {
+          console.log(dbResponse.rows);
           const {
             rest_day,
             long_run_day,

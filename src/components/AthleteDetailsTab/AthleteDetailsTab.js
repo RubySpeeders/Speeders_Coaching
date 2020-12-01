@@ -4,7 +4,7 @@ class AthleteDetailsTab extends Component {
   render() {
     return (
       <div>
-        <p>AthleteDetails</p>
+        <p>Athlete Details</p>
       </div>
     );
   }
