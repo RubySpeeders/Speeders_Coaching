@@ -32,7 +32,7 @@ import AthleteRegistrationFive from '../../pages/AthleteRegistration/AthleteRegi
 
 import AddAthlete from '../../pages/AddAthlete/AddAthlete';
 import AthleteDetails from '../../pages/AthleteDetails/AthleteDetails';
-import AddWorkout from '../../pages/AddWorkout/AddWorkout';
+import AthleteWorkoutDetail from '../../pages/AthleteWorkoutDetail/AthleteWorkoutDetail';
 
 class App extends Component {
   componentDidMount() {
@@ -118,7 +118,11 @@ class App extends Component {
               />
               <ProtectedRoute exact path="/message" component={MessageBoard} />
               <ProtectedRoute exact path="/tips" component={TipsTricks} />
-              <Route exact path="/assign/workout" component={AddWorkout} />
+              <Route
+                exact
+                path="/athlete/workout/details"
+                component={AthleteWorkoutDetail}
+              />
               <Route
                 path="/register/athlete/:temporary"
                 component={AthleteRegistrationOne}

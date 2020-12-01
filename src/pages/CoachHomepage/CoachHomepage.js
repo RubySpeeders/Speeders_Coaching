@@ -33,7 +33,9 @@ class CoachHomepage extends Component {
     return (
       <Container>
         <Grid container spacing={4}>
-          <CoachSidebar />
+          <Grid item>
+            <CoachSidebar />
+          </Grid>
           <Grid item>
             <Typography variant="h4" component="h3">
               Your Athletes

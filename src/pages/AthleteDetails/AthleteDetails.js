@@ -1,6 +1,7 @@
-import React, { Component } from 'react';
+import React, { Component, useEffect } from 'react';
 import { connect } from 'react-redux';
 import mapStoreToProps from '../../redux/mapStoreToProps';
+import { withRouter } from 'react-router-dom';
 
 //Material-UI
 import {
@@ -15,50 +16,69 @@ import {
 
 //custom file imports
 import AthleteDetailsTab from '../../components/AthleteDetailsTab/AthleteDetailsTab';
+import AthleteNotesTab from '../../components/AthleteNotesTab/AthleteNotesTab';
+import AddWorkoutTab from '../../components/AddWorkoutTab/AddWorkoutTab';
+import AthleteContactTab from '../../components/AthleteContactTab/AthleteContactTab';
+import AthleteCalendarTab from '../../components/AthleteCalendarTab/AthleteCalendarTab';
 
-class AthleteDetails extends Component {
-  componentDidMount() {
-    this.props.dispatch({
-      type: 'GET_ATHLETE_DETAILS',
-      payload: this.props.match.params.id,
-    });
-    console.log(this.props.store);
-  }
-  handleBack = (e) => {
-    this.props.history.push('/home');
+function AthleteDetails(props) {
+  useEffect(() => {
+    console.log(props);
+    // Update the document title using the browser API
+    // props.dispatch({
+    //   type: 'GET_ATHLETES',
+    // payload: this.props.match.params.id,
+    // });
+  });
+
+  const handleBack = (e) => {
+    props.history.push('/home');
   };
 
-  handleAssignWorkout = (e) => {
-    this.props.history.push('/assign/workout');
+  const [selectedTab, setSelectedTab] = React.useState(0);
+
+  const handleTabChange = (event, newValue) => {
+    setSelectedTab(newValue);
   };
 
-  // handleTabChange = (event, newValue) => {
-  //   this.setState({
-  //     selectedTab: newValue,
-  //   });
-  // };
+  return (
+    <Container>
+      <Typography variant="h4">Athlete Details</Typography>
+      <Typography>
+        {props.store.athletes.athleteDetails.first_name}{' '}
+        {props.store.athletes.athleteDetails.last_name}
+      </Typography>
+      <Tabs value={selectedTab} onChange={handleTabChange}>
+        <Tab label="Athlete Details" />
+        <Tab label="Calendar Workouts" />
+        <Tab label="Notes" />
+        <Tab label="Contact" />
+        <Tab label="Assign Workout" />
+      </Tabs>
 
-  render() {
-    return (
-      <Container>
-        <Typography variant="h4">Athlete Details</Typography>
-        <Typography>
-          {this.props.store.athletes.athleteDetails.first_name}{' '}
-          {this.props.store.athletes.athleteDetails.last_name}
-        </Typography>
-        <Tabs onChange={this.handleTabChange}>
-          <Tab label="Athlete Details" children={AthleteDetailsTab} />
-          <Tab label="Calendar Workouts" />
-          <Tab label="Notes" />
-          <Tab label="Contact" />
-          <Tab label="Assign Workout" />
-        </Tabs>
-
-        <Button onClick={this.handleAssignWorkout}>Assign a Workout</Button>
-        <Button onClick={this.handleBack}>Back</Button>
-      </Container>
-    );
-  }
+      {selectedTab === 0 && <AthleteDetailsTab />}
+      {selectedTab === 1 && <AthleteCalendarTab />}
+      {selectedTab === 2 && (
+        <AthleteNotesTab athlete={props.store.athletes.athleteDetails} />
+      )}
+      {selectedTab === 3 && <AthleteContactTab />}
+      {selectedTab === 4 && <AddWorkoutTab />}
+      <Button onClick={handleBack}>Back</Button>
+    </Container>
+  );
 }
 
-export default connect(mapStoreToProps)(AthleteDetails);
+const mapDispatchToProps = (dispatch) => {
+  return {
+    componentDidMount: () =>
+      dispatch({
+        type: 'GET_ATHLETES',
+        // payload: this.props.match.params.id,
+      }),
+  };
+};
+
+export default connect(
+  mapStoreToProps,
+  mapDispatchToProps
+)(withRouter(AthleteDetails));

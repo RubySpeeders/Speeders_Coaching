@@ -1,7 +1,5 @@
 import { put, takeLatest } from 'redux-saga/effects';
 import axios from 'axios';
-import mapStoreToProps from '../mapStoreToProps';
-import { connect } from 'react-redux';
 
 function* updateAthleteRegistration(action) {
   try {

@@ -7,7 +7,7 @@ const {
 
 // get all athletes
 router.get('/', rejectUnauthenticated, (req, res) => {
-  let queryText = ` SELECT * FROM "user" WHERE "role_id" = 2 ORDER BY "last_name";`;
+  let queryText = ` SELECT id, first_name, last_name, strava_id, city, dob, gender, email FROM "user" WHERE "role_id" = 2 ORDER BY "last_name";`;
 
   pool
     .query(queryText)
@@ -20,8 +20,8 @@ router.get('/', rejectUnauthenticated, (req, res) => {
     });
 });
 
-router.get('/details/:id', (req, res) => {
-  const queryText = `SELECT * FROM "user" WHERE "user".id = $1;`;
+router.get('/details/:id', rejectUnauthenticated, (req, res) => {
+  const queryText = `SELECT id, first_name, last_name, strava_id, city, dob, gender, email, FROM "user" WHERE "user".id = $1;`;
   pool
     .query(queryText, [req.params.id])
     .then((result) => {

@@ -21,6 +21,8 @@ class AddWorkout extends Component {
     this.props.dispatch({ type: 'GET_STEPS' });
   }
   state = {
+    coach_id: '',
+    athlete_id: '',
     date: '',
     description: '',
   };
@@ -34,7 +36,7 @@ class AddWorkout extends Component {
   render() {
     const steps = this.props.store.steps.map((item, index) => {
       return (
-        <Grid container spacing={2}>
+        <Grid key={index} container spacing={2}>
           <Grid item>
             <TextField
               key={index}
@@ -77,6 +79,7 @@ class AddWorkout extends Component {
           />
         </Box>
         <Box m={2}>{steps}</Box>
+        <Button>Assign</Button>
       </Container>
     );
   }
