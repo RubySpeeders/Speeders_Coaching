@@ -61,17 +61,16 @@ class AthleteRegistrationFour extends Component {
                 <FormLabel component="legend">
                   Are you currently injured?
                 </FormLabel>
-                <RadioGroup onChange={this.handleInputChangeFor('injury')}>
+                <RadioGroup
+                  required
+                  onChange={this.handleInputChangeFor('injury')}
+                >
                   <FormControlLabel
-                    required
-                    checked={this.state.injury === true}
                     value="true"
                     control={<Radio />}
                     label="yes"
                   />
                   <FormControlLabel
-                    required
-                    checked={this.state.injury === false}
                     value="false"
                     control={<Radio />}
                     label="no"
@@ -97,14 +96,12 @@ class AthleteRegistrationFour extends Component {
                 <FormLabel>Are you currently taking any medications?</FormLabel>
                 <RadioGroup onChange={this.handleInputChangeFor('medication')}>
                   <FormControlLabel
-                    checked={this.state.medication === true}
-                    value={true}
+                    value="true"
                     control={<Radio />}
                     label="yes"
                   />
                   <FormControlLabel
-                    checked={this.state.medication === false}
-                    value={false}
+                    value="false"
                     control={<Radio />}
                     label="no"
                   />

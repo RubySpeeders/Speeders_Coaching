@@ -186,7 +186,7 @@ router.get('/register/athlete/:tempId', (req, res) => {
 //updates athlete registration after the coach sends a link to the athlete
 router.put('/register/athlete/:tempId', (req, res) => {
   // PUT route code here
-  const temporary_key = req.params.tempId;
+  const temporary_key = req.body.temporary_key;
   console.log(temporary_key);
   const queryText = `SELECT "user".id from "user"
       JOIN "invite" ON "user".id="invite".athlete_id
@@ -279,10 +279,10 @@ router.put('/register/athlete/:tempId', (req, res) => {
 
 router.post('/register/athlete/:tempId', (req, res) => {
   try {
-    const queryText = `SELECT "athlete_info".id, "invite".temporary_key FROM "athlete_info"
+    const queryText = `SELECT "athlete_info".id FROM "athlete_info"
     JOIN "user" on "athlete_info".athlete_id="user".id
     JOIN "invite" on "user".id="invite".athlete_id WHERE "temporary_key"=$1;`;
-    const queryArray = [req.params.tempId];
+    const queryArray = [req.body.temporary_key];
     pool.query(queryText, queryArray).then((dbResponse) => {
       console.log(dbResponse.rows);
       const athlete_info_id = dbResponse.rows[0].id;
@@ -299,6 +299,7 @@ router.post('/register/athlete/:tempId', (req, res) => {
         }
       }
       Promise.all(athlete_exercise_array).then((dbResponse) => {
+        console.log(athlete_info_id);
         const race_type_list = Object.keys(req.body.race_type);
         const athlete_race_array = [];
         //iterate through the array of checked off races
@@ -324,8 +325,8 @@ router.post('/register/athlete/:tempId', (req, res) => {
 
 //updates invite from pending to completed after registration is complete
 router.put('/register/athlete/part3/:tempId', (req, res) => {
-  const temporary_key = req.params.tempId;
-  const queryText = `UPDATE "invite" SET status=2  temporary_key=$1 WHERE temporary_key=$2;`;
+  const temporary_key = req.body.temporary_key;
+  const queryText = `UPDATE "invite" SET status=2, temporary_key=$1 WHERE temporary_key=$2;`;
   const queryArray = [null, temporary_key];
   pool
     .query(queryText, queryArray)

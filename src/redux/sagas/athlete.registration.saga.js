@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 
 function* updateAthleteRegistration(action) {
   try {
+    console.log(action.payload);
     // updates first round of athlete registration information
     yield axios.put(
       `/api/user/register/athlete/${action.payload.temporary_key}`,
