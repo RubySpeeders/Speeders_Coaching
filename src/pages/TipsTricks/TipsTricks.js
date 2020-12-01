@@ -8,6 +8,8 @@ import { Grid, Tabs, Tab, Typography } from '@material-ui/core';
 //custom file import
 import TipsTricksItem from '../../components/TipsTricksItem/TipsTricksItem';
 import AddNewTip from '../../components/AddNewTip/AddNewTip';
+import CoachSidebar from '../../components/CoachSidebar/CoachSidebar';
+import AthleteSidebar from '../../components/AthleteSidebar/AthleteSidebar';
 
 class TipsTricks extends Component {
   componentDidMount() {
@@ -23,6 +25,11 @@ class TipsTricks extends Component {
         <Typography gutterBottom variant="h4" component="h3">
           Tips &amp; Tricks
         </Typography>
+        {this.props.store.user.role_id === 1 ? (
+          <CoachSidebar />
+        ) : (
+          <AthleteSidebar />
+        )}
         <Tabs>
           <Tab label="Strides" index={0} />
           <Tab label="Add a new tip" index={1} />

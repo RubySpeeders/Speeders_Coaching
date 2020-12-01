@@ -21,9 +21,7 @@ class UserPage extends Component {
         {this.props.store.user.role_id === 1 ? (
           <CoachHomepage />
         ) : (
-          <div>
-            <AthleteHomepage />
-          </div>
+          <AthleteHomepage />
         )}
         <LogOutButton className="log-in" />
       </div>

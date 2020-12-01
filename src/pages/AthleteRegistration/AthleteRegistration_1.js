@@ -160,7 +160,7 @@ class AthleteRegistrationOne extends Component {
                     />
                   </Box>
                   <Box m={2}>
-                    <Button type="submit" variant="contained">
+                    <Button color="secondary" type="submit" variant="contained">
                       Next
                     </Button>
                   </Box>

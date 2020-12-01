@@ -113,7 +113,7 @@ class AddAthlete extends Component {
                     </Button>
                   </Grid>
                   <Grid item>
-                    <Button type="submit" variant="contained">
+                    <Button color="primary" type="submit" variant="contained">
                       Add Athlete
                     </Button>
                   </Grid>

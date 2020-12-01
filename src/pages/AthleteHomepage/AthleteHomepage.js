@@ -18,6 +18,8 @@ import {
   TableRow,
   TableContainer,
 } from '@material-ui/core';
+
+//custom file import
 import AthleteSidebar from '../../components/AthleteSidebar/AthleteSidebar';
 
 class AthleteHomepage extends Component {

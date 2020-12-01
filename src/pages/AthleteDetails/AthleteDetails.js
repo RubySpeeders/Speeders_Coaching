@@ -63,7 +63,9 @@ function AthleteDetails(props) {
       )}
       {selectedTab === 3 && <AthleteContactTab />}
       {selectedTab === 4 && <AddWorkoutTab />}
-      <Button onClick={handleBack}>Back</Button>
+      <Button color="primary" onClick={handleBack}>
+        Back
+      </Button>
     </Container>
   );
 }

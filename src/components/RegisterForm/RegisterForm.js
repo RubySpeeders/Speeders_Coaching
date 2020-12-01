@@ -161,6 +161,7 @@ class RegisterForm extends Component {
               </Box>
               <Box m={2}>
                 <Button
+                  color="secondary"
                   type="submit"
                   variant="contained"
                   // name="submit"

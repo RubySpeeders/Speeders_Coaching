@@ -14,6 +14,7 @@ import {
 //custom file import
 import MessageBoardItem from '../../components/MessageBoardItem/MessageBoardItem';
 import CoachSidebar from '../../components/CoachSidebar/CoachSidebar';
+import AthleteSidebar from '../../components/AthleteSidebar/AthleteSidebar';
 
 class MessageBoard extends Component {
   state = {
@@ -48,8 +49,12 @@ class MessageBoard extends Component {
           Message Board
         </Typography>
         <Grid container>
-          <Grid item xs={3}>
-            <CoachSidebar />
+          <Grid item>
+            {this.props.store.user.role_id === 1 ? (
+              <CoachSidebar />
+            ) : (
+              <AthleteSidebar />
+            )}
           </Grid>
           <Grid item>
             <Grid container>
@@ -63,7 +68,7 @@ class MessageBoard extends Component {
                     value={this.state.message}
                   />
 
-                  <Button type="submit" variant="contained">
+                  <Button color="secondary" type="submit" variant="contained">
                     Post
                   </Button>
                 </form>

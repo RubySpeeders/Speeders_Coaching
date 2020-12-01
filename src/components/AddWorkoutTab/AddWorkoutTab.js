@@ -79,7 +79,7 @@ class AddWorkout extends Component {
           />
         </Box>
         <Box m={2}>{steps}</Box>
-        <Button>Assign</Button>
+        <Button color="primary">Assign</Button>
       </Container>
     );
   }

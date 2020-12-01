@@ -68,7 +68,7 @@ class LoginForm extends Component {
             />
           </div>
           <Box m={2}>
-            <Button variant="outlined" type="submit">
+            <Button color="secondary" variant="outlined" type="submit">
               Log In
             </Button>
           </Box>

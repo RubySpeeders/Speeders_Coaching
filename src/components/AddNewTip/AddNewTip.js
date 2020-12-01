@@ -75,7 +75,7 @@ class AddNewTip extends Component {
             variant="outlined"
             onChange={this.handleInputChangeFor('comments')}
           />
-          <Button type="submit" variant="outlined">
+          <Button color="primary" type="submit" variant="outlined">
             Add
           </Button>
         </form>

@@ -9,7 +9,8 @@ import {
 import { connect } from 'react-redux';
 
 //MATERIAL-UI imports
-import { Container } from '@material-ui/core';
+import { ThemeProvider, createMuiTheme } from '@material-ui/core/styles';
+import { pink, cyan, lightGreen } from '@material-ui/core/colors';
 
 //custom file imports
 import Nav from '../Nav/Nav';
@@ -34,6 +35,18 @@ import AddAthlete from '../../pages/AddAthlete/AddAthlete';
 import AthleteDetails from '../../pages/AthleteDetails/AthleteDetails';
 import AthleteWorkoutDetail from '../../pages/AthleteWorkoutDetail/AthleteWorkoutDetail';
 
+const customTheme = createMuiTheme({
+  //theme settings
+  palette: {
+    primary: cyan,
+    secondary: pink,
+    // error: '',
+    // warning: '',
+    // info: '',
+    // success: '',
+  },
+});
+
 class App extends Component {
   componentDidMount() {
     this.props.dispatch({ type: 'FETCH_USER' });
@@ -41,7 +54,7 @@ class App extends Component {
 
   render() {
     return (
-      <Container>
+      <ThemeProvider theme={customTheme}>
         <Router>
           <div>
             <Nav />
@@ -155,7 +168,7 @@ class App extends Component {
             <Footer />
           </div>
         </Router>
-      </Container>
+      </ThemeProvider>
     );
   }
 }

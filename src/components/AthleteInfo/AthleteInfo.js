@@ -35,8 +35,12 @@ class AthleteInfo extends Component {
           </Typography>
         </TableCell>
         <TableCell>
-          <Button onClick={this.handleDetails}>Details</Button>
-          <Button onClick={this.deleteAthlete}>Delete</Button>
+          <Button color="primary" onClick={this.handleDetails}>
+            Details
+          </Button>
+          <Button color="primary" onClick={this.deleteAthlete}>
+            Delete
+          </Button>
         </TableCell>
       </TableRow>
     );

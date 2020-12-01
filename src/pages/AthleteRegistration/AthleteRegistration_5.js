@@ -126,10 +126,14 @@ class AthleteRegistrationFive extends Component {
               />
 
               <Box m={2}>
-                <Button variant="contained" onClick={this.onBackClick}>
+                <Button
+                  color="secondary"
+                  variant="contained"
+                  onClick={this.onBackClick}
+                >
                   Back
                 </Button>
-                <Button type="submit" variant="contained">
+                <Button color="secondary" type="submit" variant="contained">
                   Submit
                 </Button>
               </Box>

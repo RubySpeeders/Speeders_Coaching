@@ -22,7 +22,9 @@ class AthleteWorkoutDetail extends Component {
     return (
       <div>
         <Typography>Workout Details</Typography>
-        <Button onClick={this.handleBack}>Back to Calendar</Button>
+        <Button color="primary" onClick={this.handleBack}>
+          Back to Calendar
+        </Button>
       </div>
     );
   }
