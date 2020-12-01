@@ -45,7 +45,9 @@ class AthleteRegistrationFive extends Component {
       if (result.isConfirmed) {
         this.props.dispatch({
           type: 'FINALISE_ATHLETE',
-          payload: { athlete: this.props.store.athleteRegistration },
+          payload: {
+            athlete: { ...this.props.store.athleteRegistration, ...this.state },
+          },
         });
       }
     });
@@ -60,6 +62,7 @@ class AthleteRegistrationFive extends Component {
 
   handleChangeForChecks = (propertyName) => (event) => {
     this.setState({
+      ...this.state,
       other_exercise: {
         ...this.state.other_exercise,
         [propertyName]: event.target.checked,

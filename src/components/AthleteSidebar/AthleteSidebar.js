@@ -6,11 +6,6 @@ import { withRouter } from 'react-router-dom';
 import { Grid, Typography } from '@material-ui/core';
 
 class AthleteSidebar extends Component {
-  //sends coach to the main all athletes page
-  allAthletes = (e) => {
-    this.props.history.push('/home');
-  };
-
   //sends coach to the message board
   messageBoard = (e) => {
     this.props.history.push('/message');
@@ -21,14 +16,14 @@ class AthleteSidebar extends Component {
     this.props.history.push('/tips');
   };
 
-  //sends coach to add athlete registration
-  addAthlete = (e) => {
-    this.props.history.push('/register/add/athlete');
+  handleHome = (e) => {
+    this.props.history.push('/home');
   };
 
   render() {
     return (
       <Grid item>
+        <Typography onClick={this.handleHome}>Workouts</Typography>
         <Typography onClick={this.messageBoard}>Messages</Typography>
         <Typography onClick={this.tipsAndTricks}>Tips/Tricks</Typography>
       </Grid>

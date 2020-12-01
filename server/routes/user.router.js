@@ -283,6 +283,7 @@ router.post('/register/athlete/:tempId', (req, res) => {
     JOIN "user" on "athlete_info".athlete_id="user".id
     JOIN "invite" on "user".id="invite".athlete_id WHERE "temporary_key"=$1;`;
     const queryArray = [req.body.temporary_key];
+    console.log(req.body, req.body.race_type);
     pool.query(queryText, queryArray).then((dbResponse) => {
       console.log(dbResponse.rows);
       const athlete_info_id = dbResponse.rows[0].id;

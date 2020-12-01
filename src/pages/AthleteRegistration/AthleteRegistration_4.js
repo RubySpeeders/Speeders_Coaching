@@ -35,14 +35,9 @@ class AthleteRegistrationFour extends Component {
   };
 
   handleInputChangeFor = (propertyName) => (event) => {
-    this.setState(
-      {
-        [propertyName]: event.target.value,
-      },
-      () => {
-        console.log(this.state);
-      }
-    );
+    this.setState({
+      [propertyName]: event.target.value,
+    });
   };
 
   //goes back a page

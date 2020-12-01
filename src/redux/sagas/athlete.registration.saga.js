@@ -1,9 +1,8 @@
-import { put, takeLatest } from 'redux-saga/effects';
+import { takeLatest } from 'redux-saga/effects';
 import axios from 'axios';
 
 function* updateAthleteRegistration(action) {
   try {
-    console.log(action.payload);
     // updates first round of athlete registration information
     yield axios.put(
       `/api/user/register/athlete/${action.payload.temporary_key}`,
