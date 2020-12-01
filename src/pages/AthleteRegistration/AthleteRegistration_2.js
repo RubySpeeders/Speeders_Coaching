@@ -31,13 +31,20 @@ class AthleteRegistrationTwo extends Component {
     e.preventDefault();
     //send answers to athlete registration reducer, saved until the last page
     this.props.dispatch({ type: 'UPDATE_ATHLETE', payload: this.state });
+    //goes to next page
     this.props.history.push('/registration/athlete/page3');
   };
 
+  //record from inputs to state
   handleInputChangeFor = (propertyName) => (event) => {
     this.setState({
       [propertyName]: event.target.value,
     });
+  };
+
+  //goes back a page
+  onBackClick = (e) => {
+    this.props.history.push('/registration/athlete/page1');
   };
 
   render() {
@@ -121,6 +128,9 @@ class AthleteRegistrationTwo extends Component {
               </Select>
             </FormControl>
             <Box m={2}>
+              <Button variant="contained" onClick={this.onBackClick}>
+                Back
+              </Button>
               <Button type="submit" variant="contained">
                 Next
               </Button>

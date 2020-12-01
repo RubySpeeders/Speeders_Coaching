@@ -30,6 +30,7 @@ class AthleteRegistrationFour extends Component {
     e.preventDefault();
     //send answers to athlete registration reducer, saved until the last page
     this.props.dispatch({ type: 'UPDATE_ATHLETE', payload: this.state });
+    //goes to next page of registration
     this.props.history.push('/registration/athlete/page5');
   };
 
@@ -44,13 +45,18 @@ class AthleteRegistrationFour extends Component {
     );
   };
 
+  //goes back a page
+  onBackClick = (e) => {
+    this.props.history.push('/registration/athlete/page3');
+  };
+
   render() {
     return (
       <Container>
         <form onSubmit={this.handleNext}>
           <Typography variant="h4">Health Information</Typography>
           <FormControl component="fieldset">
-            <Grid container spacing={6}>
+            <Grid container spacing={6} justify="space-evenly">
               <Grid item xs={6}>
                 <FormLabel component="legend">
                   Are you currently injured?
@@ -129,6 +135,9 @@ class AthleteRegistrationFour extends Component {
             />
           </FormControl>
           <Box m={2}>
+            <Button variant="contained" onClick={this.onBackClick}>
+              Back
+            </Button>
             <Button type="submit" variant="contained">
               Next
             </Button>

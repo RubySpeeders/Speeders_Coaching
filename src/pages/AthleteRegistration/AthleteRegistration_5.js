@@ -33,10 +33,22 @@ class AthleteRegistrationFive extends Component {
 
   handleSubmit = (e) => {
     e.preventDefault();
-    //send answers to athlete registration reducer, saved until the last page
+    //send answers to athlete registration reducer, saved until after sweet alert
     this.props.dispatch({ type: 'UPDATE_ATHLETE', payload: this.state });
-
-    this.props.history.push('/home');
+    Swal.fire({
+      title: 'Are you sure?',
+      text: 'Click the submit button to save your feedback.',
+      icon: 'question',
+      confirmButtonText: `SUBMIT`,
+      showCancelButton: true,
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.props.dispatch({
+          type: 'FINALISE_ATHLETE',
+          payload: { athlete: this.props.store.athleteRegistration },
+        });
+      }
+    });
   };
 
   handleInputChangeFor = (propertyName) => (event) => {
@@ -52,6 +64,11 @@ class AthleteRegistrationFive extends Component {
         [propertyName]: event.target.checked,
       },
     });
+  };
+
+  //goes back a page
+  onBackClick = (e) => {
+    this.props.history.push('/registration/athlete/page4');
   };
 
   render() {
@@ -108,6 +125,9 @@ class AthleteRegistrationFive extends Component {
               />
 
               <Box m={2}>
+                <Button variant="contained" onClick={this.onBackClick}>
+                  Back
+                </Button>
                 <Button type="submit" variant="contained">
                   Submit
                 </Button>

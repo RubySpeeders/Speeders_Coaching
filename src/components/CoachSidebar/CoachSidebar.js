@@ -23,7 +23,7 @@ class CoachSidebar extends Component {
 
   //sends coach to add athlete registration
   addAthlete = (e) => {
-    this.props.history.push('/register/athlete');
+    this.props.history.push('/register/add/athlete');
   };
 
   render() {

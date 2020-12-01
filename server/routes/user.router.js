@@ -114,7 +114,7 @@ router.post('/register/athlete', rejectUnauthenticated, (req, res, next) => {
                     );
                     // create link url for user
                     let registerLinkBase = process.env.HOST_ENV;
-                    const registerLink = `${registerLinkBase}/#/register/${temporary_key}`;
+                    const registerLink = `${registerLinkBase}/#/register/athlete/${temporary_key}`;
                     const mailOptions = {
                       from: req.user.email, // sender address
                       to: email, // list of receivers
@@ -186,78 +186,92 @@ router.get('/register/athlete/:tempId', (req, res) => {
 //updates athlete registration after the coach sends a link to the athlete
 router.put('/register/athlete/:tempId', (req, res) => {
   // PUT route code here
-  const {
-    username,
-    first_name,
-    last_name,
-    city,
-    email,
-    dob,
-    gender,
-    strava_id,
-  } = req.body;
-  const password = encryptLib.encryptPassword(req.body.password);
   const temporary_key = req.params.tempId;
-  const queryText = `UPDATE "user" SET username=$1, password=$2, first_name=$3, last_name=$4, city=$5, email=$6, dob=$7, gender=$8, strava_id=$9 FROM "invite" WHERE "user".id="invite".athlete_id
-  AND "temporary_key"=$10 RETURNING athlete_id;`;
-  const queryArray = [
-    username,
-    password,
-    first_name,
-    last_name,
-    city,
-    email,
-    dob,
-    gender,
-    strava_id,
-    temporary_key,
-  ];
+  console.log(temporary_key);
+  const queryText = `SELECT "user".id from "user"
+      JOIN "invite" ON "user".id="invite".athlete_id
+      WHERE "temporary_key"=$1 RETURNING "user".id;`;
+  const queryArray = [temporary_key];
   pool
     .query(queryText, queryArray)
     .then((dbResponse) => {
+      console.log(dbResponse.rows);
       const {
-        rest_day,
-        long_run_day,
-        speed_work,
-        run_history,
-        avg_weekly_mileage,
-        injury,
-        injury_description,
-        medication,
-        medication_description,
-        health_risk_comments,
-        life_outside_running,
-        general_comments,
+        username,
+        first_name,
+        last_name,
+        city,
+        email,
+        dob,
+        gender,
+        strava_id,
       } = req.body;
-      const athlete_id = dbResponse.rows[0].athlete_id;
-      const queryText = `UPDATE "athlete_info" SET rest_day=$1, long_run_day=$2, speed_work=$3, run_history=$4, avg_weekly_mileage=$5, injury=$6, injury_description=$7, medication=$8, medication_description=$9, health_risk_comments=$10, life_outside_running=$11, general_comments=$12 WHERE athlete_id=$13`;
+      const password = encryptLib.encryptPassword(req.body.password);
+      const queryText = `UPDATE "user" SET username=$1, password=$2, first_name=$3, last_name=$4, city=$5, email=$6, dob=$7, gender=$8, strava_id=$9 FROM "invite" WHERE "user".id="invite".athlete_id
+          AND temporary_key=$10;`;
       const queryArray = [
-        rest_day,
-        long_run_day,
-        speed_work,
-        run_history,
-        avg_weekly_mileage,
-        injury,
-        injury_description,
-        medication,
-        medication_description,
-        health_risk_comments,
-        life_outside_running,
-        general_comments,
-        athlete_id,
+        username,
+        password,
+        first_name,
+        last_name,
+        city,
+        email,
+        dob,
+        gender,
+        strava_id,
+        temporary_key,
       ];
       pool
         .query(queryText, queryArray)
         .then((dbResponse) => {
-          res.sendStatus(200);
+          const {
+            rest_day,
+            long_run_day,
+            speed_work,
+            run_history,
+            avg_weekly_mileage,
+            injury,
+            injury_description,
+            medication,
+            medication_description,
+            health_risk_comments,
+            life_outside_running,
+            general_comments,
+          } = req.body;
+          const athlete_id = dbResponse.rows[0].id;
+          const queryText = `UPDATE "athlete_info" SET rest_day=$1, long_run_day=$2, speed_work=$3, run_history=$4, avg_weekly_mileage=$5, injury=$6, injury_description=$7, medication=$8, medication_description=$9, health_risk_comments=$10, life_outside_running=$11, general_comments=$12 WHERE athlete_id=$13`;
+          const queryArray = [
+            rest_day,
+            long_run_day,
+            speed_work,
+            run_history,
+            avg_weekly_mileage,
+            injury,
+            injury_description,
+            medication,
+            medication_description,
+            health_risk_comments,
+            life_outside_running,
+            general_comments,
+            athlete_id,
+          ];
+          pool
+            .query(queryText, queryArray)
+            .then((dbResponse) => {
+              res.sendStatus(200);
+            })
+            .catch((err) => {
+              console.log('error in the athlete_info table', err);
+              res.sendStatus(500);
+            });
         })
         .catch((err) => {
-          console.log('error in the athlete_info table', err);
+          console.log('error in the user table', err);
           res.sendStatus(500);
         });
     })
     .catch((err) => {
-      console.log('error in the user table', err);
+      console.log('error in the select to get ids', err);
       res.sendStatus(500);
     });
 });
@@ -308,9 +322,10 @@ router.post('/register/athlete/:tempId', (req, res) => {
 });
 
 //updates invite from pending to completed after registration is complete
-router.put('/register/athlete/:id', (req, res) => {
-  const queryText = `UPDATE "invite" SET status=2 WHERE "athlete_id"=$1;`;
-  const queryArray = [req.params.id];
+router.put('/register/athlete/part3/:tempId', (req, res) => {
+  const temporary_key = req.params.tempId;
+  const queryText = `UPDATE "invite" SET status=2  temporary_key=$1 WHERE temporary_key=$2;`;
+  const queryArray = [null, temporary_key];
   pool
     .query(queryText, queryArray)
     .then((dbResponse) => {

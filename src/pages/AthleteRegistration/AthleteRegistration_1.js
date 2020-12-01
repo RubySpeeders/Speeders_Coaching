@@ -29,7 +29,13 @@ class AthleteRegistrationOne extends Component {
   handleNext = (e) => {
     e.preventDefault();
     //send answers to athlete registration reducer, saved until the last page
-    this.props.dispatch({ type: 'UPDATE_ATHLETE', payload: this.state });
+    this.props.dispatch({
+      type: 'UPDATE_ATHLETE',
+      payload: {
+        ...this.state,
+        temporary_key: this.props.match.params.temporary,
+      },
+    });
     this.props.history.push('/registration/athlete/page2');
   };
 

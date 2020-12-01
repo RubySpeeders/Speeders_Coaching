@@ -39,6 +39,7 @@ class AthleteRegistrationThree extends Component {
     e.preventDefault();
     //send answers to athlete registration reducer, saved until the last page
     this.props.dispatch({ type: 'UPDATE_ATHLETE', payload: this.state });
+    //goes to next page of registration
     this.props.history.push('/registration/athlete/page4');
   };
 
@@ -56,6 +57,11 @@ class AthleteRegistrationThree extends Component {
         [propertyName]: event.target.checked,
       },
     });
+  };
+
+  //goes back a page
+  onBackClick = (e) => {
+    this.props.history.push('/registration/athlete/page2');
   };
 
   render() {
@@ -200,6 +206,9 @@ class AthleteRegistrationThree extends Component {
             </Grid>
           </Grid>
           <Box m={2}>
+            <Button variant="contained" onClick={this.onBackClick}>
+              Back
+            </Button>
             <Button type="submit" variant="contained">
               Next
             </Button>

@@ -15,6 +15,7 @@ const athleteInfoRouter = require('./routes/athlete.info.router');
 const daysRouter = require('./routes/days.router');
 const racesRouter = require('./routes/races.router');
 const exercisesRouter = require('./routes/exercises.router');
+const workoutStepsRouter = require('./routes/workout.steps.router');
 
 // Body parser middleware
 app.use(bodyParser.json());
@@ -35,6 +36,7 @@ app.use('/api/athlete/info', athleteInfoRouter);
 app.use('/api/days', daysRouter);
 app.use('/api/races', racesRouter);
 app.use('/api/exercises', exercisesRouter);
+app.use('/api/workout/steps', workoutStepsRouter);
 
 // Serve static files
 app.use(express.static('build'));

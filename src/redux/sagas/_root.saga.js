@@ -3,7 +3,7 @@ import { all } from 'redux-saga/effects';
 // SAGAS
 import loginSaga from './login.saga';
 import registrationSaga from './registration.saga';
-import addAthleteSaga from './addAthlete.saga';
+import addAthleteSaga from './add.athlete.saga';
 import userSaga from './user.saga';
 import daysSaga from './days.saga';
 import messagesSaga from './messages.saga';
@@ -12,6 +12,8 @@ import athletesSaga from './athletes.saga';
 import deleteAthleteSaga from './delete.athlete.saga';
 import getRacesSaga from './races.saga';
 import exercisesSaga from './exercises.saga';
+import updateAthleteSaga from './athlete.registration.saga';
+import workoutStepsSaga from './workout.steps.saga';
 
 // rootSaga is the primary saga.
 // It bundles up all of the other sagas so our project can use them.
@@ -33,5 +35,7 @@ export default function* rootSaga() {
     deleteAthleteSaga(),
     getRacesSaga(),
     exercisesSaga(),
+    updateAthleteSaga(),
+    workoutStepsSaga(),
   ]);
 }
