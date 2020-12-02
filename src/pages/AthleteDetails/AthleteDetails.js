@@ -23,19 +23,19 @@ import AthleteCalendarTab from '../../components/AthleteCalendarTab/AthleteCalen
 
 function AthleteDetails(props) {
   const dispatch = useDispatch();
-
   useEffect(() => {
     // Update the document title using the browser API
     dispatch({
       type: 'GET_ATHLETE_DETAILS',
       payload: props.match.params.id,
     });
-  }, []);
+  }, [dispatch, props.match.params.id]);
 
   const handleBack = (e) => {
     props.history.push('/home');
   };
 
+  //config for tabs
   const [selectedTab, setSelectedTab] = React.useState(0);
 
   const handleTabChange = (event, newValue) => {

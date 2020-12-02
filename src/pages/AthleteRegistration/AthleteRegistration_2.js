@@ -44,7 +44,7 @@ class AthleteRegistrationTwo extends Component {
 
   //goes back a page
   onBackClick = (e) => {
-    this.props.history.push('/registration/athlete/page1');
+    this.props.history.push('/register/athlete/:temporary');
   };
 
   render() {
@@ -130,12 +130,12 @@ class AthleteRegistrationTwo extends Component {
             <Box m={2}>
               <Button
                 color="secondary"
-                variant="contained"
+                variant="outlined"
                 onClick={this.onBackClick}
               >
                 Back
               </Button>
-              <Button color="secondary" type="submit" variant="contained">
+              <Button color="secondary" type="submit" variant="outlined">
                 Next
               </Button>
             </Box>

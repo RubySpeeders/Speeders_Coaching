@@ -28,6 +28,13 @@ class AthleteRegistrationOne extends Component {
     password: '',
   };
 
+  componentDidMount() {
+    this.props.dispatch({
+      type: 'GET_TEMP_USER',
+      payload: this.props.match.params.temporary,
+    });
+  }
+
   handleNext = (e) => {
     e.preventDefault();
     //send answers to athlete registration reducer, saved until the last page
@@ -160,7 +167,7 @@ class AthleteRegistrationOne extends Component {
                     />
                   </Box>
                   <Box m={2}>
-                    <Button color="secondary" type="submit" variant="contained">
+                    <Button color="secondary" type="submit" variant="outlined">
                       Next
                     </Button>
                   </Box>
