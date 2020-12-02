@@ -17,8 +17,15 @@ function* updateAthleteRegistration(action) {
       `/api/user/register/athlete/part3/${action.payload.temporary_key}`,
       action.payload.athlete
     );
+    // automatically log a user in after registration
+    yield put({ type: 'LOGIN', payload: action.payload });
+
+    // set to 'login' mode so they see the login screen
+    // after registration or after they log out
+    yield put({ type: 'SET_TO_LOGIN_MODE' });
   } catch (err) {
-    console.log(err);
+    console.log('Error with user registration:', error);
+    yield put({ type: 'REGISTRATION_FAILED' });
   }
 }
 

@@ -23,6 +23,8 @@ class AddWorkout extends Component {
   state = {
     date: '',
     description: '',
+    warm_up: '',
+    interval: '',
   };
 
   handleInputChangeFor = (propertyName) => (event) => {
@@ -63,9 +65,6 @@ class AddWorkout extends Component {
     });
     return (
       <Container>
-        <Typography variant="h4" component="h2">
-          Add a workout!
-        </Typography>
         <form onSubmit={this.handleSubmit}>
           <Box m={2}>
             <TextField

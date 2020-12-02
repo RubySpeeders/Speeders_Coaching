@@ -93,7 +93,7 @@ class AddAthlete extends Component {
               <Box m={2}>
                 <TextField
                   placeholder="email"
-                  type="text"
+                  type="email"
                   name="email"
                   value={this.state.email}
                   required

@@ -143,6 +143,7 @@ class App extends Component {
                   component={AthleteWorkoutDetail}
                 />
                 <Route
+                  exact
                   path="/register/athlete/:temporary"
                   component={AthleteRegistrationOne}
                 />
