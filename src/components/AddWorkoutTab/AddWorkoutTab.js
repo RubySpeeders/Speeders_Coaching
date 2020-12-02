@@ -23,10 +23,11 @@ class AddWorkout extends Component {
   state = {
     date: '',
     description: '',
-    step: '',
-    repetitions: '',
-    warm_up: '',
-    interval: '',
+    workout: [],
+    // step: '',
+    // repetitions: '',
+    // pace: '',
+    // distance: '',
   };
 
   handleInputChangeFor = (propertyName) => (event) => {
@@ -52,7 +53,7 @@ class AddWorkout extends Component {
   };
 
   render() {
-    const steps = this.props.store.steps.map((item, index) => {
+    const steps = this.props.store.workouts.map((item, index) => {
       return (
         <Grid key={index} container spacing={2}>
           <Grid item>

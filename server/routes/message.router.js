@@ -7,7 +7,7 @@ const {
 
 // get all messages for the message board
 router.get('/', rejectUnauthenticated, (req, res) => {
-  let queryText = `SELECT message, time_posted, "user".first_name, "user".last_name FROM "messages"
+  let queryText = `SELECT message, "messages".id, time_posted, "user".first_name, "user".last_name FROM "messages"
   JOIN "user" ON "messages".user_id="user".id
   ORDER BY time_posted DESC;`;
   pool
@@ -56,7 +56,7 @@ router.put('/:id', (req, res) => {
 });
 
 //delete a message
-router.delete('/:id', (req, res) => {
+router.delete('/delete/:id', (req, res) => {
   const queryText = `DELETE FROM "messages" WHERE id=$1;`;
   const queryArrayData = [req.params.id];
 

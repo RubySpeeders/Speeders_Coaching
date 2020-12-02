@@ -21,10 +21,18 @@ import {
 } from '@material-ui/core';
 
 class AthleteCalendarTab extends Component {
+  componentDidMount() {
+    this.props.dispatch({
+      type: 'GET_WORKOUTS',
+      payload: this.props.match.params.id,
+    });
+  }
   render() {
     return (
       <div>
-        <Typography variant="h5">Your workouts</Typography>
+        <Typography variant="h5">
+          {this.props.store.athletes.athleteDetails.first_name}'s workouts
+        </Typography>
         <TableContainer>
           <Table>
             <TableHead>
@@ -40,7 +48,7 @@ class AthleteCalendarTab extends Component {
             <TableBody>
               <TableRow onClick={this.handleDetails}>
                 <TableCell>
-                  <Typography>workout hardcode #1</Typography>
+                  <Typography>12/20/2020</Typography>
                 </TableCell>
                 <TableCell>
                   <Typography>workout hardcode #2</Typography>

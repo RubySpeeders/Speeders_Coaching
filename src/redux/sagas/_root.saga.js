@@ -13,7 +13,7 @@ import deleteAthleteSaga from './delete.athlete.saga';
 import getRacesSaga from './races.saga';
 import exercisesSaga from './exercises.saga';
 import updateAthleteSaga from './athlete.registration.saga';
-import workoutStepsSaga from './workout.steps.saga';
+import workoutsSaga from './workouts.saga';
 
 // rootSaga is the primary saga.
 // It bundles up all of the other sagas so our project can use them.
@@ -36,6 +36,6 @@ export default function* rootSaga() {
     getRacesSaga(),
     exercisesSaga(),
     updateAthleteSaga(),
-    workoutStepsSaga(),
+    workoutsSaga(),
   ]);
 }
