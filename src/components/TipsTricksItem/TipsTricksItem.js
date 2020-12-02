@@ -17,6 +17,13 @@ import {
 } from '@material-ui/core';
 
 class TipsTricksItem extends Component {
+  handleDelete = (e) => {
+    console.log(this.props.item.id);
+    this.props.dispatch({
+      type: 'DELETE_TIP',
+      payload: this.props.item.id,
+    });
+  };
   render() {
     return (
       <Grid container spacing={2}>

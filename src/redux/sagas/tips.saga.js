@@ -42,10 +42,22 @@ function* getTipTypes(action) {
   }
 }
 
+function* deleteTip(action) {
+  try {
+    yield axios.delete(`/api/tips/delete/${action.payload}`);
+    yield put({
+      type: 'GET_TIPS',
+    });
+  } catch (err) {
+    console.log(err);
+  }
+}
+
 function* tipsSaga() {
   yield takeLatest('GET_TIPS', getTips);
   yield takeLatest('POST_TIP', postTip);
   yield takeLatest('GET_TIP_TYPES', getTipTypes);
+  yield takeLatest('DELETE_TIP', deleteTip);
 }
 
 export default tipsSaga;

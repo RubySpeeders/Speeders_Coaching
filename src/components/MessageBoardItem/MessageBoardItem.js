@@ -21,12 +21,12 @@ class MessageBoardItem extends Component {
   };
 
   handleDelete = (e) => {
-    console.log(this.props.messages.id);
     this.props.dispatch({
       type: 'DELETE_MESSAGE',
       payload: this.props.messages.id,
     });
   };
+
   render() {
     return (
       <Card>
