@@ -20,9 +20,19 @@ class AthleteDetailsTab extends Component {
       <Card>
         <CardContent>
           <Typography>
-            {this.props.store.athletes.athleteDetails.first_name}{' '}
+            {' '}
+            Name: {this.props.store.athletes.athleteDetails.first_name}{' '}
             {this.props.store.athletes.athleteDetails.last_name}
           </Typography>
+          {!this.props.store.athletes.athleteDetails.health_risk_comments ===
+          null ? (
+            <Typography>
+              Health notes:
+              {this.props.store.athletes.athleteDetails.health_risk_comments}
+            </Typography>
+          ) : (
+            <></>
+          )}
         </CardContent>
         <CardActions>
           <Button>Edit</Button>

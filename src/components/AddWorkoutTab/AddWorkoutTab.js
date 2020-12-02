@@ -76,7 +76,7 @@ class AddWorkout extends Component {
           <Box m={2}>
             <TextField
               id="date"
-              label="dob"
+              label="workout date"
               type="date"
               value={this.state.date}
               onChange={this.handleInputChangeFor('date')}

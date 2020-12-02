@@ -23,17 +23,33 @@ import {
 class AthleteCalendarTab extends Component {
   render() {
     return (
-      <Card>
-        <CardContent>
-          <Typography>
-            {this.props.store.athletes.athleteDetails.first_name}{' '}
-            {this.props.store.athletes.athleteDetails.last_name}
-          </Typography>
-        </CardContent>
-        <CardActions>
-          <Button>Edit</Button>
-        </CardActions>
-      </Card>
+      <div>
+        <Typography variant="h5">Your workouts</Typography>
+        <TableContainer>
+          <Table>
+            <TableHead>
+              <TableRow>
+                <TableCell>
+                  <Typography>Date</Typography>
+                </TableCell>
+                <TableCell>
+                  <Typography>Title</Typography>
+                </TableCell>
+              </TableRow>
+            </TableHead>
+            <TableBody>
+              <TableRow onClick={this.handleDetails}>
+                <TableCell>
+                  <Typography>workout hardcode #1</Typography>
+                </TableCell>
+                <TableCell>
+                  <Typography>workout hardcode #2</Typography>
+                </TableCell>
+              </TableRow>
+            </TableBody>
+          </Table>
+        </TableContainer>
+      </div>
     );
   }
 }

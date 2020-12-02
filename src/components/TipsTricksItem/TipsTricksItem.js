@@ -4,26 +4,41 @@ import mapStoreToProps from '../../redux/mapStoreToProps';
 import { withRouter } from 'react-router-dom';
 
 //Material-UI
-import { Grid, Typography } from '@material-ui/core';
+//MATERIAL-UI imports
+import {
+  Box,
+  Button,
+  Card,
+  CardActions,
+  CardContent,
+  Grid,
+  TextField,
+  Typography,
+} from '@material-ui/core';
 
 class TipsTricksItem extends Component {
   render() {
     return (
-      <Grid container>
-        {this.props.store.tips.map((item, index) => (
-          <Grid item key={index}>
-            <Grid container>
-              <Typography component="h4">{this.props.tips.title}</Typography>
-              <Typography component="p">
-                {this.props.tips.article_link}
+      <Grid container spacing={2}>
+        <Grid item xs={4}>
+          <Card>
+            <CardContent value={this.props.item.id}>
+              <Typography>{this.props.item.title} </Typography>
+              <a href={this.props.item.article_link} target="_blank">
+                {this.props.item.article_link}
+              </a>
+              <Typography>Comments: {this.props.item.comments}</Typography>
+              <Typography>
+                Posted by Coach {this.props.item.first_name}
               </Typography>
-              <Typography component="p">{this.props.tips.comments}</Typography>
-              <Typography component="p">
-                Posted by: {this.props.tips.first_name}
-              </Typography>
-            </Grid>
-          </Grid>
-        ))}
+            </CardContent>
+            <CardActions>
+              <Button color="primary" variant="outlined">
+                Edit
+              </Button>
+            </CardActions>
+          </Card>
+        </Grid>
       </Grid>
     );
   }

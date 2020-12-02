@@ -3,28 +3,22 @@ import { connect } from 'react-redux';
 import mapStoreToProps from '../../redux/mapStoreToProps';
 
 //MATERIAL-UI imports
-import {
-  Box,
-  Button,
-  Card,
-  CardActions,
-  CardContent,
-  Grid,
-  TextField,
-  Typography,
-} from '@material-ui/core';
+import { Box, Grid, TextField, Typography } from '@material-ui/core';
+
+//custom file imports
+import TipsTricksItem from '../TipsTricksItem/TipsTricksItem';
 
 class PreRunTab extends Component {
   render() {
+    const tips = this.props.store.tips.map((item, index) => {
+      if (item.type === 1) {
+        return <TipsTricksItem key={index} item={item} />;
+      }
+    });
     return (
       <div>
         <Typography variant="h6">Before running tips!</Typography>
-        <Card>
-          <CardContent></CardContent>
-          <CardActions>
-            <Button>Edit</Button>
-          </CardActions>
-        </Card>
+        {tips}
       </div>
     );
   }
