@@ -10,6 +10,11 @@ import TipsTricksItem from '../../components/TipsTricksItem/TipsTricksItem';
 import AddNewTip from '../../components/AddNewTip/AddNewTip';
 import CoachSidebar from '../../components/CoachSidebar/CoachSidebar';
 import AthleteSidebar from '../../components/AthleteSidebar/AthleteSidebar';
+import PreRunTab from '../../components/PreRunTab/PreRunTab';
+import PostRunTab from '../../components/PostRunTab/PostRunTab';
+import StridesTab from '../../components/StridesTab/StridesTab';
+import StretchingTab from '../../components/StretchingTab/StretchingTab';
+import FuelTab from '../../components/FuelTab/FuelTab';
 
 function TipsTricks(props) {
   const dispatch = useDispatch();
@@ -41,13 +46,13 @@ function TipsTricks(props) {
         {/* display add a new tip tab if coach */}
         {props.store.user.role_id === 1 ? <Tab label="Add a new tip" /> : <></>}
       </Tabs>
-      <Grid container>
-        {props.store.tips.map((item, index) => (
-          <Grid item key={index}>
-            <TipsTricksItem tips={item} />
-          </Grid>
-        ))}
-      </Grid>
+
+      {selectedTab === 0 && <PreRunTab />}
+      {selectedTab === 1 && <PostRunTab />}
+      {selectedTab === 2 && <StridesTab />}
+      {selectedTab === 3 && <StretchingTab />}
+      {selectedTab === 4 && <FuelTab />}
+      {selectedTab === 5 && <AddNewTip />}
     </div>
   );
 }

@@ -30,8 +30,7 @@ class AthleteNotesTab extends Component {
             </Typography>
 
             <Typography>
-              <CakeIcon />
-              {this.props.store.athletes.athleteDetails.dob}
+              <CakeIcon /> {this.props.store.athletes.athleteDetails.dob}
             </Typography>
             <Typography>
               Average weekly mileage:{' '}

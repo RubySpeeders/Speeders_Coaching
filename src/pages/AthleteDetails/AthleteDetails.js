@@ -20,6 +20,7 @@ import AthleteNotesTab from '../../components/AthleteNotesTab/AthleteNotesTab';
 import AddWorkoutTab from '../../components/AddWorkoutTab/AddWorkoutTab';
 import AthleteContactTab from '../../components/AthleteContactTab/AthleteContactTab';
 import AthleteCalendarTab from '../../components/AthleteCalendarTab/AthleteCalendarTab';
+import CoachSidebar from '../../components/CoachSidebar/CoachSidebar';
 
 function AthleteDetails(props) {
   const dispatch = useDispatch();
@@ -44,6 +45,7 @@ function AthleteDetails(props) {
 
   return (
     <Container>
+      <CoachSidebar />
       <Typography variant="h4" gutterBottom>
         Athlete Details
       </Typography>

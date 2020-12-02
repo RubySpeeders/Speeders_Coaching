@@ -1,14 +1,29 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-
+import mapStoreToProps from '../../redux/mapStoreToProps';
 //Material-UI
-import { Box, Grid, Button, Typography, TextField } from '@material-ui/core';
+import {
+  Box,
+  Grid,
+  Button,
+  Typography,
+  TextField,
+  MenuItem,
+  FormControl,
+  InputLabel,
+  Select,
+} from '@material-ui/core';
 
 class AddNewTip extends Component {
+  componentDidMount() {
+    //dispatch to get types of tips for the dropdown
+    this.props.dispatch({ type: 'GET_TIP_TYPES' });
+  }
+
   state = {
     title: '',
+    type: '',
     article_link: '',
-    video_link: '',
     comments: '',
   };
 
@@ -25,29 +40,49 @@ class AddNewTip extends Component {
     this.setState({
       title: '',
       article_link: '',
-      video_link: '',
       comments: '',
+      type: '',
     });
   };
 
   render() {
+    const types = this.props.store.tips.map((item, index) => {
+      return (
+        <MenuItem value={item.id} key={index}>
+          {item.type}
+        </MenuItem>
+      );
+    });
     return (
-      <Grid container>
-        <Grid item xs={12}>
-          <Typography variant="h6">Add a new tip</Typography>
-        </Grid>
+      <div>
+        <Typography variant="h6">Add a new tip</Typography>
         <form onSubmit={this.postTip}>
-          <Grid item xs={12}>
-            <TextField
-              placeholder="title"
-              type="text"
-              name="title"
-              value={this.state.title}
-              required
-              variant="outlined"
-              onChange={this.handleInputChangeFor('title')}
-            />
-          </Grid>
+          <TextField
+            placeholder="title"
+            type="text"
+            name="title"
+            value={this.state.title}
+            required
+            variant="outlined"
+            onChange={this.handleInputChangeFor('title')}
+          />
+          <Box mb={2}>
+            <FormControl variant="outlined" fullWidth>
+              <InputLabel id="tip-type">Type of tip</InputLabel>
+              <Select
+                fullWidth
+                labelId="tip-type"
+                value={this.state.type}
+                onChange={this.handleInputChangeFor('type')}
+                label="tip-type"
+              >
+                <MenuItem value="">
+                  <em>Select type</em>
+                </MenuItem>
+                {types}
+              </Select>
+            </FormControl>
+          </Box>
           <TextField
             placeholder="article link"
             type="text"
@@ -56,15 +91,6 @@ class AddNewTip extends Component {
             required
             variant="outlined"
             onChange={this.handleInputChangeFor('article_link')}
-          />
-          <TextField
-            placeholder="video link"
-            type="text"
-            name="video_link"
-            value={this.state.video_link}
-            required
-            variant="outlined"
-            onChange={this.handleInputChangeFor('video_link')}
           />
           <TextField
             placeholder="additional comments"
@@ -79,9 +105,9 @@ class AddNewTip extends Component {
             Add
           </Button>
         </form>
-      </Grid>
+      </div>
     );
   }
 }
 
-export default connect()(AddNewTip);
+export default connect(mapStoreToProps)(AddNewTip);

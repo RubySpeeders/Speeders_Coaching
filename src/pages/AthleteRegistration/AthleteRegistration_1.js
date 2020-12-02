@@ -59,11 +59,13 @@ class AthleteRegistrationOne extends Component {
       <Container>
         {this.props.store.errors.registrationMessage !== 'NOT AVAILABLE' ? (
           <div>
-            <Typography variant="h4" component="h2">
-              Tell me about yourself!
-            </Typography>
             <Grid container justify="space-evenly">
               <Grid item>
+                <Typography variant="h4" component="h2">
+                  Welcome {this.props.store.athleteRegistration.first_name}!
+                  Please tell me about yourself!
+                </Typography>
+
                 <form className="formPanel" onSubmit={this.handleNext}>
                   {this.props.store.errors.registrationMessage && (
                     <h3 className="alert" role="alert">

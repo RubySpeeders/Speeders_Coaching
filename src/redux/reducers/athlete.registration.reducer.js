@@ -1,10 +1,14 @@
 // Used to store athlete registration information
 
-const registrationReducer = (state = {}, action) => {
-  if (action.type === 'UPDATE_ATHLETE') {
-    return { ...state, ...action.payload };
+const athleteRegistrationReducer = (state = {}, action) => {
+  switch (action.type) {
+    case 'SET_TEMP_USER':
+      return action.payload;
+    case 'UPDATE_ATHLETE':
+      return { ...state, ...action.payload };
+    default:
+      return state;
   }
-  return state;
 };
 
-export default registrationReducer;
+export default athleteRegistrationReducer;
