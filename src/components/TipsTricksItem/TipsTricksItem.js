@@ -36,6 +36,17 @@ class TipsTricksItem extends Component {
               <Button color="primary" variant="outlined">
                 Edit
               </Button>
+              {this.props.store.user.role_id === 1 ? (
+                <Button
+                  variant="outlined"
+                  color="primary"
+                  onClick={this.handleDelete}
+                >
+                  Delete
+                </Button>
+              ) : (
+                <></>
+              )}
             </CardActions>
           </Card>
         </Grid>

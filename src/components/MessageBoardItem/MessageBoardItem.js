@@ -33,12 +33,18 @@ class MessageBoardItem extends Component {
         <CardContent>
           <Typography>{this.props.messages.message}</Typography>
           <Typography>Runner: {this.props.messages.first_name}</Typography>
+          <FavoriteBorderIcon onClick={this.handleLikes}></FavoriteBorderIcon>
           {this.props.store.user.role_id === 1 ? (
-            <Button onClick={this.handleDelete}>Delete</Button>
+            <Button
+              variant="outlined"
+              color="primary"
+              onClick={this.handleDelete}
+            >
+              Delete
+            </Button>
           ) : (
             <></>
           )}
-          <FavoriteBorderIcon onClick={this.handleLikes}></FavoriteBorderIcon>
         </CardContent>
       </Card>
     );
