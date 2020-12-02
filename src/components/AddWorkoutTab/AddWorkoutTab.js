@@ -21,8 +21,6 @@ class AddWorkout extends Component {
     this.props.dispatch({ type: 'GET_STEPS' });
   }
   state = {
-    coach_id: '',
-    athlete_id: '',
     date: '',
     description: '',
   };
@@ -30,6 +28,17 @@ class AddWorkout extends Component {
   handleInputChangeFor = (propertyName) => (event) => {
     this.setState({
       [propertyName]: event.target.value,
+    });
+  };
+
+  handleSubmit = (e) => {
+    e.preventDefault();
+    this.props.dispatch({
+      type: 'POST_WORKOUT',
+      payload: {
+        workout: this.state,
+        athlete_id: this.props.match.params.id,
+      },
     });
   };
 
@@ -57,29 +66,31 @@ class AddWorkout extends Component {
         <Typography variant="h4" component="h2">
           Add a workout!
         </Typography>
-        <Box m={2}>
-          <TextField
-            id="date"
-            label="dob"
-            type="date"
-            value={this.state.date}
-            onChange={this.handleInputChangeFor('date')}
-            variant="outlined"
-          />
-        </Box>
-        <Box m={2}>
-          <TextField
-            placeholder="description"
-            type="text"
-            name="description"
-            value={this.state.description}
-            required
-            variant="outlined"
-            onChange={this.handleInputChangeFor('description')}
-          />
-        </Box>
-        <Box m={2}>{steps}</Box>
-        <Button color="primary">Assign</Button>
+        <form onSubmit={this.handleSubmit}>
+          <Box m={2}>
+            <TextField
+              id="date"
+              label="dob"
+              type="date"
+              value={this.state.date}
+              onChange={this.handleInputChangeFor('date')}
+              variant="outlined"
+            />
+          </Box>
+          <Box m={2}>
+            <TextField
+              placeholder="description"
+              type="text"
+              name="description"
+              value={this.state.description}
+              required
+              variant="outlined"
+              onChange={this.handleInputChangeFor('description')}
+            />
+          </Box>
+          <Box m={2}>{steps}</Box>
+          <Button color="primary">Assign</Button>
+        </form>
       </Container>
     );
   }

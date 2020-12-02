@@ -1,10 +1,10 @@
-import React, { Component, useEffect } from 'react';
-import { connect } from 'react-redux';
+import React, { useEffect } from 'react';
+import { connect, useDispatch } from 'react-redux';
 import mapStoreToProps from '../../redux/mapStoreToProps';
-import { withRouter } from 'react-router-dom';
 
 //Material-UI
 import {
+  Box,
   Tabs,
   Tab,
   Container,
@@ -22,14 +22,15 @@ import AthleteContactTab from '../../components/AthleteContactTab/AthleteContact
 import AthleteCalendarTab from '../../components/AthleteCalendarTab/AthleteCalendarTab';
 
 function AthleteDetails(props) {
+  const dispatch = useDispatch();
+
   useEffect(() => {
-    console.log(props);
     // Update the document title using the browser API
-    // props.dispatch({
-    //   type: 'GET_ATHLETES',
-    // payload: this.props.match.params.id,
-    // });
-  });
+    dispatch({
+      type: 'GET_ATHLETE_DETAILS',
+      payload: props.match.params.id,
+    });
+  }, []);
 
   const handleBack = (e) => {
     props.history.push('/home');
@@ -43,11 +44,15 @@ function AthleteDetails(props) {
 
   return (
     <Container>
-      <Typography variant="h4">Athlete Details</Typography>
-      <Typography>
-        {props.store.athletes.athleteDetails.first_name}{' '}
-        {props.store.athletes.athleteDetails.last_name}
+      <Typography variant="h4" gutterBottom>
+        Athlete Details
       </Typography>
+      <Box ml={10}>
+        <Typography>
+          {props.store.athletes.athleteDetails.first_name}{' '}
+          {props.store.athletes.athleteDetails.last_name}
+        </Typography>
+      </Box>
       <Tabs value={selectedTab} onChange={handleTabChange}>
         <Tab label="Athlete Details" />
         <Tab label="Calendar Workouts" />
@@ -70,17 +75,4 @@ function AthleteDetails(props) {
   );
 }
 
-const mapDispatchToProps = (dispatch) => {
-  return {
-    componentDidMount: () =>
-      dispatch({
-        type: 'GET_ATHLETES',
-        // payload: this.props.match.params.id,
-      }),
-  };
-};
-
-export default connect(
-  mapStoreToProps,
-  mapDispatchToProps
-)(withRouter(AthleteDetails));
+export default connect(mapStoreToProps)(AthleteDetails);
