@@ -33,8 +33,10 @@ function* getWorkouts(action) {
 function* postWorkout(action) {
   try {
     //axios call to post workouts for that specific athlete
-    console.log(action.payload);
-    yield axios.post(`/api/workout/add/${action.payload}`);
+    yield axios.post(
+      `/api/workout/add/${action.payload.athlete_id}`,
+      action.payload.entire_workout
+    );
     // yield put({
     //   type: 'GET_WORKOUTS',
 

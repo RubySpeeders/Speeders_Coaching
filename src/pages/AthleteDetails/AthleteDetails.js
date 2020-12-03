@@ -70,7 +70,7 @@ function AthleteDetails(props) {
         <AthleteNotesTab athlete={props.store.athletes.athleteDetails} />
       )}
       {selectedTab === 3 && <AthleteContactTab />}
-      {selectedTab === 4 && <AddWorkoutTab />}
+      {selectedTab === 4 && <AddWorkoutTab athlete={props.match.params.id} />}
       <Button color="primary" onClick={handleBack}>
         Back
       </Button>

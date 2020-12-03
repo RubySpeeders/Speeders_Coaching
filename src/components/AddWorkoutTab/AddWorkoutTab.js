@@ -19,7 +19,6 @@ import {
 class AddWorkout extends Component {
   componentDidMount() {
     this.props.dispatch({ type: 'GET_STEPS' });
-    console.log(this.props);
   }
 
   state = {
@@ -34,14 +33,19 @@ class AddWorkout extends Component {
   };
 
   handleInputChangeForWorkout = (propertyName, stepId) => (event) => {
-    this.setState({
-      workout: this.state.workout.map((item, index) => {
-        if (item.step === stepId) {
-          return { ...item, [propertyName]: event.target.value };
-        }
-        return item;
-      }),
-    });
+    this.setState(
+      {
+        workout: this.state.workout.map((item) => {
+          if (item.step === stepId) {
+            return { ...item, [propertyName]: event.target.value };
+          }
+          return item;
+        }),
+      },
+      () => {
+        console.log(this.state.workout);
+      }
+    );
   };
 
   handleInputChangeFor = (propertyName) => (event) => {
@@ -55,8 +59,8 @@ class AddWorkout extends Component {
     this.props.dispatch({
       type: 'POST_WORKOUT',
       payload: {
-        workout: this.state,
-        athlete_id: this.props.match.params.id,
+        entire_workout: this.state,
+        athlete_id: this.props.store.athletes.athleteDetails.id,
       },
     });
   };
@@ -73,7 +77,7 @@ class AddWorkout extends Component {
               labelId="repetitions"
               value={this.state.workout.rep}
               onChange={this.handleInputChangeForWorkout('rep', item.id)}
-              label="repetitions"
+              // label="repetitions"
             >
               <MenuItem value="">
                 <em>Select repetitions</em>
@@ -122,6 +126,7 @@ class AddWorkout extends Component {
         <form onSubmit={this.handleSubmit}>
           <Box m={2}>
             <TextField
+              required
               id="date"
               label="workout date"
               type="date"
@@ -142,11 +147,6 @@ class AddWorkout extends Component {
             />
           </Box>
           <Box m={2}>{steps}</Box>
-
-          {/* <input
-            onChange={this.handleInputChangeForWorkout('rep', '1')}
-          ></input> */}
-
           <Button type="submit" color="primary">
             Assign
           </Button>

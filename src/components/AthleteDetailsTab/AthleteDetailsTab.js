@@ -27,14 +27,12 @@ class AthleteDetailsTab extends Component {
           <Typography>
             Gender: {this.props.store.athletes.athleteDetails.gender}
           </Typography>
-          <Typography>Health notes: </Typography>
-          {this.props.store.athletes.athleteDetails.health_risk_comments !==
-          null ? (
+
+          {this.props.store.athletes.athleteDetails.health_risk_comments && (
             <Typography>
+              Health notes:{' '}
               {this.props.store.athletes.athleteDetails.health_risk_comments}
             </Typography>
-          ) : (
-            <Typography>n/a</Typography>
           )}
         </CardContent>
         <CardActions>
