@@ -24,18 +24,23 @@ class AthleteDetailsTab extends Component {
             Name: {this.props.store.athletes.athleteDetails.first_name}{' '}
             {this.props.store.athletes.athleteDetails.last_name}
           </Typography>
-          {!this.props.store.athletes.athleteDetails.health_risk_comments ===
+          <Typography>
+            Gender: {this.props.store.athletes.athleteDetails.gender}
+          </Typography>
+          <Typography>Health notes: </Typography>
+          {this.props.store.athletes.athleteDetails.health_risk_comments !==
           null ? (
             <Typography>
-              Health notes:
               {this.props.store.athletes.athleteDetails.health_risk_comments}
             </Typography>
           ) : (
-            <></>
+            <Typography>n/a</Typography>
           )}
         </CardContent>
         <CardActions>
-          <Button>Edit</Button>
+          <Button variant="outlined" color="primary">
+            Edit
+          </Button>
         </CardActions>
       </Card>
     );

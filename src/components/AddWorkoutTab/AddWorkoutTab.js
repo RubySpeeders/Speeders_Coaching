@@ -23,11 +23,7 @@ class AddWorkout extends Component {
   state = {
     date: '',
     description: '',
-    workout: [],
-    // step: '',
-    // repetitions: '',
-    // pace: '',
-    // distance: '',
+    workout: [{ step: '', rep: '', distance: '', pace: '' }],
   };
 
   handleInputChangeFor = (propertyName) => (event) => {

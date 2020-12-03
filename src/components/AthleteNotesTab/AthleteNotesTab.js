@@ -37,9 +37,15 @@ class AthleteNotesTab extends Component {
               Average weekly mileage:{' '}
               {this.props.store.athletes.athleteDetails.avg_weekly_mileage}
             </Typography>
+            <Typography>
+              What life is like outside of running:{' '}
+              {this.props.store.athletes.athleteDetails.life_outside_running}
+            </Typography>
           </CardContent>
           <CardActions>
-            <Button>Edit</Button>
+            <Button variant="outlined" color="primary">
+              Edit
+            </Button>
           </CardActions>
         </Card>
       </div>

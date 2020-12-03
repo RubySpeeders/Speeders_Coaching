@@ -20,12 +20,13 @@ import AthleteNotesTab from '../../components/AthleteNotesTab/AthleteNotesTab';
 import AddWorkoutTab from '../../components/AddWorkoutTab/AddWorkoutTab';
 import AthleteContactTab from '../../components/AthleteContactTab/AthleteContactTab';
 import AthleteCalendarTab from '../../components/AthleteCalendarTab/AthleteCalendarTab';
-import CoachSidebar from '../../components/CoachSidebar/CoachSidebar';
+import Sidebar from '../../components/Sidebar/Sidebar';
 
 function AthleteDetails(props) {
   const dispatch = useDispatch();
   useEffect(() => {
-    // Update the document title using the browser API
+    console.log(props.match.params.id);
+    // DISPATCH TO GET ALL ATHLETE DETAILS
     dispatch({
       type: 'GET_ATHLETE_DETAILS',
       payload: props.match.params.id,
@@ -45,7 +46,7 @@ function AthleteDetails(props) {
 
   return (
     <Container>
-      <CoachSidebar />
+      <Sidebar />
       <Typography variant="h4" gutterBottom>
         Athlete Details
       </Typography>

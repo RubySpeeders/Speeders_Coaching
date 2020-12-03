@@ -20,7 +20,7 @@ import {
 } from '@material-ui/core';
 
 //custom file import
-import AthleteSidebar from '../../components/AthleteSidebar/AthleteSidebar';
+import Sidebar from '../../components/Sidebar/Sidebar';
 
 class AthleteHomepage extends Component {
   //sends user to the message board
@@ -41,7 +41,7 @@ class AthleteHomepage extends Component {
       <Container>
         <Grid container spacing={4}>
           <Grid item>
-            <AthleteSidebar />
+            <Sidebar />
           </Grid>
           <Grid item>
             <Typography variant="h5">Your workouts</Typography>

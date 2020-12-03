@@ -8,8 +8,7 @@ import { Grid, Tabs, Tab, Typography } from '@material-ui/core';
 //custom file import
 import TipsTricksItem from '../../components/TipsTricksItem/TipsTricksItem';
 import AddNewTip from '../../components/AddNewTip/AddNewTip';
-import CoachSidebar from '../../components/CoachSidebar/CoachSidebar';
-import AthleteSidebar from '../../components/AthleteSidebar/AthleteSidebar';
+import Sidebar from '../../components/Sidebar/Sidebar';
 import PreRunTab from '../../components/PreRunTab/PreRunTab';
 import PostRunTab from '../../components/PostRunTab/PostRunTab';
 import StridesTab from '../../components/StridesTab/StridesTab';
@@ -36,7 +35,7 @@ function TipsTricks(props) {
       <Typography gutterBottom variant="h4" component="h3">
         Tips &amp; Tricks
       </Typography>
-      {props.store.user.role_id === 1 ? <CoachSidebar /> : <AthleteSidebar />}
+      <Sidebar />
       <Tabs value={selectedTab} onChange={handleTabChange}>
         <Tab label="Pre-run" />
         <Tab label="Post-run" />

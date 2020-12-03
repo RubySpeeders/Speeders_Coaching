@@ -21,12 +21,13 @@ router.get('/steps', (req, res) => {
 
 //gets all workouts for specific athlete
 router.get('/athlete/:id', (req, res) => {
-  const athlete_id = req.body.athlete_id;
+  const athlete_id = req.params.id;
   let queryText = `SELECT * FROM "workouts"
   JOIN "workout_details" ON "workouts".id = "workout_details".workout_id
   WHERE athlete_id = $1;`;
+  let queryArray = [athlete_id];
   pool
-    .query(queryText)
+    .query(queryText, queryArray)
     .then((dbResponse) => {
       res.send(dbResponse.rows);
     })
@@ -73,5 +74,21 @@ router.post('/add/:id', rejectUnauthenticated, (req, res) => {
     res.sendStatus(500);
   }
 });
+
+// //delete a workout
+// router.delete('/delete/:id', (req, res) => {
+//   const queryText = `DELETE FROM "workout_details" WHERE id=$1;`;
+//   const queryArrayData = [req.params.id];
+
+//   pool
+//     .query(queryText, queryArrayData)
+//     .then((dbResponse) => {
+//       res.sendStatus(200);
+//     })
+//     .catch((err) => {
+//       console.log(err);
+//       res.sendStatus(500);
+//     });
+// });
 
 module.exports = router;
