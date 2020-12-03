@@ -24,7 +24,7 @@ class AthleteCalendarTab extends Component {
   componentDidMount() {
     this.props.dispatch({
       type: 'GET_WORKOUTS',
-      payload: this.props.match.params.id,
+      payload: this.props.store.athletes.athleteDetails.id,
     });
   }
   render() {
@@ -42,6 +42,9 @@ class AthleteCalendarTab extends Component {
                 </TableCell>
                 <TableCell>
                   <Typography>Title</Typography>
+                </TableCell>
+                <TableCell>
+                  <Typography>Actions</Typography>
                 </TableCell>
               </TableRow>
             </TableHead>

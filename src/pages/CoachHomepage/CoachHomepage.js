@@ -21,7 +21,7 @@ import {
 
 //file imoprts
 import AthleteInfo from '../../components/AthleteInfo/AthleteInfo';
-import CoachSidebar from '../../components/CoachSidebar/CoachSidebar';
+import Sidebar from '../../components/Sidebar/Sidebar';
 
 class CoachHomepage extends Component {
   componentDidMount() {
@@ -34,7 +34,7 @@ class CoachHomepage extends Component {
       <Container>
         <Grid container spacing={4}>
           <Grid item>
-            <CoachSidebar />
+            <Sidebar />
           </Grid>
           <Grid item>
             <Typography variant="h4" component="h3">
