@@ -1,3 +1,4 @@
+// const { DateTime } = require('luxon');
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import mapStoreToProps from '../../redux/mapStoreToProps';
@@ -30,8 +31,7 @@ class AthleteNotesTab extends Component {
             </Typography>
 
             <Typography>
-              <CakeIcon />
-              {this.props.store.athletes.athleteDetails.dob}
+              <CakeIcon /> {this.props.store.athletes.athleteDetails.dob}
             </Typography>
             <Typography>
               Average weekly mileage:{' '}

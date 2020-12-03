@@ -61,6 +61,7 @@ class MessageBoard extends Component {
               <Grid item>
                 <form onSubmit={this.postMessage}>
                   <TextField
+                    required
                     placeholder="write a message!"
                     variant="outlined"
                     fullWidth
@@ -68,7 +69,7 @@ class MessageBoard extends Component {
                     value={this.state.message}
                   />
 
-                  <Button color="secondary" type="submit" variant="contained">
+                  <Button color="primary" type="submit" variant="outlined">
                     Post
                   </Button>
                 </form>

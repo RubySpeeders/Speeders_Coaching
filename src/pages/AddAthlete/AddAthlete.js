@@ -107,13 +107,13 @@ class AddAthlete extends Component {
                     <Button
                       onClick={this.handleBack}
                       type="submit"
-                      variant="contained"
+                      variant="outlined"
                     >
                       Back
                     </Button>
                   </Grid>
                   <Grid item>
-                    <Button color="primary" type="submit" variant="contained">
+                    <Button color="primary" type="submit" variant="outlined">
                       Add Athlete
                     </Button>
                   </Grid>

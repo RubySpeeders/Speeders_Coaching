@@ -23,14 +23,22 @@ class AddWorkout extends Component {
   state = {
     date: '',
     description: '',
-    warm_up: '',
-    interval: '',
+    workout: [],
+    // step: '',
+    // repetitions: '',
+    // pace: '',
+    // distance: '',
   };
 
   handleInputChangeFor = (propertyName) => (event) => {
-    this.setState({
-      [propertyName]: event.target.value,
-    });
+    this.setState(
+      {
+        [propertyName]: event.target.value,
+      },
+      () => {
+        console.log(this.state);
+      }
+    );
   };
 
   handleSubmit = (e) => {
@@ -45,7 +53,7 @@ class AddWorkout extends Component {
   };
 
   render() {
-    const steps = this.props.store.steps.map((item, index) => {
+    const steps = this.props.store.workouts.map((item, index) => {
       return (
         <Grid key={index} container spacing={2}>
           <Grid item>
@@ -57,7 +65,7 @@ class AddWorkout extends Component {
               value={this.state.step}
               required
               variant="outlined"
-              onChange={this.handleInputChangeFor()}
+              onChange={this.handleInputChangeFor(item.step)}
             />
           </Grid>
         </Grid>
@@ -69,7 +77,7 @@ class AddWorkout extends Component {
           <Box m={2}>
             <TextField
               id="date"
-              label="dob"
+              label="workout date"
               type="date"
               value={this.state.date}
               onChange={this.handleInputChangeFor('date')}
@@ -88,6 +96,33 @@ class AddWorkout extends Component {
             />
           </Box>
           <Box m={2}>{steps}</Box>
+          <Box>
+            <FormControl variant="outlined" fullWidth>
+              <InputLabel id="repetitions">
+                How many repetitions of interval?
+              </InputLabel>
+              <Select
+                labelId="repetitions"
+                value={this.state.speed_work}
+                onChange={this.handleInputChangeFor('repetitions')}
+                label="repetitions"
+              >
+                <MenuItem value="">
+                  <em>None</em>
+                </MenuItem>
+                <MenuItem value={'1'}>1</MenuItem>
+                <MenuItem value={'2'}>2</MenuItem>
+                <MenuItem value={'3'}>3</MenuItem>
+                <MenuItem value={'4'}>4</MenuItem>
+                <MenuItem value={'5'}>5</MenuItem>
+                <MenuItem value={'6'}>6</MenuItem>
+                <MenuItem value={'7'}>7</MenuItem>
+                <MenuItem value={'8'}>8</MenuItem>
+                <MenuItem value={'9'}>9</MenuItem>
+                <MenuItem value={'10'}>10</MenuItem>
+              </Select>
+            </FormControl>
+          </Box>
           <Button color="primary">Assign</Button>
         </form>
       </Container>

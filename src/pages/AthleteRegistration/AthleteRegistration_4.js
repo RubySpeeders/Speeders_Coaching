@@ -129,12 +129,12 @@ class AthleteRegistrationFour extends Component {
           <Box m={2}>
             <Button
               color="secondary"
-              variant="contained"
+              variant="outlined"
               onClick={this.onBackClick}
             >
               Back
             </Button>
-            <Button color="secondary" type="submit" variant="contained">
+            <Button color="secondary" type="submit" variant="outlined">
               Next
             </Button>
           </Box>

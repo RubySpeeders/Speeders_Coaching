@@ -1,5 +1,21 @@
-import { takeLatest } from 'redux-saga/effects';
+import { put, takeLatest } from 'redux-saga/effects';
 import axios from 'axios';
+
+function* getTempUser(action) {
+  try {
+    // clear any existing error on the registration page
+    yield put({ type: 'CLEAR_REGISTRATION_ERROR' });
+    //get temp user information matching the temporary key
+    const response = yield axios.get(
+      `/api/user/register/athlete/${action.payload}`
+    );
+    //dispatch to set temporary user
+    yield put({ type: 'SET_TEMP_USER', payload: response.data });
+  } catch (error) {
+    console.log('Error getting temp user information:', error);
+    yield put({ type: 'REGISTRATION_FAILED_TEMP_USER_NOT_AVAILABLE' });
+  }
+}
 
 function* updateAthleteRegistration(action) {
   try {
@@ -13,6 +29,7 @@ function* updateAthleteRegistration(action) {
       `/api/user/register/athlete/${action.payload.temporary_key}`,
       action.payload.athlete
     );
+    //updates athlete from pending to completed and deletes temporary key from invite table
     yield axios.put(
       `/api/user/register/athlete/part3/${action.payload.temporary_key}`,
       action.payload.athlete
@@ -24,17 +41,14 @@ function* updateAthleteRegistration(action) {
     // after registration or after they log out
     yield put({ type: 'SET_TO_LOGIN_MODE' });
   } catch (err) {
-    console.log('Error with user registration:', error);
-    yield put({ type: 'REGISTRATION_FAILED' });
+    console.log('Error with user registration:', err);
+    yield put({ type: 'REGISTRATION_FAILED_TEMP_USER' });
   }
 }
 
 function* updateAthleteSaga() {
+  yield takeLatest('GET_TEMP_USER', getTempUser);
   yield takeLatest('FINALISE_ATHLETE', updateAthleteRegistration);
 }
-
-// const mapStoreToProps = (store) => ({
-//   store,
-// });
 
 export default updateAthleteSaga;

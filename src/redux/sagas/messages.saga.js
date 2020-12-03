@@ -27,10 +27,21 @@ function* postMessage(action) {
     console.log(err);
   }
 }
+function* deleteMessage(action) {
+  try {
+    yield axios.delete(`/api/message/delete/${action.payload}`);
+    yield put({
+      type: 'GET_MESSAGES',
+    });
+  } catch (err) {
+    console.log(err);
+  }
+}
 
 function* messagesSaga() {
   yield takeLatest('GET_MESSAGES', getMessages);
   yield takeLatest('POST_MESSAGE', postMessage);
+  yield takeLatest('DELETE_MESSAGE', deleteMessage);
 }
 
 export default messagesSaga;

@@ -27,6 +27,10 @@ const registrationMessage = (state = '', action) => {
       return 'Choose a username and password!';
     case 'REGISTRATION_FAILED':
       return "Oops! That didn't work. The username might already be taken. Try again!";
+    case 'REGISTRATION_FAILED_TEMP_USER_NOT_AVAILABLE':
+      return 'NOT AVAILABLE';
+    case 'REGISTRATION_INPUT_TEMP_user':
+      return 'Oops! You were not able to finalise registration. The username might already be taken. Try again !';
     default:
       return state;
   }
