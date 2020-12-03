@@ -30,9 +30,24 @@ function* getWorkouts(action) {
   }
 }
 
+function* postWorkout(action) {
+  try {
+    //axios call to post workouts for that specific athlete
+    console.log(action.payload);
+    yield axios.post(`/api/workout/add/${action.payload}`);
+    // yield put({
+    //   type: 'GET_WORKOUTS',
+
+    // });
+  } catch (err) {
+    console.log(err);
+  }
+}
+
 function* workoutSaga() {
   yield takeLatest('GET_STEPS', getWorkoutSteps);
   yield takeLatest('GET_WORKOUTS', getWorkouts);
+  yield takeLatest('POST_WORKOUT', postWorkout);
 }
 
 export default workoutSaga;

@@ -1,4 +1,3 @@
-// const { DateTime } = require('luxon');
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import mapStoreToProps from '../../redux/mapStoreToProps';
@@ -16,11 +15,15 @@ import {
 } from '@material-ui/core';
 import CakeIcon from '@material-ui/icons/Cake';
 
+const { DateTime } = require('luxon');
+
 class AthleteNotesTab extends Component {
-  componentDidMount() {
-    console.log(this.props.store);
-  }
   render() {
+    const birthday = DateTime.fromISO(
+      this.props.store.athletes.athleteDetails.dob
+    );
+    console.log(birthday);
+    const humanBirthday = birthday.toLocaleString(DateTime.DATE_SHORT);
     return (
       <div>
         <Card>
@@ -31,7 +34,7 @@ class AthleteNotesTab extends Component {
             </Typography>
 
             <Typography>
-              <CakeIcon /> {this.props.store.athletes.athleteDetails.dob}
+              <CakeIcon /> {humanBirthday}
             </Typography>
             <Typography>
               Average weekly mileage:{' '}

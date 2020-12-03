@@ -19,22 +19,35 @@ import {
 class AddWorkout extends Component {
   componentDidMount() {
     this.props.dispatch({ type: 'GET_STEPS' });
+    console.log(this.props);
   }
+
   state = {
     date: '',
     description: '',
-    workout: [{ step: '', rep: '', distance: '', pace: '' }],
+    workout: [
+      { step: 1, rep: '', distance: '', pace: '' },
+      { step: 2, rep: '', distance: '', pace: '' },
+      { step: 3, rep: '', distance: '', pace: '' },
+      { step: 4, rep: '', distance: '', pace: '' },
+    ],
+  };
+
+  handleInputChangeForWorkout = (propertyName, stepId) => (event) => {
+    this.setState({
+      workout: this.state.workout.map((item, index) => {
+        if (item.step === stepId) {
+          return { ...item, [propertyName]: event.target.value };
+        }
+        return item;
+      }),
+    });
   };
 
   handleInputChangeFor = (propertyName) => (event) => {
-    this.setState(
-      {
-        [propertyName]: event.target.value,
-      },
-      () => {
-        console.log(this.state);
-      }
-    );
+    this.setState({
+      [propertyName]: event.target.value,
+    });
   };
 
   handleSubmit = (e) => {
@@ -52,18 +65,55 @@ class AddWorkout extends Component {
     const steps = this.props.store.workouts.map((item, index) => {
       return (
         <Grid key={index} container spacing={2}>
-          <Grid item>
+          <Typography>{item.step}:</Typography>
+          {/* <Grid item> */}
+          <FormControl variant="outlined">
+            <InputLabel id="repetitions">How many repetitions?</InputLabel>
+            <Select
+              labelId="repetitions"
+              value={this.state.workout.rep}
+              onChange={this.handleInputChangeForWorkout('rep', item.id)}
+              label="repetitions"
+            >
+              <MenuItem value="">
+                <em>Select repetitions</em>
+              </MenuItem>
+              <MenuItem value={0}>0</MenuItem>
+              <MenuItem value={1}>1</MenuItem>
+              <MenuItem value={2}>2</MenuItem>
+              <MenuItem value={3}>3</MenuItem>
+              <MenuItem value={4}>4</MenuItem>
+              <MenuItem value={5}>5</MenuItem>
+              <MenuItem value={6}>6</MenuItem>
+              <MenuItem value={7}>7</MenuItem>
+              <MenuItem value={8}>8</MenuItem>
+              <MenuItem value={9}>9</MenuItem>
+              <MenuItem value={10}>10</MenuItem>
+            </Select>
+          </FormControl>
+          <Box m={2}>
             <TextField
-              key={index}
-              placeholder={item.step}
+              placeholder="distance"
               type="text"
-              name={item.step}
-              value={this.state.step}
+              name="distance"
+              value={this.state.workout.distance}
               required
               variant="outlined"
-              onChange={this.handleInputChangeFor(item.step)}
+              onChange={this.handleInputChangeForWorkout('distance', item.id)}
             />
-          </Grid>
+          </Box>
+          <Box m={2}>
+            <TextField
+              placeholder="pace"
+              type="text"
+              name="pace"
+              value={this.state.workout.pace}
+              required
+              variant="outlined"
+              onChange={this.handleInputChangeForWorkout('pace', item.id)}
+            />
+          </Box>
+          {/* </Grid> */}
         </Grid>
       );
     });
@@ -92,34 +142,14 @@ class AddWorkout extends Component {
             />
           </Box>
           <Box m={2}>{steps}</Box>
-          <Box>
-            <FormControl variant="outlined" fullWidth>
-              <InputLabel id="repetitions">
-                How many repetitions of interval?
-              </InputLabel>
-              <Select
-                labelId="repetitions"
-                value={this.state.speed_work}
-                onChange={this.handleInputChangeFor('repetitions')}
-                label="repetitions"
-              >
-                <MenuItem value="">
-                  <em>None</em>
-                </MenuItem>
-                <MenuItem value={'1'}>1</MenuItem>
-                <MenuItem value={'2'}>2</MenuItem>
-                <MenuItem value={'3'}>3</MenuItem>
-                <MenuItem value={'4'}>4</MenuItem>
-                <MenuItem value={'5'}>5</MenuItem>
-                <MenuItem value={'6'}>6</MenuItem>
-                <MenuItem value={'7'}>7</MenuItem>
-                <MenuItem value={'8'}>8</MenuItem>
-                <MenuItem value={'9'}>9</MenuItem>
-                <MenuItem value={'10'}>10</MenuItem>
-              </Select>
-            </FormControl>
-          </Box>
-          <Button color="primary">Assign</Button>
+
+          {/* <input
+            onChange={this.handleInputChangeForWorkout('rep', '1')}
+          ></input> */}
+
+          <Button type="submit" color="primary">
+            Assign
+          </Button>
         </form>
       </Container>
     );

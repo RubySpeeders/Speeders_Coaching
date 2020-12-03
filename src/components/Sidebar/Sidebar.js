@@ -53,10 +53,8 @@ function Sidebar(props) {
         )}
         <MenuItem onClick={messageBoard}>Messages</MenuItem>
         <MenuItem onClick={tipsAndTricks}>Tips/Tricks</MenuItem>
-        {props.store.user.role_id === 1 ? (
+        {props.store.user.role_id === 1 && (
           <MenuItem onClick={addAthlete}>Add an Athlete</MenuItem>
-        ) : (
-          <MenuItem></MenuItem>
         )}
       </Menu>
     </Grid>
