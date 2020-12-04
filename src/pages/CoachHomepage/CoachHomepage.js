@@ -8,6 +8,8 @@ import {
   AppBar,
   Tabs,
   Button,
+  Card,
+  CardContent,
   Grid,
   Container,
   Typography,
@@ -37,30 +39,34 @@ class CoachHomepage extends Component {
             <Sidebar />
           </Grid>
           <Grid item>
-            <Typography variant="h4" component="h3">
-              Your Athletes
-            </Typography>
+            <Card>
+              <CardContent>
+                <Typography variant="h4" component="h3">
+                  Your Athletes
+                </Typography>
 
-            <TableContainer>
-              <Table>
-                <TableHead>
-                  <TableRow>
-                    <TableCell>
-                      <Typography>Athlete</Typography>
-                    </TableCell>
+                <TableContainer>
+                  <Table>
+                    <TableHead>
+                      <TableRow>
+                        <TableCell>
+                          <Typography>Athlete</Typography>
+                        </TableCell>
 
-                    <TableCell>
-                      <Typography>Actions</Typography>
-                    </TableCell>
-                  </TableRow>
-                </TableHead>
-                <TableBody>
-                  {this.props.store.athletes.athletes.map((item, index) => (
-                    <AthleteInfo key={index} athlete={item} />
-                  ))}
-                </TableBody>
-              </Table>
-            </TableContainer>
+                        <TableCell>
+                          <Typography>Actions</Typography>
+                        </TableCell>
+                      </TableRow>
+                    </TableHead>
+                    <TableBody>
+                      {this.props.store.athletes.athletes.map((item, index) => (
+                        <AthleteInfo key={index} athlete={item} />
+                      ))}
+                    </TableBody>
+                  </Table>
+                </TableContainer>
+              </CardContent>
+            </Card>
           </Grid>
         </Grid>
       </Container>

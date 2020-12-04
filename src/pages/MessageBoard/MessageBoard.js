@@ -4,6 +4,9 @@ import mapStoreToProps from '../../redux/mapStoreToProps';
 
 //Material-UI
 import {
+  Box,
+  Card,
+  CardContent,
   Container,
   Grid,
   TextField,
@@ -47,30 +50,45 @@ class MessageBoard extends Component {
         <Typography gutterBottom variant="h4" component="h3">
           Message Board
         </Typography>
-        <Grid container>
-          <Grid item>
+        <Grid container justify="space-evenly">
+          <Grid item xs={2}>
             <Sidebar />
           </Grid>
-          <Grid item>
-            <Grid container>
-              <Grid item>
-                <form onSubmit={this.postMessage}>
-                  <TextField
-                    required
-                    placeholder="write a message!"
-                    variant="outlined"
-                    fullWidth
-                    onChange={this.handleChange}
-                    value={this.state.message}
-                  />
-
-                  <Button color="primary" type="submit" variant="outlined">
-                    Post
-                  </Button>
-                </form>
+          <Grid item xs={10}>
+            <Grid container spacing={2}>
+              <Grid item xs={12}>
+                <Card>
+                  <CardContent>
+                    <form onSubmit={this.postMessage}>
+                      <Grid container alignItems="center">
+                        <Grid item xs={10}>
+                          <TextField
+                            required
+                            placeholder="write a message!"
+                            variant="outlined"
+                            fullWidth
+                            onChange={this.handleChange}
+                            value={this.state.message}
+                          />
+                        </Grid>
+                        <Grid item xs={2}>
+                          <Box m={2}>
+                            <Button
+                              color="primary"
+                              type="submit"
+                              variant="contained"
+                            >
+                              Post
+                            </Button>
+                          </Box>
+                        </Grid>
+                      </Grid>
+                    </form>
+                  </CardContent>
+                </Card>
               </Grid>
             </Grid>
-            <Grid container spacing={4}>
+            <Grid container spacing={2}>
               {this.props.store.messages.map((item, index) => (
                 <Grid item key={index} xs={12}>
                   <MessageBoardItem key={index} messages={item} />

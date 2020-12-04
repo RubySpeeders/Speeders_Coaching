@@ -27,10 +27,12 @@ class TipsTricksItem extends Component {
   render() {
     return (
       <Grid container spacing={2}>
-        <Grid item xs={4}>
+        <Grid item xs={10}>
           <Card>
             <CardContent value={this.props.item.id}>
-              <Typography>{this.props.item.title} </Typography>
+              <Typography fontWeight="fontWeightBold">
+                {this.props.item.title}{' '}
+              </Typography>
               <a href={this.props.item.article_link} target="_blank">
                 {this.props.item.article_link}
               </a>

@@ -55,27 +55,31 @@ class AthleteCalendarTab extends Component {
     });
     return (
       <div>
-        <Typography variant="h5">
-          {this.props.store.athletes.athleteDetails.first_name}'s workouts
-        </Typography>
-        <TableContainer>
-          <Table>
-            <TableHead>
-              <TableRow>
-                <TableCell>
-                  <Typography>Date</Typography>
-                </TableCell>
-                <TableCell>
-                  <Typography>Title</Typography>
-                </TableCell>
-                <TableCell>
-                  <Typography>Actions</Typography>
-                </TableCell>
-              </TableRow>
-            </TableHead>
-            <TableBody>{workouts}</TableBody>
-          </Table>
-        </TableContainer>
+        <Card>
+          <CardContent>
+            <Typography variant="h5">
+              {this.props.store.athletes.athleteDetails.first_name}'s workouts
+            </Typography>
+            <TableContainer>
+              <Table>
+                <TableHead>
+                  <TableRow>
+                    <TableCell>
+                      <Typography>Date</Typography>
+                    </TableCell>
+                    <TableCell>
+                      <Typography>Title</Typography>
+                    </TableCell>
+                    <TableCell>
+                      <Typography>Actions</Typography>
+                    </TableCell>
+                  </TableRow>
+                </TableHead>
+                <TableBody>{workouts}</TableBody>
+              </Table>
+            </TableContainer>
+          </CardContent>
+        </Card>
       </div>
     );
   }

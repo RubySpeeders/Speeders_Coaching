@@ -23,7 +23,7 @@ class UserPage extends Component {
         ) : (
           <AthleteHomepage />
         )}
-        <LogOutButton className="log-in" />
+        {/* <LogOutButton className="log-in" /> */}
       </div>
     );
   }

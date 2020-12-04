@@ -5,6 +5,8 @@ import mapStoreToProps from '../../redux/mapStoreToProps';
 //MATERIAL-UI imports
 import {
   Box,
+  Card,
+  CardContent,
   Container,
   Button,
   Grid,
@@ -63,9 +65,8 @@ class AddWorkout extends Component {
   render() {
     const steps = this.props.store.workouts.map((item, index) => {
       return (
-        <Grid key={index} container spacing={2}>
-          <Typography>{item.step}:</Typography>
-          {/* <Grid item> */}
+        <Grid key={index} container spacing={2} alignItems="center">
+          <Typography>{item.step}: </Typography>
           <FormControl variant="outlined">
             <InputLabel id="repetitions">How many repetitions?</InputLabel>
             <Select
@@ -112,40 +113,43 @@ class AddWorkout extends Component {
               onChange={this.handleInputChangeForWorkout('pace', item.id)}
             />
           </Box>
-          {/* </Grid> */}
         </Grid>
       );
     });
     return (
       <Container>
-        <form onSubmit={this.handleSubmit}>
-          <Box m={2}>
-            <TextField
-              required
-              id="date"
-              label="workout date"
-              type="date"
-              value={this.state.date}
-              onChange={this.handleInputChangeFor('date')}
-              variant="outlined"
-            />
-          </Box>
-          <Box m={2}>
-            <TextField
-              placeholder="description"
-              type="text"
-              name="description"
-              value={this.state.description}
-              required
-              variant="outlined"
-              onChange={this.handleInputChangeFor('description')}
-            />
-          </Box>
-          <Box m={2}>{steps}</Box>
-          <Button type="submit" color="primary">
-            Assign
-          </Button>
-        </form>
+        <Card>
+          <CardContent>
+            <form onSubmit={this.handleSubmit}>
+              <Box m={2}>
+                <TextField
+                  required
+                  id="date"
+                  label="workout date"
+                  type="date"
+                  value={this.state.date}
+                  onChange={this.handleInputChangeFor('date')}
+                  variant="outlined"
+                />
+              </Box>
+              <Box m={2}>
+                <TextField
+                  placeholder="description"
+                  type="text"
+                  name="description"
+                  value={this.state.description}
+                  required
+                  variant="outlined"
+                  onChange={this.handleInputChangeFor('description')}
+                />
+              </Box>
+              <Box m={2}>{steps}</Box>
+              <Button type="submit" color="primary">
+                Assign
+              </Button>
+            </form>
+          </CardContent>
+        </Card>
       </Container>
     );
   }

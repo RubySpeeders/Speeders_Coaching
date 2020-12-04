@@ -127,16 +127,22 @@ class AthleteRegistrationFour extends Component {
             />
           </FormControl>
           <Box m={2}>
-            <Button
-              color="secondary"
-              variant="outlined"
-              onClick={this.onBackClick}
-            >
-              Back
-            </Button>
-            <Button color="secondary" type="submit" variant="outlined">
-              Next
-            </Button>
+            <Grid container justify="space-evenly">
+              <Grid item>
+                <Button
+                  color="secondary"
+                  variant="outlined"
+                  onClick={this.onBackClick}
+                >
+                  Back
+                </Button>
+              </Grid>
+              <Grid item>
+                <Button color="secondary" type="submit" variant="outlined">
+                  Next
+                </Button>
+              </Grid>
+            </Grid>
           </Box>
         </form>
       </Container>

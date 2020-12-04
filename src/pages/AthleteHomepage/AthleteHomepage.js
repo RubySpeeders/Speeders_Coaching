@@ -8,6 +8,8 @@ import {
   AppBar,
   Tabs,
   Button,
+  Card,
+  CardContent,
   Grid,
   Container,
   Typography,
@@ -60,6 +62,11 @@ class AthleteHomepage extends Component {
           <TableCell>
             <Typography>{item.description}</Typography>
           </TableCell>
+          <TableCell>
+            <Button variant="outlined" color="primary">
+              Details
+            </Button>
+          </TableCell>
         </TableRow>
       );
     });
@@ -71,22 +78,29 @@ class AthleteHomepage extends Component {
             <Sidebar />
           </Grid>
           <Grid item>
-            <Typography variant="h5">Your workouts</Typography>
-            <TableContainer>
-              <Table>
-                <TableHead>
-                  <TableRow>
-                    <TableCell>
-                      <Typography>Date</Typography>
-                    </TableCell>
-                    <TableCell>
-                      <Typography>Title</Typography>
-                    </TableCell>
-                  </TableRow>
-                </TableHead>
-                <TableBody>{workouts}</TableBody>
-              </Table>
-            </TableContainer>
+            <Card>
+              <CardContent>
+                <Typography variant="h5">Your workouts</Typography>
+                <TableContainer>
+                  <Table>
+                    <TableHead>
+                      <TableRow>
+                        <TableCell>
+                          <Typography>Date</Typography>
+                        </TableCell>
+                        <TableCell>
+                          <Typography>Title</Typography>
+                        </TableCell>
+                        <TableCell>
+                          <Typography>Actions</Typography>
+                        </TableCell>
+                      </TableRow>
+                    </TableHead>
+                    <TableBody>{workouts}</TableBody>
+                  </Table>
+                </TableContainer>
+              </CardContent>
+            </Card>
           </Grid>
         </Grid>
       </Container>

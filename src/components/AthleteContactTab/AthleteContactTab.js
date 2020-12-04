@@ -42,7 +42,9 @@ class AthleteContactTab extends Component {
             )}
           </CardContent>
           <CardActions>
-            <Button>Edit</Button>
+            <Button variant="outlined" color="primary">
+              Edit
+            </Button>
           </CardActions>
         </Card>
       </div>
