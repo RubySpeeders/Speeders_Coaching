@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import mapStoreToProps from '../../redux/mapStoreToProps';
 
 //Material-UI imports
 import {
@@ -25,23 +26,28 @@ class AthleteWorkoutDetail extends Component {
   };
   render() {
     return (
-      <Grid container spacing={2}>
-        <Grid item>
-          <Sidebar />
-        </Grid>
-        <Grid item>
-          <Card>
-            <CardContent>
-              <Typography variant="h4">Workout Details</Typography>
-            </CardContent>
-          </Card>
-          {/* <Button color="primary" onClick={this.handleBack}>
+      <Container>
+        <Typography variant="h4">
+          {this.props.store.user.first_name} {this.props.store.user.last_name}
+        </Typography>
+        <Grid container spacing={2}>
+          <Grid item>
+            <Sidebar />
+          </Grid>
+          <Grid item>
+            <Card>
+              <CardContent>
+                <Typography variant="h4">Workout Details</Typography>
+              </CardContent>
+            </Card>
+            {/* <Button color="primary" onClick={this.handleBack}>
             Back to Calendar
           </Button> */}
+          </Grid>
         </Grid>
-      </Grid>
+      </Container>
     );
   }
 }
 
-export default connect()(AthleteWorkoutDetail);
+export default connect(mapStoreToProps)(AthleteWorkoutDetail);
