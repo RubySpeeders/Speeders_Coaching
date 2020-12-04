@@ -19,6 +19,8 @@ import {
   TableContainer,
   TableCell,
 } from '@material-ui/core';
+import EditIcon from '@material-ui/icons/Edit';
+import DeleteIcon from '@material-ui/icons/Delete';
 
 //import for date/time config
 const { DateTime } = require('luxon');
@@ -47,7 +49,11 @@ class AthleteCalendarTab extends Component {
           </TableCell>
           <TableCell>
             <Button variant="outlined" color="primary">
-              Delete
+              <EditIcon />
+            </Button>
+            &nbsp;
+            <Button variant="outlined" color="primary">
+              <DeleteIcon />
             </Button>
           </TableCell>
         </TableRow>
