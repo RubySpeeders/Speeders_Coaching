@@ -8,12 +8,17 @@ import Swal from 'sweetalert2';
 //MATERIAL-UI imports
 import {
   Box,
+  Card,
+  CardContent,
   Container,
   Button,
   Typography,
   Grid,
   TextField,
 } from '@material-ui/core';
+
+//custom file imports
+import './AddAthlete.css';
 
 class AddAthlete extends Component {
   state = {
@@ -61,65 +66,72 @@ class AddAthlete extends Component {
       <Container>
         <Grid container justify="space-evenly">
           <Grid item>
-            <Typography variant="h4">Register an Athlete!</Typography>
-            <form className="formPanel" onSubmit={this.addAthlete}>
-              {this.props.store.errors.registrationMessage && (
-                <h3 className="alert" role="alert">
-                  {this.props.store.errors.registrationMessage}
-                </h3>
-              )}
-              <Box m={2}>
-                <TextField
-                  placeholder="first name"
-                  type="text"
-                  name="first_name"
-                  value={this.state.first_name}
-                  required
-                  variant="outlined"
-                  onChange={this.handleInputChangeFor('first_name')}
-                />
-              </Box>{' '}
-              <Box m={2}>
-                <TextField
-                  placeholder="last name"
-                  type="text"
-                  name="last_name"
-                  value={this.state.last_name}
-                  required
-                  variant="outlined"
-                  onChange={this.handleInputChangeFor('last_name')}
-                />
-              </Box>{' '}
-              <Box m={2}>
-                <TextField
-                  placeholder="email"
-                  type="email"
-                  name="email"
-                  value={this.state.email}
-                  required
-                  variant="outlined"
-                  onChange={this.handleInputChangeFor('email')}
-                />
-              </Box>
-              <Box m={2}>
-                <Grid container spacing={2}>
-                  <Grid item>
-                    <Button
-                      onClick={this.handleBack}
-                      type="submit"
-                      variant="outlined"
-                    >
-                      Back
-                    </Button>
+            <div className="opacity">
+              {/* <Card>
+                <CardContent> */}
+              <Typography variant="h4">Register an Athlete!</Typography>
+              <form className="formPanel" onSubmit={this.addAthlete}>
+                {this.props.store.errors.registrationMessage && (
+                  <h3 className="alert" role="alert">
+                    {this.props.store.errors.registrationMessage}
+                  </h3>
+                )}
+                <Box m={2}>
+                  <TextField
+                    placeholder="first name"
+                    type="text"
+                    name="first_name"
+                    value={this.state.first_name}
+                    required
+                    variant="outlined"
+                    onChange={this.handleInputChangeFor('first_name')}
+                  />
+                </Box>{' '}
+                <Box m={2}>
+                  <TextField
+                    placeholder="last name"
+                    type="text"
+                    name="last_name"
+                    value={this.state.last_name}
+                    required
+                    variant="outlined"
+                    onChange={this.handleInputChangeFor('last_name')}
+                  />
+                </Box>{' '}
+                <Box m={2}>
+                  <TextField
+                    placeholder="email"
+                    type="email"
+                    name="email"
+                    value={this.state.email}
+                    required
+                    variant="outlined"
+                    onChange={this.handleInputChangeFor('email')}
+                  />
+                </Box>
+                <Box m={2}>
+                  <Grid container spacing={2}>
+                    <Grid item>
+                      <Button
+                        onClick={this.handleBack}
+                        type="submit"
+                        variant="outlined"
+                        color="primary"
+                      >
+                        Back
+                      </Button>
+                    </Grid>
+                    <Grid item>
+                      <Button color="primary" type="submit" variant="outlined">
+                        Add Athlete
+                      </Button>
+                    </Grid>
                   </Grid>
-                  <Grid item>
-                    <Button color="primary" type="submit" variant="outlined">
-                      Add Athlete
-                    </Button>
-                  </Grid>
-                </Grid>
-              </Box>
-            </form>
+                </Box>
+              </form>
+              {/* </CardContent>
+              </Card> */}
+            </div>
           </Grid>
         </Grid>
       </Container>

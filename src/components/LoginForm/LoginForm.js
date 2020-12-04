@@ -36,43 +36,45 @@ class LoginForm extends Component {
   render() {
     return (
       <Grid container justify="space-evenly">
-        <form className="formPanel" onSubmit={this.login}>
-          <Typography variant="h4" component="h2" gutterBottom>
-            Login
-          </Typography>
-          {this.props.store.errors.loginMessage && (
-            <h3 className="alert" role="alert">
-              {this.props.store.errors.loginMessage}
-            </h3>
-          )}
-          <Box mb={2}>
-            <TextField
-              placeholder="username"
-              type="text"
-              name="username"
-              required
-              variant="outlined"
-              value={this.state.username}
-              onChange={this.handleInputChangeFor('username')}
-            />
-          </Box>
-          <div>
-            <TextField
-              placeholder="password"
-              type="password"
-              name="password"
-              required
-              variant="outlined"
-              value={this.state.password}
-              onChange={this.handleInputChangeFor('password')}
-            />
-          </div>
-          <Box m={2}>
-            <Button color="secondary" variant="outlined" type="submit">
-              Log In
-            </Button>
-          </Box>
-        </form>
+        <div className="opacity">
+          <form onSubmit={this.login}>
+            <Typography variant="h4" component="h2" gutterBottom>
+              Login
+            </Typography>
+            {this.props.store.errors.loginMessage && (
+              <h3 className="alert" role="alert">
+                {this.props.store.errors.loginMessage}
+              </h3>
+            )}
+            <Box mb={2}>
+              <TextField
+                placeholder="username"
+                type="text"
+                name="username"
+                required
+                variant="outlined"
+                value={this.state.username}
+                onChange={this.handleInputChangeFor('username')}
+              />
+            </Box>
+            <div>
+              <TextField
+                placeholder="password"
+                type="password"
+                name="password"
+                required
+                variant="outlined"
+                value={this.state.password}
+                onChange={this.handleInputChangeFor('password')}
+              />
+            </div>
+            <Box m={2}>
+              <Button color="secondary" variant="outlined" type="submit">
+                Log In
+              </Button>
+            </Box>
+          </form>
+        </div>
       </Grid>
     );
   }

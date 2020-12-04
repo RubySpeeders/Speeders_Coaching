@@ -21,6 +21,7 @@ import AddWorkoutTab from '../../components/AddWorkoutTab/AddWorkoutTab';
 import AthleteContactTab from '../../components/AthleteContactTab/AthleteContactTab';
 import AthleteCalendarTab from '../../components/AthleteCalendarTab/AthleteCalendarTab';
 import Sidebar from '../../components/Sidebar/Sidebar';
+import './AthleteDetails.css';
 
 function AthleteDetails(props) {
   const dispatch = useDispatch();
@@ -46,34 +47,42 @@ function AthleteDetails(props) {
 
   return (
     <Container>
-      <Sidebar />
-      <Typography variant="h4" gutterBottom>
-        Athlete Details
-      </Typography>
-      <Box ml={10}>
-        <Typography>
-          {props.store.athletes.athleteDetails.first_name}{' '}
-          {props.store.athletes.athleteDetails.last_name}
-        </Typography>
-      </Box>
-      <Tabs value={selectedTab} onChange={handleTabChange}>
-        <Tab label="Athlete Details" />
-        <Tab label="Calendar Workouts" />
-        <Tab label="Notes" />
-        <Tab label="Contact" />
-        <Tab label="Assign Workout" />
-      </Tabs>
+      <Grid container>
+        <Grid item xs={2}>
+          <Sidebar />
+        </Grid>
+        <Grid item xs={10}>
+          <div className="opacity">
+            <Typography variant="h4" gutterBottom>
+              Athlete Details
+            </Typography>
+            <Box ml={10}>
+              <Typography>
+                {props.store.athletes.athleteDetails.first_name}{' '}
+                {props.store.athletes.athleteDetails.last_name}
+              </Typography>
+            </Box>
+            <Tabs value={selectedTab} onChange={handleTabChange}>
+              <Tab label="Athlete Details" />
+              <Tab label="Calendar Workouts" />
+              <Tab label="Notes" />
+              <Tab label="Contact" />
+              <Tab label="Assign Workout" />
+            </Tabs>
 
-      {selectedTab === 0 && <AthleteDetailsTab />}
-      {selectedTab === 1 && <AthleteCalendarTab />}
-      {selectedTab === 2 && (
-        <AthleteNotesTab athlete={props.store.athletes.athleteDetails} />
-      )}
-      {selectedTab === 3 && <AthleteContactTab />}
-      {selectedTab === 4 && <AddWorkoutTab />}
-      <Button color="primary" onClick={handleBack}>
-        Back
-      </Button>
+            {selectedTab === 0 && <AthleteDetailsTab />}
+            {selectedTab === 1 && <AthleteCalendarTab />}
+            {selectedTab === 2 && (
+              <AthleteNotesTab athlete={props.store.athletes.athleteDetails} />
+            )}
+            {selectedTab === 3 && <AthleteContactTab />}
+            {selectedTab === 4 && <AddWorkoutTab />}
+            {/* <Button color="primary" variant="outlined" onClick={handleBack}>
+              Back
+            </Button> */}
+          </div>
+        </Grid>
+      </Grid>
     </Container>
   );
 }

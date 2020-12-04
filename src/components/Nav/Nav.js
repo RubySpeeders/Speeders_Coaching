@@ -33,6 +33,9 @@ const Nav = (props) => {
       </Container>
 
       <div className="nav-right">
+        {/* <Link className="nav-link" to="/home">
+          Home
+        </Link> */}
         <Link className="nav-link" to={loginLinkData.path}>
           {/* Show this link if they are logged in or not,
           but call this link 'Home' if they are logged in,
@@ -49,9 +52,9 @@ const Nav = (props) => {
           </>
         )}
         {/* Always show this link since the about page is not protected */}
-        <Link className="nav-link" to="/about">
+        {/* <Link className="nav-link" to="/about">
           About
-        </Link>
+        </Link> */}
       </div>
     </div>
   );

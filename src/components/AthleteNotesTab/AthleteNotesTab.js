@@ -14,6 +14,7 @@ import {
   Typography,
 } from '@material-ui/core';
 import CakeIcon from '@material-ui/icons/Cake';
+import EditIcon from '@material-ui/icons/Edit';
 
 //import for date/time config
 const { DateTime } = require('luxon');
@@ -44,10 +45,23 @@ class AthleteNotesTab extends Component {
               What life is like outside of running:{' '}
               {this.props.store.athletes.athleteDetails.life_outside_running}
             </Typography>
+            <Typography>
+              General comments:{' '}
+              {this.props.store.athletes.athleteDetails.general_comments}
+            </Typography>
+            {this.props.store.athletes.athleteDetails.medication && (
+              <Typography>
+                Medication information:
+                {
+                  this.props.store.athletes.athleteDetails
+                    .medication_description
+                }
+              </Typography>
+            )}
           </CardContent>
           <CardActions>
             <Button variant="outlined" color="primary">
-              Edit
+              <EditIcon />
             </Button>
           </CardActions>
         </Card>

@@ -13,6 +13,7 @@ import {
   TextField,
   Typography,
 } from '@material-ui/core';
+import EditIcon from '@material-ui/icons/Edit';
 
 class AthleteDetailsTab extends Component {
   render() {
@@ -40,7 +41,7 @@ class AthleteDetailsTab extends Component {
         </CardContent>
         <CardActions>
           <Button variant="outlined" color="primary">
-            Edit
+            <EditIcon />
           </Button>
         </CardActions>
       </Card>

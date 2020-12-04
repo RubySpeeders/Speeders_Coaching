@@ -107,7 +107,7 @@ class App extends Component {
                   // - if logged in, redirects to "/user"
                   // - else shows RegisterPage at "/registration"
                   exact
-                  path="/registration"
+                  path="/registration/coach"
                   component={RegisterPage}
                   authRedirect="/user"
                 />
@@ -120,7 +120,7 @@ class App extends Component {
                   component={LandingPage}
                   authRedirect="/user"
                 />
-                <Route
+                <ProtectedRoute
                   exact
                   path="/athlete/details/:id"
                   component={AthleteDetails}

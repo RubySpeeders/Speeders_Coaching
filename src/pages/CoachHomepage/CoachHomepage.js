@@ -24,6 +24,7 @@ import {
 //file imoprts
 import AthleteInfo from '../../components/AthleteInfo/AthleteInfo';
 import Sidebar from '../../components/Sidebar/Sidebar';
+import './CoachHomepage.css';
 
 class CoachHomepage extends Component {
   componentDidMount() {
@@ -39,34 +40,32 @@ class CoachHomepage extends Component {
             <Sidebar />
           </Grid>
           <Grid item>
-            <Card>
-              <CardContent>
-                <Typography variant="h4" component="h3">
-                  Your Athletes
-                </Typography>
+            <div className="opacity">
+              <Typography variant="h4" component="h3">
+                Your Athletes
+              </Typography>
 
-                <TableContainer>
-                  <Table>
-                    <TableHead>
-                      <TableRow>
-                        <TableCell>
-                          <Typography>Athlete</Typography>
-                        </TableCell>
+              <TableContainer>
+                <Table>
+                  <TableHead>
+                    <TableRow>
+                      <TableCell>
+                        <Typography>Athlete</Typography>
+                      </TableCell>
 
-                        <TableCell>
-                          <Typography>Actions</Typography>
-                        </TableCell>
-                      </TableRow>
-                    </TableHead>
-                    <TableBody>
-                      {this.props.store.athletes.athletes.map((item, index) => (
-                        <AthleteInfo key={index} athlete={item} />
-                      ))}
-                    </TableBody>
-                  </Table>
-                </TableContainer>
-              </CardContent>
-            </Card>
+                      <TableCell>
+                        <Typography>Actions</Typography>
+                      </TableCell>
+                    </TableRow>
+                  </TableHead>
+                  <TableBody>
+                    {this.props.store.athletes.athletes.map((item, index) => (
+                      <AthleteInfo key={index} athlete={item} />
+                    ))}
+                  </TableBody>
+                </Table>
+              </TableContainer>
+            </div>
           </Grid>
         </Grid>
       </Container>

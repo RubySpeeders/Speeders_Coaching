@@ -11,6 +11,7 @@ import {
   TableCell,
   TableRow,
 } from '@material-ui/core';
+import DeleteIcon from '@material-ui/icons/Delete';
 
 class AthleteInfo extends Component {
   //delete an athlete
@@ -39,7 +40,7 @@ class AthleteInfo extends Component {
             Details
           </Button>
           <Button color="primary" onClick={this.deleteAthlete}>
-            Delete
+            <DeleteIcon />
           </Button>
         </TableCell>
       </TableRow>

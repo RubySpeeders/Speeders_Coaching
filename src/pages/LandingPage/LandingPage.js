@@ -2,10 +2,14 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import mapStoreToProps from '../../redux/mapStoreToProps';
 
-import './LandingPage.css';
+//SWEET ALERT
+import Swal from 'sweetalert2';
+
+//MATERIAL-UI imports
+import { Typography, Button, Grid, Container, Box } from '@material-ui/core';
 
 // CUSTOM COMPONENTS
-import RegisterForm from '../../components/RegisterForm/RegisterForm';
+import './LandingPage.css';
 
 class LandingPage extends Component {
   state = {
@@ -16,27 +20,57 @@ class LandingPage extends Component {
     this.props.history.push('/login');
   };
 
+  coachRegistration = (event) => {
+    Swal.fire({
+      title: 'Are you a coach or an athlete?',
+      icon: 'question',
+      confirmButtonText: `Coach`,
+      showDenyButton: true,
+      denyButtonText: 'Athlete',
+      allowOutsideClick: false,
+    }).then((result) => {
+      if (result.isConfirmed) {
+        //goes to coach registration page
+        this.props.history.push('/registration/coach');
+      } else if (result.isDenied) {
+        Swal.fire(`Please wait for an email from your coach to register!`);
+      }
+    });
+  };
+
   render() {
     return (
-      <div className="container">
-        <h2>{this.state.heading}</h2>
-
-        <div className="grid">
-          <div className="grid-col grid-col_8">
-            <p>Welcome to Speeders Coaching!</p>
-          </div>
-          <div className="grid-col grid-col_4">
-            <RegisterForm />
-
-            <center>
-              <h4>Already a Member?</h4>
-              <button className="btn btn_sizeSm" onClick={this.onLogin}>
-                Login
-              </button>
-            </center>
-          </div>
-        </div>
-      </div>
+      <Container>
+        <Typography variant="h2" gutterBottom>
+          Welcome to Speeders Coaching!
+        </Typography>
+        <Grid container justify="space-evenly" alignItems="center">
+          <Grid item>
+            <div className="opacity">
+              <Box m={2}>
+                <Typography>Do you need an account?</Typography>
+                <Button
+                  variant="outlined"
+                  color="secondary"
+                  onClick={this.coachRegistration}
+                >
+                  Register
+                </Button>
+              </Box>
+              <Box m={2}>
+                <Typography>Already running?</Typography>
+                <Button
+                  variant="outlined"
+                  color="secondary"
+                  onClick={this.onLogin}
+                >
+                  Login
+                </Button>
+              </Box>
+            </div>
+          </Grid>
+        </Grid>
+      </Container>
     );
   }
 }
