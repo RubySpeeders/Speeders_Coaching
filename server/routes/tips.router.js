@@ -72,12 +72,11 @@ router.delete('/delete/:id', (req, res) => {
 });
 
 //edit a tip
-router.put('/:id', (req, res) => {
-  const newTitle = req.body.title;
-  const newArticle = req.body.article_link;
-  const newComments = req.body.comments;
+router.put('/update/:id', (req, res) => {
+  const { new_title, new_article, new_comments } = req.body;
+  const tip_id = req.params.id;
   const queryText = `UPDATE "tips_and_tricks" SET title = $1, article_link = $2, comments = $3, time_posted=CURRENT_TIMESTAMP WHERE id=$4;`;
-  const queryArray = [newTitle, newArticle, newComments, req.params.id];
+  const queryArray = [new_title, new_article, new_comments, tip_id];
 
   pool
     .query(queryText, queryArray)

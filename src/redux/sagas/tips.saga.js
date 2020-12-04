@@ -5,7 +5,6 @@ function* getTips(action) {
   try {
     //axios call to get all messages
     const response = yield axios.get('/api/tips');
-    console.log(response.data);
     yield put({
       type: 'SET_TIPS',
       payload: response.data,
@@ -52,12 +51,26 @@ function* deleteTip(action) {
     console.log(err);
   }
 }
+function* editTip(action) {
+  try {
+    yield axios.put(
+      `/api/tips/update/${action.payload.tip_id}`,
+      action.payload.new_tip
+    );
+    yield put({
+      type: 'GET_TIPS',
+    });
+  } catch (err) {
+    console.log(err);
+  }
+}
 
 function* tipsSaga() {
   yield takeLatest('GET_TIPS', getTips);
   yield takeLatest('POST_TIP', postTip);
   yield takeLatest('GET_TIP_TYPES', getTipTypes);
   yield takeLatest('DELETE_TIP', deleteTip);
+  yield takeLatest('UPDATE_TIP', editTip);
 }
 
 export default tipsSaga;

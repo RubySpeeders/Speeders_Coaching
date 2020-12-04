@@ -31,18 +31,21 @@ const Nav = (props) => {
     loginLinkData.text = 'Home';
   }
 
+  const goHome = (e) => {
+    console.log(props.dispatch);
+    // props.history.push('/home');
+  };
+
   return (
     <div className="nav">
       <Container>
-        <div>
-          {/* <Link to="/home"> */}
+        <div onClick={goHome}>
           <StyledTypography component="h2" variant="h2" fontStyle="italic">
             Speeders
           </StyledTypography>
           <StyledTypography component="h2" variant="h3">
             coaching
           </StyledTypography>
-          {/* </Link> */}
         </div>
       </Container>
 

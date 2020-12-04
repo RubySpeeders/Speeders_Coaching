@@ -49,7 +49,7 @@ class AddNewTip extends Component {
   };
 
   render() {
-    const types = this.props.store.tips.map((item, index) => {
+    const types = this.props.store.tipTypes.map((item, index) => {
       return (
         <MenuItem value={item.id} key={index}>
           {item.type}
@@ -122,9 +122,18 @@ class AddNewTip extends Component {
                   />
                 </Grid>
               </Grid>
-              <Button color="primary" type="submit" variant="outlined">
-                Add
-              </Button>
+              <Grid
+                container
+                justify="space-evenly"
+                alignItems="center"
+                spacing={2}
+              >
+                <Grid item>
+                  <Button color="primary" type="submit" variant="outlined">
+                    Add
+                  </Button>
+                </Grid>
+              </Grid>
             </form>
           </CardContent>
         </Card>

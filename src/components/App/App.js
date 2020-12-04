@@ -11,7 +11,10 @@ import { connect } from 'react-redux';
 //MATERIAL-UI imports
 import { Container } from '@material-ui/core';
 import { ThemeProvider, createMuiTheme } from '@material-ui/core/styles';
-import { pink, cyan, lightGreen } from '@material-ui/core/colors';
+
+//Record Theme Colors
+//dark teal - #03A6A6;
+//hot pink - #F24495;
 
 //custom file imports
 import Nav from '../Nav/Nav';
@@ -39,8 +42,12 @@ import AthleteWorkoutDetail from '../../pages/AthleteWorkoutDetail/AthleteWorkou
 const customTheme = createMuiTheme({
   //theme settings
   palette: {
-    primary: cyan,
-    secondary: pink,
+    primary: {
+      main: '#03A6A6',
+    },
+    secondary: {
+      main: '#F24495',
+    },
     // error: '',
     // warning: '',
     // info: '',

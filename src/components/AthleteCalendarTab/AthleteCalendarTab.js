@@ -49,9 +49,9 @@ class AthleteCalendarTab extends Component {
           </TableCell>
           <TableCell>
             {item.complete_status ? (
-              <Typography>Done!</Typography>
+              <Typography>Complete</Typography>
             ) : (
-              <Typography>Not yet</Typography>
+              <Typography>Not complete</Typography>
             )}
             <Typography>{item.complete_status}</Typography>
           </TableCell>
@@ -85,7 +85,7 @@ class AthleteCalendarTab extends Component {
                       <Typography>Title</Typography>
                     </TableCell>
                     <TableCell>
-                      <Typography>Completed?</Typography>
+                      <Typography>Status</Typography>
                     </TableCell>
                     <TableCell>
                       <Typography>Actions</Typography>
