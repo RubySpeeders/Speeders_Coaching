@@ -73,7 +73,6 @@ class AthleteHomepage extends Component {
 
     return (
       <Container>
-        <Typography variant="h2">{this.props.store.user.first_name}</Typography>
         <Grid container spacing={4}>
           <Grid item xs={3}>
             <Sidebar />
