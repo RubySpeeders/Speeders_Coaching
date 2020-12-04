@@ -3,8 +3,11 @@ import { connect } from 'react-redux';
 import mapStoreToProps from '../../redux/mapStoreToProps';
 //Material-UI
 import {
+  Container,
   Box,
   Grid,
+  Card,
+  CardContent,
   Button,
   Typography,
   TextField,
@@ -54,58 +57,78 @@ class AddNewTip extends Component {
       );
     });
     return (
-      <div>
+      <Container>
         <Typography variant="h6">Add a new tip</Typography>
-        <form onSubmit={this.postTip}>
-          <TextField
-            placeholder="title"
-            type="text"
-            name="title"
-            value={this.state.title}
-            required
-            variant="outlined"
-            onChange={this.handleInputChangeFor('title')}
-          />
-          <Box mb={2}>
-            <FormControl variant="outlined" fullWidth>
-              <InputLabel id="tip-type">Type of tip</InputLabel>
-              <Select
-                fullWidth
-                labelId="tip-type"
-                value={this.state.type}
-                onChange={this.handleInputChangeFor('type')}
-                label="tip-type"
-              >
-                <MenuItem value="">
-                  <em>Select type</em>
-                </MenuItem>
-                {types}
-              </Select>
-            </FormControl>
-          </Box>
-          <TextField
-            placeholder="article link"
-            type="text"
-            name="article_link"
-            value={this.state.article_link}
-            required
-            variant="outlined"
-            onChange={this.handleInputChangeFor('article_link')}
-          />
-          <TextField
-            placeholder="additional comments"
-            type="text"
-            name="comments"
-            value={this.state.comments}
-            required
-            variant="outlined"
-            onChange={this.handleInputChangeFor('comments')}
-          />
-          <Button color="primary" type="submit" variant="outlined">
-            Add
-          </Button>
-        </form>
-      </div>
+        <Card>
+          <CardContent>
+            <form onSubmit={this.postTip}>
+              <Grid container spacing={2} justify="space-evenly">
+                <Grid item xs={6}>
+                  <TextField
+                    fullWidth
+                    placeholder="title"
+                    type="text"
+                    name="title"
+                    value={this.state.title}
+                    required
+                    variant="outlined"
+                    onChange={this.handleInputChangeFor('title')}
+                  />
+                </Grid>
+                <Grid item xs={6}>
+                  <FormControl variant="outlined" fullWidth>
+                    <InputLabel id="tip-type">Type of tip</InputLabel>
+                    <Select
+                      fullWidth
+                      labelId="tip-type"
+                      value={this.state.type}
+                      onChange={this.handleInputChangeFor('type')}
+                      label="tip-type"
+                    >
+                      <MenuItem value="">
+                        <em>Select type</em>
+                      </MenuItem>
+                      {types}
+                    </Select>
+                  </FormControl>
+                </Grid>
+              </Grid>
+              <Grid container spacing={2}>
+                <Grid item xs={12}>
+                  <TextField
+                    fullWidth
+                    placeholder="article link"
+                    type="text"
+                    name="article_link"
+                    value={this.state.article_link}
+                    required
+                    variant="outlined"
+                    onChange={this.handleInputChangeFor('article_link')}
+                  />
+                </Grid>
+
+                <Grid item xs={12}>
+                  <TextField
+                    fullWidth
+                    multiline
+                    rows={3}
+                    placeholder="additional comments"
+                    type="text"
+                    name="comments"
+                    value={this.state.comments}
+                    required
+                    variant="outlined"
+                    onChange={this.handleInputChangeFor('comments')}
+                  />
+                </Grid>
+              </Grid>
+              <Button color="primary" type="submit" variant="outlined">
+                Add
+              </Button>
+            </form>
+          </CardContent>
+        </Card>
+      </Container>
     );
   }
 }

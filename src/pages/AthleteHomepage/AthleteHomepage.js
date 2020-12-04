@@ -54,6 +54,7 @@ class AthleteHomepage extends Component {
     const workouts = this.props.store.workouts.map((item, index) => {
       const date = DateTime.fromISO(item.date);
       const humanDate = date.toLocaleString(DateTime.DATE_SHORT);
+
       return (
         <TableRow key={index} onClick={this.handleDetails}>
           <TableCell>

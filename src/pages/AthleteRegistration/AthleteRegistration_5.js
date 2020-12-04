@@ -93,56 +93,72 @@ class AthleteRegistrationFive extends Component {
     });
     return (
       <Container>
-        <Typography variant="h4" gutterBottom>
-          More fun stuff!
-        </Typography>
-        <Grid container justify="space-evenly">
-          <Grid item>
-            <form onSubmit={this.handleSubmit}>
-              <FormControl>
-                <FormLabel>
-                  Check all other forms of exercise you enjoy:
-                </FormLabel>
-                <FormGroup row>{other_exercise}</FormGroup>
-              </FormControl>
+        <div className="opacity">
+          <Typography variant="h4" gutterBottom>
+            More fun stuff!
+          </Typography>
+          <Grid container justify="space-evenly">
+            <Grid item>
+              <form onSubmit={this.handleSubmit}>
+                <FormControl>
+                  <FormLabel>
+                    Check all other forms of exercise you enjoy:
+                  </FormLabel>
+                  <FormGroup row>{other_exercise}</FormGroup>
+                </FormControl>
+                <Grid container>
+                  <Grid item xs={12}>
+                    <Box m={2}>
+                      <TextField
+                        fullWidth
+                        placeholder="Describe your life outside of running"
+                        type="text"
+                        name="life_outside_running"
+                        value={this.state.life_outside_running}
+                        variant="outlined"
+                        multiline
+                        rows={4}
+                        onChange={this.handleInputChangeFor(
+                          'life_outside_running'
+                        )}
+                      />
+                    </Box>
+                  </Grid>
+                </Grid>
+                <Grid container spacing={2}>
+                  <Grid item xs={12}>
+                    <Box m={2}>
+                      <TextField
+                        fullWidth
+                        placeholder="Any other comments or details you want to share"
+                        type="text"
+                        name="general_comments"
+                        value={this.state.general_comments}
+                        variant="outlined"
+                        multiline
+                        rows={4}
+                        onChange={this.handleInputChangeFor('general_comments')}
+                      />
+                    </Box>
+                  </Grid>
+                </Grid>
 
-              <TextField
-                placeholder="Describe your life outside of running"
-                type="text"
-                name="life_outside_running"
-                value={this.state.life_outside_running}
-                variant="outlined"
-                multiline
-                rows={4}
-                onChange={this.handleInputChangeFor('life_outside_running')}
-              />
-
-              <TextField
-                placeholder="Any other comments or details you want to share"
-                type="text"
-                name="general_comments"
-                value={this.state.general_comments}
-                variant="outlined"
-                multiline
-                rows={4}
-                onChange={this.handleInputChangeFor('general_comments')}
-              />
-
-              <Box m={2}>
-                <Button
-                  color="secondary"
-                  variant="outlined"
-                  onClick={this.onBackClick}
-                >
-                  Back
-                </Button>
-                <Button color="secondary" type="submit" variant="outlined">
-                  Submit
-                </Button>
-              </Box>
-            </form>
+                <Box m={2}>
+                  <Button
+                    color="secondary"
+                    variant="outlined"
+                    onClick={this.onBackClick}
+                  >
+                    Back
+                  </Button>
+                  <Button color="secondary" type="submit" variant="outlined">
+                    Submit
+                  </Button>
+                </Box>
+              </form>
+            </Grid>
           </Grid>
-        </Grid>
+        </div>
       </Container>
     );
   }

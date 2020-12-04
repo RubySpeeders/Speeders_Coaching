@@ -15,6 +15,8 @@ import {
   TextField,
   Typography,
 } from '@material-ui/core';
+import EditIcon from '@material-ui/icons/Edit';
+import DeleteIcon from '@material-ui/icons/Delete';
 
 class TipsTricksItem extends Component {
   handleDelete = (e) => {
@@ -43,7 +45,7 @@ class TipsTricksItem extends Component {
             </CardContent>
             <CardActions>
               <Button color="primary" variant="outlined">
-                Edit
+                <EditIcon />
               </Button>
               {this.props.store.user.role_id === 1 ? (
                 <Button
@@ -51,7 +53,7 @@ class TipsTricksItem extends Component {
                   color="primary"
                   onClick={this.handleDelete}
                 >
-                  Delete
+                  <DeleteIcon />
                 </Button>
               ) : (
                 <></>

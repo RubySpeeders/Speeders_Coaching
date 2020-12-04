@@ -40,22 +40,24 @@ function TipsTricks(props) {
           <Sidebar />
         </Grid>
         <Grid item xs={10}>
-          <Tabs value={selectedTab} onChange={handleTabChange}>
-            <Tab label="Pre-run" />
-            <Tab label="Post-run" />
-            <Tab label="Strides" />
-            <Tab label="Stretching" />
-            <Tab label="Fuel" />
-            {/* display add a new tip tab if coach */}
-            {props.store.user.role_id === 1 && <Tab label="Add a new tip" />}
-          </Tabs>
+          <div className="opacity">
+            <Tabs value={selectedTab} onChange={handleTabChange}>
+              <Tab label="Pre-run" />
+              <Tab label="Post-run" />
+              <Tab label="Strides" />
+              <Tab label="Stretching" />
+              <Tab label="Fuel" />
+              {/* display add a new tip tab if coach */}
+              {props.store.user.role_id === 1 && <Tab label="Add a new tip" />}
+            </Tabs>
 
-          {selectedTab === 0 && <PreRunTab />}
-          {selectedTab === 1 && <PostRunTab />}
-          {selectedTab === 2 && <StridesTab />}
-          {selectedTab === 3 && <StretchingTab />}
-          {selectedTab === 4 && <FuelTab />}
-          {selectedTab === 5 && <AddNewTip />}
+            {selectedTab === 0 && <PreRunTab />}
+            {selectedTab === 1 && <PostRunTab />}
+            {selectedTab === 2 && <StridesTab />}
+            {selectedTab === 3 && <StretchingTab />}
+            {selectedTab === 4 && <FuelTab />}
+            {selectedTab === 5 && <AddNewTip />}
+          </div>
         </Grid>
       </Grid>
     </div>

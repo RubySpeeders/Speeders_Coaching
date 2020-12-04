@@ -67,31 +67,33 @@ class AddWorkout extends Component {
       return (
         <Grid key={index} container spacing={2} alignItems="center">
           <Typography>{item.step}: </Typography>
-          <FormControl variant="outlined">
-            <InputLabel id="repetitions">How many repetitions?</InputLabel>
-            <Select
-              labelId="repetitions"
-              value={this.state.workout.rep}
-              onChange={this.handleInputChangeForWorkout('rep', item.id)}
-              // label="repetitions"
-            >
-              <MenuItem value="">
-                <em>Select repetitions</em>
-              </MenuItem>
-              <MenuItem value={0}>0</MenuItem>
-              <MenuItem value={1}>1</MenuItem>
-              <MenuItem value={2}>2</MenuItem>
-              <MenuItem value={3}>3</MenuItem>
-              <MenuItem value={4}>4</MenuItem>
-              <MenuItem value={5}>5</MenuItem>
-              <MenuItem value={6}>6</MenuItem>
-              <MenuItem value={7}>7</MenuItem>
-              <MenuItem value={8}>8</MenuItem>
-              <MenuItem value={9}>9</MenuItem>
-              <MenuItem value={10}>10</MenuItem>
-            </Select>
-          </FormControl>
-          <Box m={2}>
+          <Grid item xs={4}>
+            <FormControl variant="outlined" fullWidth>
+              <InputLabel id="repetitions">How many repetitions?</InputLabel>
+              <Select
+                labelId="repetitions"
+                value={this.state.workout.rep}
+                onChange={this.handleInputChangeForWorkout('rep', item.id)}
+                // label="repetitions"
+              >
+                <MenuItem value="">
+                  <em>Select repetitions</em>
+                </MenuItem>
+                <MenuItem value={0}>0</MenuItem>
+                <MenuItem value={1}>1</MenuItem>
+                <MenuItem value={2}>2</MenuItem>
+                <MenuItem value={3}>3</MenuItem>
+                <MenuItem value={4}>4</MenuItem>
+                <MenuItem value={5}>5</MenuItem>
+                <MenuItem value={6}>6</MenuItem>
+                <MenuItem value={7}>7</MenuItem>
+                <MenuItem value={8}>8</MenuItem>
+                <MenuItem value={9}>9</MenuItem>
+                <MenuItem value={10}>10</MenuItem>
+              </Select>
+            </FormControl>
+          </Grid>
+          <Grid item xs={3}>
             <TextField
               placeholder="distance"
               type="text"
@@ -101,8 +103,8 @@ class AddWorkout extends Component {
               variant="outlined"
               onChange={this.handleInputChangeForWorkout('distance', item.id)}
             />
-          </Box>
-          <Box m={2}>
+          </Grid>
+          <Grid item xs={3}>
             <TextField
               placeholder="pace"
               type="text"
@@ -112,7 +114,7 @@ class AddWorkout extends Component {
               variant="outlined"
               onChange={this.handleInputChangeForWorkout('pace', item.id)}
             />
-          </Box>
+          </Grid>
         </Grid>
       );
     });

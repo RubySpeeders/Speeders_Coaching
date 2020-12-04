@@ -4,14 +4,7 @@ import mapStoreToProps from '../../redux/mapStoreToProps';
 import { withRouter } from 'react-router-dom';
 
 //Material-UI imports
-import {
-  Button,
-  Card,
-  CardHeader,
-  CardActionArea,
-  CardContent,
-  Typography,
-} from '@material-ui/core';
+import { Button, Card, CardContent, Typography, Grid } from '@material-ui/core';
 import FavoriteIcon from '@material-ui/icons/Favorite';
 import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder';
 
@@ -32,19 +25,25 @@ class MessageBoardItem extends Component {
       <Card>
         <CardContent>
           <Typography>{this.props.messages.message}</Typography>
-          <Typography>Runner: {this.props.messages.first_name}</Typography>
-          <FavoriteBorderIcon onClick={this.handleLikes}></FavoriteBorderIcon>
-          {this.props.store.user.role_id === 1 ? (
-            <Button
-              variant="outlined"
-              color="primary"
-              onClick={this.handleDelete}
-            >
-              Delete
-            </Button>
-          ) : (
-            <></>
-          )}
+          <Typography>Posted by: {this.props.messages.first_name}</Typography>
+          <Grid container spacing={2}>
+            <Grid item>
+              <FavoriteBorderIcon
+                onClick={this.handleLikes}
+              ></FavoriteBorderIcon>
+            </Grid>
+            <Grid item>
+              {this.props.store.user.role_id === 1 && (
+                <Button
+                  variant="outlined"
+                  color="primary"
+                  onClick={this.handleDelete}
+                >
+                  Delete
+                </Button>
+              )}
+            </Grid>
+          </Grid>
         </CardContent>
       </Card>
     );

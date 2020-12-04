@@ -55,46 +55,44 @@ class MessageBoard extends Component {
             <Sidebar />
           </Grid>
           <Grid item xs={10}>
-            <Grid container spacing={2}>
-              <Grid item xs={12}>
-                <Card>
-                  <CardContent>
-                    <form onSubmit={this.postMessage}>
-                      <Grid container alignItems="center">
-                        <Grid item xs={10}>
-                          <TextField
-                            required
-                            placeholder="write a message!"
-                            variant="outlined"
-                            fullWidth
-                            onChange={this.handleChange}
-                            value={this.state.message}
-                          />
-                        </Grid>
-                        <Grid item xs={2}>
-                          <Box m={2}>
-                            <Button
-                              color="primary"
-                              type="submit"
-                              variant="contained"
-                            >
-                              Post
-                            </Button>
-                          </Box>
-                        </Grid>
+            <div className="opacity">
+              <Grid container spacing={2}>
+                <Grid item xs={12}>
+                  <form onSubmit={this.postMessage}>
+                    <Grid container alignItems="center">
+                      <Grid item xs={10}>
+                        <TextField
+                          required
+                          placeholder="write a message!"
+                          variant="outlined"
+                          fullWidth
+                          onChange={this.handleChange}
+                          value={this.state.message}
+                        />
                       </Grid>
-                    </form>
-                  </CardContent>
-                </Card>
-              </Grid>
-            </Grid>
-            <Grid container spacing={2}>
-              {this.props.store.messages.map((item, index) => (
-                <Grid item key={index} xs={12}>
-                  <MessageBoardItem key={index} messages={item} />
+                      <Grid item xs={2}>
+                        <Box m={2}>
+                          <Button
+                            color="primary"
+                            type="submit"
+                            variant="contained"
+                          >
+                            Post
+                          </Button>
+                        </Box>
+                      </Grid>
+                    </Grid>
+                  </form>
                 </Grid>
-              ))}
-            </Grid>
+              </Grid>
+              <Grid container spacing={2}>
+                {this.props.store.messages.map((item, index) => (
+                  <Grid item key={index} xs={12}>
+                    <MessageBoardItem key={index} messages={item} />
+                  </Grid>
+                ))}
+              </Grid>
+            </div>
           </Grid>
         </Grid>
       </Container>

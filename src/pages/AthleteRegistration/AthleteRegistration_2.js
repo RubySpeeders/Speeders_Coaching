@@ -58,108 +58,100 @@ class AthleteRegistrationTwo extends Component {
       );
     });
     return (
-      <Container>
-        <Card>
-          <CardContent>
-            <Grid container justify="space-evenly">
-              <Grid item>
-                <Typography variant="h4" gutterBottom>
-                  Running Details
-                </Typography>
-                <form onSubmit={this.handleNext}>
-                  {this.props.store.errors.registrationMessage && (
-                    <h3 className="alert" role="alert">
-                      {this.props.store.errors.registrationMessage}
-                    </h3>
-                  )}
-                  <Box mb={2}>
-                    <FormControl variant="outlined" fullWidth>
-                      <InputLabel id="rest-day">Preferred Rest Day</InputLabel>
-                      <Select
-                        fullWidth
-                        labelId="rest-day"
-                        value={this.state.rest_day}
-                        onChange={this.handleInputChangeFor('rest_day')}
-                        label="rest_day"
-                      >
-                        <MenuItem value="">
-                          <em>None</em>
-                        </MenuItem>
-                        {day}
-                      </Select>
-                    </FormControl>
-                  </Box>
-                  <Box mb={2}>
-                    <FormControl variant="outlined" fullWidth>
-                      <InputLabel id="long-run-day">
-                        Preferred Long Run Day
-                      </InputLabel>
-                      <Select
-                        fullWidth
-                        labelId="long-run-day"
-                        value={this.state.long_run_day}
-                        onChange={this.handleInputChangeFor('long_run_day')}
-                        label="long_run_day"
-                      >
-                        <MenuItem value="">
-                          <em>None</em>
-                        </MenuItem>
-                        {day}
-                      </Select>
-                    </FormControl>
-                  </Box>
-                  <FormControl variant="outlined" fullWidth>
-                    <InputLabel id="speed">Speed Work</InputLabel>
-                    <Select
-                      labelId="speed"
-                      value={this.state.speed_work}
-                      onChange={this.handleInputChangeFor('speed_work')}
-                      label="speed_work"
+      <div className="opacity">
+        <Grid container justify="space-evenly">
+          <Grid item xs={6}>
+            <Typography variant="h4" gutterBottom>
+              Running Details
+            </Typography>
+            <form onSubmit={this.handleNext}>
+              {this.props.store.errors.registrationMessage && (
+                <h3 className="alert" role="alert">
+                  {this.props.store.errors.registrationMessage}
+                </h3>
+              )}
+              <Box mb={2}>
+                <FormControl variant="outlined" fullWidth>
+                  <InputLabel id="rest-day">Preferred Rest Day</InputLabel>
+                  <Select
+                    fullWidth
+                    labelId="rest-day"
+                    value={this.state.rest_day}
+                    onChange={this.handleInputChangeFor('rest_day')}
+                    label="rest_day"
+                  >
+                    <MenuItem value="">
+                      <em>None</em>
+                    </MenuItem>
+                    {day}
+                  </Select>
+                </FormControl>
+              </Box>
+              <Box mb={2}>
+                <FormControl variant="outlined" fullWidth>
+                  <InputLabel id="long-run-day">
+                    Preferred Long Run Day
+                  </InputLabel>
+                  <Select
+                    fullWidth
+                    labelId="long-run-day"
+                    value={this.state.long_run_day}
+                    onChange={this.handleInputChangeFor('long_run_day')}
+                    label="long_run_day"
+                  >
+                    <MenuItem value="">
+                      <em>None</em>
+                    </MenuItem>
+                    {day}
+                  </Select>
+                </FormControl>
+              </Box>
+              <FormControl variant="outlined" fullWidth>
+                <InputLabel id="speed">Speed Work</InputLabel>
+                <Select
+                  labelId="speed"
+                  value={this.state.speed_work}
+                  onChange={this.handleInputChangeFor('speed_work')}
+                  label="speed_work"
+                >
+                  <MenuItem value="">
+                    <em>None</em>
+                  </MenuItem>
+                  <MenuItem value={'Yes, loads of it!'}>
+                    Yes, loads of it!
+                  </MenuItem>
+                  <MenuItem value={'Never heard of it.'}>
+                    Never heard of it.
+                  </MenuItem>
+                  <MenuItem
+                    value={'Some - I have heard of it but never tried it.'}
+                  >
+                    Some - I have heard of it but never tried it.
+                  </MenuItem>
+                </Select>
+              </FormControl>
+              <Box m={2}>
+                <Grid container justify="space-evenly">
+                  <Grid item>
+                    <Button
+                      color="secondary"
+                      variant="outlined"
+                      onClick={this.onBackClick}
                     >
-                      <MenuItem value="">
-                        <em>None</em>
-                      </MenuItem>
-                      <MenuItem value={'Yes, loads of it!'}>
-                        Yes, loads of it!
-                      </MenuItem>
-                      <MenuItem value={'Never heard of it.'}>
-                        Never heard of it.
-                      </MenuItem>
-                      <MenuItem
-                        value={'Some - I have heard of it but never tried it.'}
-                      >
-                        Some - I have heard of it but never tried it.
-                      </MenuItem>
-                    </Select>
-                  </FormControl>
-                  <Box m={2}>
-                    <Grid container justify="space-evenly">
-                      <Grid item>
-                        <Button
-                          color="secondary"
-                          variant="outlined"
-                          onClick={this.onBackClick}
-                        >
-                          Back
-                        </Button>
-                      </Grid>
-                      <Grid item>
-                        <Button
-                          color="secondary"
-                          type="submit"
-                          variant="outlined"
-                        >
-                          Next
-                        </Button>
-                      </Grid>
-                    </Grid>
-                  </Box>
-                </form>
-              </Grid>
-            </Grid>
-          </CardContent>
-        </Card>
-      </Container>
+                      Back
+                    </Button>
+                  </Grid>
+                  <Grid item>
+                    <Button color="secondary" type="submit" variant="outlined">
+                      Next
+                    </Button>
+                  </Grid>
+                </Grid>
+              </Box>
+            </form>
+          </Grid>
+        </Grid>
+      </div>
     );
   }
 }
