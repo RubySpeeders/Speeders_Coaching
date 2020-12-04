@@ -34,10 +34,6 @@ function AthleteDetails(props) {
     });
   }, [dispatch, props.match.params.id]);
 
-  const handleBack = (e) => {
-    props.history.push('/home');
-  };
-
   //config for tabs
   const [selectedTab, setSelectedTab] = React.useState(0);
 
@@ -77,9 +73,6 @@ function AthleteDetails(props) {
             )}
             {selectedTab === 3 && <AthleteContactTab />}
             {selectedTab === 4 && <AddWorkoutTab />}
-            {/* <Button color="primary" variant="outlined" onClick={handleBack}>
-              Back
-            </Button> */}
           </div>
         </Grid>
       </Grid>

@@ -23,9 +23,7 @@ import {
 
 //custom file import
 import Sidebar from '../../components/Sidebar/Sidebar';
-
-//import for date/time config
-import { DateTime } from 'luxon';
+import AthleteWorkoutTableItem from '../../components/AthleteWorkoutTableItem/AthleteWorkoutTableItem';
 
 class AthleteHomepage extends Component {
   //get all workouts for athlete(user)
@@ -46,62 +44,48 @@ class AthleteHomepage extends Component {
     this.props.history.push('/tips');
   };
 
-  handleDetails = (e) => {
-    this.props.history.push('/athlete/workout/details');
-  };
-
   render() {
-    const workouts = this.props.store.workouts.map((item, index) => {
-      const date = DateTime.fromISO(item.date);
-      const humanDate = date.toLocaleString(DateTime.DATE_SHORT);
-
-      return (
-        <TableRow key={index} onClick={this.handleDetails}>
-          <TableCell>
-            <Typography>{humanDate}</Typography>
-          </TableCell>
-          <TableCell>
-            <Typography>{item.description}</Typography>
-          </TableCell>
-          <TableCell>
-            <Button variant="outlined" color="primary">
-              Details
-            </Button>
-          </TableCell>
-        </TableRow>
-      );
-    });
-
     return (
       <Container>
         <Grid container spacing={4}>
-          <Grid item xs={3}>
+          <Grid item xs={2}>
             <Sidebar />
           </Grid>
-          <Grid item xs={9}>
-            <Card>
-              <CardContent>
-                <Typography variant="h5">Your workouts</Typography>
-                <TableContainer>
-                  <Table>
-                    <TableHead>
-                      <TableRow>
-                        <TableCell>
-                          <Typography>Date</Typography>
-                        </TableCell>
-                        <TableCell>
-                          <Typography>Title</Typography>
-                        </TableCell>
-                        <TableCell>
-                          <Typography>Actions</Typography>
-                        </TableCell>
-                      </TableRow>
-                    </TableHead>
-                    <TableBody>{workouts}</TableBody>
-                  </Table>
-                </TableContainer>
-              </CardContent>
-            </Card>
+          <Grid item xs={10}>
+            <div className="opacity">
+              <Card>
+                <CardContent>
+                  <Typography variant="h5">Your workouts</Typography>
+                  <TableContainer>
+                    <Table>
+                      <TableHead>
+                        <TableRow>
+                          <TableCell>
+                            <Typography>Date</Typography>
+                          </TableCell>
+                          <TableCell>
+                            <Typography>Title</Typography>
+                          </TableCell>
+                          <TableCell>
+                            <Typography>Actions</Typography>
+                          </TableCell>
+                        </TableRow>
+                      </TableHead>
+                      <TableBody>
+                        {this.props.store.workouts.map((item, index) => {
+                          return (
+                            <AthleteWorkoutTableItem
+                              workout={item}
+                              key={index}
+                            />
+                          );
+                        })}
+                      </TableBody>
+                    </Table>
+                  </TableContainer>
+                </CardContent>
+              </Card>
+            </div>
           </Grid>
         </Grid>
       </Container>

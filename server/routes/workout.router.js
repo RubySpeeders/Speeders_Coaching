@@ -37,6 +37,24 @@ router.get('/athlete/:id', (req, res) => {
     });
 });
 
+//gets specific workout
+router.get('/specific/:id', (req, res) => {
+  const workout_id = req.params.id;
+  let queryText = `SELECT * FROM "workouts"
+  JOIN "workout_details" ON "workouts".id = "workout_details".workout_id
+  WHERE workout_id = $1;`;
+  let queryArray = [athlete_id];
+  pool
+    .query(queryText, queryArray)
+    .then((dbResponse) => {
+      res.send(dbResponse.rows);
+    })
+    .catch((error) => {
+      console.log('error getting workout steps', error);
+      res.sendStatus(500);
+    });
+});
+
 // add a workout
 router.post('/add/:id', rejectUnauthenticated, (req, res) => {
   try {

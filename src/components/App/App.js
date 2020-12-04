@@ -13,7 +13,7 @@ import { Container } from '@material-ui/core';
 import { ThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 
 //Record Theme Colors
-//dark teal - #03A6A6;
+//light teal - ##00DDCC;
 //hot pink - #F24495;
 
 //custom file imports
@@ -43,7 +43,7 @@ const customTheme = createMuiTheme({
   //theme settings
   palette: {
     primary: {
-      main: '#03A6A6',
+      main: '#00DDCC',
     },
     secondary: {
       main: '#F24495',
@@ -146,7 +146,7 @@ class App extends Component {
                 <ProtectedRoute exact path="/tips" component={TipsTricks} />
                 <Route
                   exact
-                  path="/athlete/workout/details"
+                  path="/athlete/workout/details/:id"
                   component={AthleteWorkoutDetail}
                 />
                 <Route

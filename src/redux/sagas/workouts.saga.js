@@ -44,10 +44,24 @@ function* postWorkout(action) {
   }
 }
 
+function* getWorkoutDetail(action) {
+  try {
+    //axios call to get specific workout
+    const response = yield axios.get(`/api/workout/specific/${action.payload}`);
+    yield put({
+      type: 'SET_WORKOUT_DETAILS',
+      payload: response.data,
+    });
+  } catch (err) {
+    console.log(err);
+  }
+}
+
 function* workoutSaga() {
   yield takeLatest('GET_STEPS', getWorkoutSteps);
   yield takeLatest('GET_WORKOUTS', getWorkouts);
   yield takeLatest('POST_WORKOUT', postWorkout);
+  yield takeLatest('GET_WORKOUT_DETAIL', getWorkoutDetail);
 }
 
 export default workoutSaga;

@@ -15,6 +15,7 @@ import Sidebar from '../../components/Sidebar/Sidebar';
 
 class AthleteWorkoutDetail extends Component {
   componentDidMount() {
+    console.log(this.props.match);
     this.props.dispatch({
       type: 'GET_WORKOUT_DETAIL',
       payload: '',
@@ -35,11 +36,13 @@ class AthleteWorkoutDetail extends Component {
             <Sidebar />
           </Grid>
           <Grid item>
-            <Card>
-              <CardContent>
-                <Typography variant="h4">Workout Details</Typography>
-              </CardContent>
-            </Card>
+            <div className="opacity">
+              <Card>
+                <CardContent>
+                  <Typography variant="h4">Workout Details</Typography>
+                </CardContent>
+              </Card>
+            </div>
             {/* <Button color="primary" onClick={this.handleBack}>
             Back to Calendar
           </Button> */}
