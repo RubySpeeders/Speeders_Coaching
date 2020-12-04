@@ -7,6 +7,18 @@ import mapStoreToProps from '../../redux/mapStoreToProps';
 
 //material-ui imports
 import { Typography, Box, Container } from '@material-ui/core';
+import { makeStyles, withStyles } from '@material-ui/core/styles';
+
+const StyledTypography = withStyles((theme) => ({
+  root: {
+    color: theme.palette.secondary.main,
+  },
+  h2: {
+    fontSize: '4rem',
+    fontStyle: 'italic',
+    fontWeight: 'bold',
+  },
+}))(Typography);
 
 const Nav = (props) => {
   let loginLinkData = {
@@ -23,12 +35,14 @@ const Nav = (props) => {
     <div className="nav">
       <Container>
         <div>
-          <Box variant="h3" fontSize={56} fontStyle="italic">
+          {/* <Link to="/home"> */}
+          <StyledTypography component="h2" variant="h2" fontStyle="italic">
             Speeders
-          </Box>
-          <Typography component="h2" variant="h3">
+          </StyledTypography>
+          <StyledTypography component="h2" variant="h3">
             coaching
-          </Typography>
+          </StyledTypography>
+          {/* </Link> */}
         </div>
       </Container>
 

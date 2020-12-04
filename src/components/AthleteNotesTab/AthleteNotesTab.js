@@ -17,7 +17,7 @@ import CakeIcon from '@material-ui/icons/Cake';
 import EditIcon from '@material-ui/icons/Edit';
 
 //import for date/time config
-const { DateTime } = require('luxon');
+import { DateTime } from 'luxon';
 
 class AthleteNotesTab extends Component {
   render() {

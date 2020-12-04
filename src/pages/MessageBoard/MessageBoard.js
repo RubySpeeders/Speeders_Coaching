@@ -47,9 +47,13 @@ class MessageBoard extends Component {
   render() {
     return (
       <Container>
-        <Typography gutterBottom variant="h4" component="h3">
-          Message Board
-        </Typography>
+        <Grid container justify="flex-start">
+          <Grid item>
+            <Typography gutterBottom variant="h4" component="h3">
+              Message Board
+            </Typography>
+          </Grid>
+        </Grid>
         <Grid container justify="space-evenly">
           <Grid item xs={2}>
             <Sidebar />

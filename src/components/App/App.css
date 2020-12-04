@@ -13,7 +13,7 @@ body {
   background: transparent url('run_background.jpg');
   background-size: cover;
   background-repeat: no-repeat;
-  background-size: relative;
+  background-attachment: fixed;
 }
 
 img {

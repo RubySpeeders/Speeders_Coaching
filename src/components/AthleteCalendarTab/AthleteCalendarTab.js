@@ -23,7 +23,7 @@ import EditIcon from '@material-ui/icons/Edit';
 import DeleteIcon from '@material-ui/icons/Delete';
 
 //import for date/time config
-const { DateTime } = require('luxon');
+import { DateTime } from 'luxon';
 
 class AthleteCalendarTab extends Component {
   componentDidMount() {
@@ -46,6 +46,14 @@ class AthleteCalendarTab extends Component {
           </TableCell>
           <TableCell>
             <Typography>{item.description}</Typography>
+          </TableCell>
+          <TableCell>
+            {item.complete_status ? (
+              <Typography>Done!</Typography>
+            ) : (
+              <Typography>Not yet</Typography>
+            )}
+            <Typography>{item.complete_status}</Typography>
           </TableCell>
           <TableCell>
             <Button variant="outlined" color="primary">
@@ -75,6 +83,9 @@ class AthleteCalendarTab extends Component {
                     </TableCell>
                     <TableCell>
                       <Typography>Title</Typography>
+                    </TableCell>
+                    <TableCell>
+                      <Typography>Completed?</Typography>
                     </TableCell>
                     <TableCell>
                       <Typography>Actions</Typography>

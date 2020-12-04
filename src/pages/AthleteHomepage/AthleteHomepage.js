@@ -25,7 +25,7 @@ import {
 import Sidebar from '../../components/Sidebar/Sidebar';
 
 //import for date/time config
-const { DateTime } = require('luxon');
+import { DateTime } from 'luxon';
 
 class AthleteHomepage extends Component {
   //get all workouts for athlete(user)

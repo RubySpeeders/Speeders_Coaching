@@ -8,8 +8,9 @@
 
 .nav {
   margin: 0 0 30px;
-  background-color: #f2f2f2;
   overflow: hidden;
+  background-color: rgb(0, 0, 0, 0.7);
+  border-radius: 0 0 0 100px;
 }
 
 .nav-link {
