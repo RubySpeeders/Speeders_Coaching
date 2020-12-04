@@ -20,6 +20,9 @@ import {
   TableCell,
 } from '@material-ui/core';
 
+//import for date/time config
+const { DateTime } = require('luxon');
+
 class AthleteCalendarTab extends Component {
   componentDidMount() {
     this.props.dispatch({
@@ -27,7 +30,29 @@ class AthleteCalendarTab extends Component {
       payload: this.props.store.athletes.athleteDetails.id,
     });
   }
+  handleDetails = (e) => {
+    console.log('details clicked');
+  };
   render() {
+    const workouts = this.props.store.workouts.map((item, index) => {
+      const date = DateTime.fromISO(item.date);
+      const humanDate = date.toLocaleString(DateTime.DATE_SHORT);
+      return (
+        <TableRow key={index} onClick={this.handleDetails}>
+          <TableCell>
+            <Typography>{humanDate}</Typography>
+          </TableCell>
+          <TableCell>
+            <Typography>{item.description}</Typography>
+          </TableCell>
+          <TableCell>
+            <Button variant="outlined" color="primary">
+              Delete
+            </Button>
+          </TableCell>
+        </TableRow>
+      );
+    });
     return (
       <div>
         <Typography variant="h5">
@@ -48,16 +73,7 @@ class AthleteCalendarTab extends Component {
                 </TableCell>
               </TableRow>
             </TableHead>
-            <TableBody>
-              <TableRow onClick={this.handleDetails}>
-                <TableCell>
-                  <Typography>12/20/2020</Typography>
-                </TableCell>
-                <TableCell>
-                  <Typography>workout hardcode #2</Typography>
-                </TableCell>
-              </TableRow>
-            </TableBody>
+            <TableBody>{workouts}</TableBody>
           </Table>
         </TableContainer>
       </div>

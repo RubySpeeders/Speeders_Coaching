@@ -22,7 +22,18 @@ import {
 //custom file import
 import Sidebar from '../../components/Sidebar/Sidebar';
 
+//import for date/time config
+const { DateTime } = require('luxon');
+
 class AthleteHomepage extends Component {
+  //get all workouts for athlete(user)
+  componentDidMount() {
+    this.props.dispatch({
+      type: 'GET_WORKOUTS',
+      payload: this.props.store.user.id,
+    });
+  }
+
   //sends user to the message board
   messageBoard = (e) => {
     this.props.history.push('/message');
@@ -36,7 +47,23 @@ class AthleteHomepage extends Component {
   handleDetails = (e) => {
     this.props.history.push('/athlete/workout/details');
   };
+
   render() {
+    const workouts = this.props.store.workouts.map((item, index) => {
+      const date = DateTime.fromISO(item.date);
+      const humanDate = date.toLocaleString(DateTime.DATE_SHORT);
+      return (
+        <TableRow key={index} onClick={this.handleDetails}>
+          <TableCell>
+            <Typography>{humanDate}</Typography>
+          </TableCell>
+          <TableCell>
+            <Typography>{item.description}</Typography>
+          </TableCell>
+        </TableRow>
+      );
+    });
+
     return (
       <Container>
         <Grid container spacing={4}>
@@ -57,16 +84,7 @@ class AthleteHomepage extends Component {
                     </TableCell>
                   </TableRow>
                 </TableHead>
-                <TableBody>
-                  <TableRow onClick={this.handleDetails}>
-                    <TableCell>
-                      <Typography>workout hardcode #1</Typography>
-                    </TableCell>
-                    <TableCell>
-                      <Typography>workout hardcode #2</Typography>
-                    </TableCell>
-                  </TableRow>
-                </TableBody>
+                <TableBody>{workouts}</TableBody>
               </Table>
             </TableContainer>
           </Grid>

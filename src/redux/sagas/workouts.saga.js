@@ -18,9 +18,7 @@ function* getWorkoutSteps(action) {
 function* getWorkouts(action) {
   try {
     //axios call to get all workouts for that specific athlete
-    console.log(action.payload);
     const response = yield axios.get(`/api/workout/athlete/${action.payload}`);
-    console.log(response.data);
     yield put({
       type: 'SET_WORKOUTS',
       payload: response.data,

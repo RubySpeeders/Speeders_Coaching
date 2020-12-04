@@ -1,10 +1,10 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import mapStoreToProps from '../../redux/mapStoreToProps';
 
 //Material-UI imports
-import { Grid, Typography, Button, Menu, MenuItem } from '@material-ui/core';
+import { Grid, Button, Menu, MenuItem } from '@material-ui/core';
 
 function Sidebar(props) {
   //sends coach to the main all athletes page

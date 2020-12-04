@@ -24,9 +24,12 @@ class AthleteDetailsTab extends Component {
             Name: {this.props.store.athletes.athleteDetails.first_name}{' '}
             {this.props.store.athletes.athleteDetails.last_name}
           </Typography>
-          <Typography>
-            Gender: {this.props.store.athletes.athleteDetails.gender}
-          </Typography>
+
+          {this.props.store.athletes.athleteDetails.gender && (
+            <Typography>
+              Gender: {this.props.store.athletes.athleteDetails.gender}
+            </Typography>
+          )}
 
           {this.props.store.athletes.athleteDetails.health_risk_comments && (
             <Typography>

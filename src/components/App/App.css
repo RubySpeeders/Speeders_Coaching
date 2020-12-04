@@ -9,6 +9,13 @@ body {
   margin: 0px;
 }
 
+body {
+  background: transparent url('run_background.jpg');
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-size: relative;
+}
+
 img {
   display: inline-block;
   max-width: 100%;

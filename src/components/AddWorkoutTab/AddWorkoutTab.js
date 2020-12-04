@@ -33,19 +33,14 @@ class AddWorkout extends Component {
   };
 
   handleInputChangeForWorkout = (propertyName, stepId) => (event) => {
-    this.setState(
-      {
-        workout: this.state.workout.map((item) => {
-          if (item.step === stepId) {
-            return { ...item, [propertyName]: event.target.value };
-          }
-          return item;
-        }),
-      },
-      () => {
-        console.log(this.state.workout);
-      }
-    );
+    this.setState({
+      workout: this.state.workout.map((item) => {
+        if (item.step === stepId) {
+          return { ...item, [propertyName]: event.target.value };
+        }
+        return item;
+      }),
+    });
   };
 
   handleInputChangeFor = (propertyName) => (event) => {

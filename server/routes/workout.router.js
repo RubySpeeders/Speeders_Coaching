@@ -21,9 +21,9 @@ router.get('/steps', (req, res) => {
 
 //gets all workouts for specific athlete
 router.get('/athlete/:id', (req, res) => {
+  // JOIN "workout_details" ON "workouts".id = "workout_details".workout_id
   const athlete_id = req.params.id;
   let queryText = `SELECT * FROM "workouts"
-  JOIN "workout_details" ON "workouts".id = "workout_details".workout_id
   WHERE athlete_id = $1;`;
   let queryArray = [athlete_id];
   pool

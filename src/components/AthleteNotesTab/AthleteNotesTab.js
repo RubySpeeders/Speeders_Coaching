@@ -15,6 +15,7 @@ import {
 } from '@material-ui/core';
 import CakeIcon from '@material-ui/icons/Cake';
 
+//import for date/time config
 const { DateTime } = require('luxon');
 
 class AthleteNotesTab extends Component {
@@ -22,7 +23,6 @@ class AthleteNotesTab extends Component {
     const birthday = DateTime.fromISO(
       this.props.store.athletes.athleteDetails.dob
     );
-    console.log(birthday);
     const humanBirthday = birthday.toLocaleString(DateTime.DATE_SHORT);
     return (
       <div>

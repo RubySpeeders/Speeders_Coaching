@@ -35,9 +35,11 @@ class AthleteContactTab extends Component {
               <AlternateEmailIcon />{' '}
               {this.props.store.athletes.athleteDetails.email}
             </Typography>
-            <Typography>
-              Strava id: {this.props.store.athletes.athleteDetails.strava_id}
-            </Typography>
+            {this.props.store.athletes.athleteDetails.strava_id && (
+              <Typography>
+                Strava id: {this.props.store.athletes.athleteDetails.strava_id}
+              </Typography>
+            )}
           </CardContent>
           <CardActions>
             <Button>Edit</Button>
