@@ -7,7 +7,7 @@ import mapStoreToProps from '../../redux/mapStoreToProps';
 
 //material-ui imports
 import { Typography, Box, Container } from '@material-ui/core';
-import { makeStyles, withStyles } from '@material-ui/core/styles';
+import { withStyles } from '@material-ui/core/styles';
 
 const StyledTypography = withStyles((theme) => ({
   root: {

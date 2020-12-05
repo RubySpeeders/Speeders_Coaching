@@ -82,6 +82,7 @@ class AthleteRegistrationFive extends Component {
           key={index}
           control={
             <Checkbox
+              color="primary"
               value={item.id}
               onChange={this.handleChangeForChecks(item.id)}
               name={item.description}
