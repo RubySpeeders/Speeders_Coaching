@@ -7,10 +7,14 @@ const {
 
 // get all athletes
 router.get('/', rejectUnauthenticated, (req, res) => {
-  let queryText = `SELECT id, first_name, last_name, strava_id, city, dob, gender, email FROM "user" WHERE "role_id" = 2 ORDER BY "last_name";`;
+  const coach_id = req.user.id;
+  let queryText = `SELECT * FROM "user"
+  JOIN "athlete_info" ON "user".id="athlete_info".coach_id
+  WHERE "user".id=$1; ORDER BY "last_name";`;
+  let queryArray = [coach_id];
 
   pool
-    .query(queryText)
+    .query(queryText, queryArray)
     .then((dbResponse) => {
       res.send(dbResponse.rows);
     })

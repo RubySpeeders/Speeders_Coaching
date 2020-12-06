@@ -40,6 +40,34 @@ CREATE TABLE "status" (
 
 INSERT INTO "status" (status) VALUES ('PENDING'), ('COMPLETED'), ('CANCELLED');
 
+CREATE TABLE "other_exercise" (
+	"id" SERIAL PRIMARY KEY,
+	"description" VARCHAR (80)
+	);
+
+INSERT INTO "other_exercise" (description) VALUES ('Yoga'), ('Barre'), ('Cycling'), ('Crossfit'), ('Weight Lifting'), ('Dance'), ('HIIT'), ('Pilates');
+
+CREATE TABLE "race_types" (
+	"id" SERIAL PRIMARY KEY,
+	"description" VARCHAR (80)
+	);
+
+INSERT INTO "race_types" (description) VALUES ('5K'), ('10K'),  ('half marathon'),  ('marathon'),  ('50K'),  ('100K'), ('100 mile');
+
+CREATE TABLE "tips_type" (
+	"id" SERIAL PRIMARY KEY,
+	"type" varchar
+	);
+	
+INSERT INTO "tips_type" (type) VALUES ('pre-run'), ('post-run'), ('strides'), ('stretching'), ('fueling');
+
+CREATE TABLE "workout_steps" (
+	"id" SERIAL PRIMARY KEY,
+	"step" VARCHAR NOT NULL
+);
+
+INSERT INTO "workout_steps" (step) VALUES ('Warm up'), ('Interval'), ('Recovery'), ('Cool down');
+
 CREATE TABLE "athlete_info" (
     "id" SERIAL PRIMARY KEY,
     "athlete_id" INT REFERENCES "user",
@@ -63,22 +91,22 @@ CREATE TABLE "invite" (
 	"coach_id" INT REFERENCES "user",
 	"athlete_id" INT REFERENCES "user",
 	"status" INT REFERENCES "status",
-	"temporary_key" UUID
+	"temporary_key" VARCHAR
 	);
 
-CREATE TABLE "other_exercise" (
+CREATE TABLE "athlete_race" (
 	"id" SERIAL PRIMARY KEY,
-	"description" VARCHAR (80)
+	"athlete_id" INT REFERENCES "athlete_info",
+	"race_id" iNT REFERENCES "race_types"
 	);
 
-INSERT INTO "other_exercise" (description) VALUES ('Yoga'), ('Barre'), ('Cycling'), ('Crossfit'), ('Weight Lifting'), ('Dance'), ('HIIT'), ('Pilates');
-
-CREATE TABLE "race_types" (
+CREATE TABLE "athlete_other_excercise" (
 	"id" SERIAL PRIMARY KEY,
-	"description" VARCHAR (80)
-	);
+	"athlete_info_id" INT REFERENCES "athlete_info",
+	"other_exercise_id" INT REFERENCES "other_exercise"
+);
 
-INSERT INTO "race_types" (description) VALUES ('5K'), ('10K'),  ('half marathon'),  ('marathon'),  ('50K'),  ('100K'), ('100 mile');
+SET timezone = 'America/Chicago';
 
 CREATE TABLE "messages" (
 	"id" SERIAL PRIMARY KEY,
@@ -87,14 +115,30 @@ CREATE TABLE "messages" (
 	"time_posted" TIMESTAMP
 	);
 
-SET timezone = 'America/Chicago';
-
 CREATE TABLE "tips_and_tricks" (
 	"id" SERIAL PRIMARY KEY,
 	"user_id" INT REFERENCES "user",
 	"title" VARCHAR (1000),
 	"article_link" VARCHAR (1000),
-	"video_link" VARCHAR (1000),
 	"comments" VARCHAR,
-	"time_posted" TIMESTAMP
+	"time_posted" TIMESTAMP,
+	"type" INT REFERENCES "tips_type"
+	);
+
+CREATE TABLE "workouts" (
+	"id" SERIAL PRIMARY KEY,
+	"date" DATE NOT NULL,
+	"athlete_id" INT REFERENCES "user",
+	"coach_id" INT REFERENCES "user",
+	"description" VARCHAR, 
+	"complete_status" BOOLEAN
+	);
+
+CREATE TABLE "workout_details" (
+	"id" SERIAL PRIMARY KEY,
+	"workout_id" INT REFERENCES "workouts",
+	"repetitions" INT,
+	"distance" VARCHAR,
+	"pace" VARCHAR,
+	"step" INT REFERENCES "workout_steps"
 	);
