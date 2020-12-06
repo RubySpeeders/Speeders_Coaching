@@ -33,7 +33,7 @@ const Nav = (props) => {
 
   const goHome = (e) => {
     console.log(props.dispatch);
-    // props.history.push('/home');
+    props.history.push('/home');
   };
 
   return (
