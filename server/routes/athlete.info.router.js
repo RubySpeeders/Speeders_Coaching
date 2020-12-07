@@ -5,7 +5,7 @@ const {
   rejectUnauthenticated,
 } = require('../modules/authentication-middleware');
 
-// get all athletes
+// get all athletes for coach signed in
 router.get('/', rejectUnauthenticated, (req, res) => {
   const coach_id = req.user.id;
   let queryText = `SELECT * FROM "user"
