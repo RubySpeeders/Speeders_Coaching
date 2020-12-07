@@ -31,6 +31,18 @@ class AthleteDetailsTab extends Component {
               Gender: {this.props.store.athletes.athleteDetails.gender}
             </Typography>
           )}
+          {this.props.store.athletes.athleteDetails.run_history && (
+            <Typography>
+              Running experience:{' '}
+              {this.props.store.athletes.athleteDetails.run_history}
+            </Typography>
+          )}
+          {this.props.store.athletes.athleteDetails.speed_work && (
+            <Typography>
+              Speed work experience:{' '}
+              {this.props.store.athletes.athleteDetails.speed_work}
+            </Typography>
+          )}
 
           {this.props.store.athletes.athleteDetails.health_risk_comments && (
             <Typography>

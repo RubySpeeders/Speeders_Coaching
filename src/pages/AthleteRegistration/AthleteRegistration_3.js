@@ -30,9 +30,10 @@ class AthleteRegistrationThree extends Component {
   state = {
     run_history: '',
     avg_weekly_mileage: '',
-    personal_record: {
-      distance: '',
-    },
+    // personal_record: {
+    //   distance: '',
+    // },
+    strava_id: '',
     agree: false,
     race_type: {},
   };
@@ -232,6 +233,7 @@ class AthleteRegistrationThree extends Component {
                       <TextField
                         variant="outlined"
                         placeholder="Enter your strava id"
+                        onChange={this.handleInputChangeFor('strava_id')}
                       />
                     </Grid>
                   </Box>

@@ -38,8 +38,8 @@ function Sidebar(props) {
 
   return (
     <Grid item>
-      <Button onClick={handleClick}>
-        <img src="./running-stick-figure.png" alt="running stick figure" />
+      <Button onClick={handleClick} color="secondary">
+        Start Running
       </Button>
       <Menu
         id="simple-menu"

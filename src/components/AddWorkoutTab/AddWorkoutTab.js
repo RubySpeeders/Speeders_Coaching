@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { withRouter } from 'react-router-dom';
 import mapStoreToProps from '../../redux/mapStoreToProps';
 
 //MATERIAL-UI imports
@@ -60,6 +61,7 @@ class AddWorkout extends Component {
         athlete_id: this.props.store.athletes.athleteDetails.id,
       },
     });
+    this.props.history.push('/home');
   };
 
   render() {
@@ -74,7 +76,6 @@ class AddWorkout extends Component {
                 labelId="repetitions"
                 value={this.state.workout.rep}
                 onChange={this.handleInputChangeForWorkout('rep', item.id)}
-                // label="repetitions"
               >
                 <MenuItem value="">
                   <em>Select repetitions</em>
@@ -99,7 +100,6 @@ class AddWorkout extends Component {
               type="text"
               name="distance"
               value={this.state.workout.distance}
-              required
               variant="outlined"
               onChange={this.handleInputChangeForWorkout('distance', item.id)}
             />
@@ -110,7 +110,6 @@ class AddWorkout extends Component {
               type="text"
               name="pace"
               value={this.state.workout.pace}
-              required
               variant="outlined"
               onChange={this.handleInputChangeForWorkout('pace', item.id)}
             />
@@ -146,7 +145,7 @@ class AddWorkout extends Component {
                 />
               </Box>
               <Box m={2}>{steps}</Box>
-              <Button type="submit" color="primary">
+              <Button variant="outlined" type="submit" color="primary">
                 Assign
               </Button>
             </form>
@@ -157,4 +156,4 @@ class AddWorkout extends Component {
   }
 }
 
-export default connect(mapStoreToProps)(AddWorkout);
+export default withRouter(connect(mapStoreToProps)(AddWorkout));

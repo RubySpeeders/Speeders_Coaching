@@ -24,7 +24,8 @@ router.get('/athlete/:id', (req, res) => {
   // JOIN "workout_details" ON "workouts".id = "workout_details".workout_id
   const athlete_id = req.params.id;
   let queryText = `SELECT * FROM "workouts"
-  WHERE athlete_id = $1;`;
+  WHERE athlete_id = $1
+  ORDER BY date;`;
   let queryArray = [athlete_id];
   pool
     .query(queryText, queryArray)
@@ -40,10 +41,12 @@ router.get('/athlete/:id', (req, res) => {
 //gets specific workout
 router.get('/specific/:id', (req, res) => {
   const workout_id = req.params.id;
-  let queryText = `SELECT * FROM "workouts"
-  JOIN "workout_details" ON "workouts".id = "workout_details".workout_id
-  WHERE workout_id = $1;`;
-  let queryArray = [athlete_id];
+  const athlete_id = req.user.id;
+  let queryText = `  SELECT * FROM "workout_details"
+  JOIN "workouts" ON "workout_details".workout_id = "workouts".id
+  JOIN "workout_steps" ON "workout_details".step="workout_steps".id
+  WHERE athlete_id=$1 AND "workouts".id=$2`;
+  let queryArray = [athlete_id, workout_id];
   pool
     .query(queryText, queryArray)
     .then((dbResponse) => {
@@ -91,6 +94,21 @@ router.post('/add/:id', rejectUnauthenticated, (req, res) => {
     console.log('error posting workout', error);
     res.sendStatus(500);
   }
+});
+
+//mark a workout complete
+router.put('/complete/:id', (req, res) => {
+  const queryText = `UPDATE "workouts" SET complete_status=true WHERE id=$1;`;
+  const queryArray = [req.params.id];
+  pool
+    .query(queryText, queryArray)
+    .then((dbResponse) => {
+      res.sendStatus(200);
+    })
+    .catch((err) => {
+      console.log(err);
+      res.sendStatus(500);
+    });
 });
 
 // //delete a workout
