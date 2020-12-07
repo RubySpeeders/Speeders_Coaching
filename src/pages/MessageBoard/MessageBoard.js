@@ -79,7 +79,7 @@ class MessageBoard extends Component {
                           <Button
                             color="primary"
                             type="submit"
-                            variant="contained"
+                            variant="outlined"
                           >
                             Post
                           </Button>

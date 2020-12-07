@@ -38,7 +38,9 @@ function Sidebar(props) {
 
   return (
     <Grid item>
-      <Button onClick={handleClick}>Open Menu</Button>
+      <Button onClick={handleClick} color="secondary">
+        Start Running
+      </Button>
       <Menu
         id="simple-menu"
         anchorEl={anchorEl}

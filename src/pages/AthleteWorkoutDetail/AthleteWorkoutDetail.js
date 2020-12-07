@@ -10,21 +10,35 @@ import {
   Card,
   CardContent,
   Typography,
+  CircularProgress,
 } from '@material-ui/core';
 import Sidebar from '../../components/Sidebar/Sidebar';
 
+//import for date/time config
+import { DateTime } from 'luxon';
+
+import AthleteWorkoutDetailItem from '../../components/AthleteWorkoutDetailItem/AthleteWorkoutDetailItem';
+
 class AthleteWorkoutDetail extends Component {
   componentDidMount() {
-    console.log(this.props.match);
     this.props.dispatch({
       type: 'GET_WORKOUT_DETAIL',
-      payload: '',
+      payload: this.props.match.params.id,
     });
+    console.log(this.props.store);
   }
 
   handleBack = (e) => {
     this.props.history.push('/home');
   };
+
+  handleComplete = (e) => {
+    this.props.dispatch({
+      type: 'MARK_WORKOUT_COMPLETE',
+      payload: this.props.match.params.id,
+    });
+  };
+
   render() {
     return (
       <Container>
@@ -39,13 +53,44 @@ class AthleteWorkoutDetail extends Component {
             <div className="opacity">
               <Card>
                 <CardContent>
-                  <Typography variant="h4">Workout Details</Typography>
+                  <Typography variant="h4" gutterBottom>
+                    Workout Details
+                  </Typography>
+                  {this.props.store.workouts[0] != null ? (
+                    <div>
+                      <Typography variant="h6" gutterBottom>
+                        {this.props.store.workouts[0].description}
+                      </Typography>
+                      {/* <Typography>{humanDate}</Typography> */}
+                    </div>
+                  ) : (
+                    <CircularProgress color="secondary" />
+                  )}
+                  {this.props.store.workouts.map((item, index) => {
+                    return (
+                      <Grid container spacing={2} key={index}>
+                        <AthleteWorkoutDetailItem workouts={item} />
+                      </Grid>
+                    );
+                  })}
+                  <Button
+                    color="primary"
+                    variant="outlined"
+                    onClick={this.handleComplete}
+                  >
+                    Mark Complete
+                  </Button>
+                  &nbsp;
+                  <Button
+                    color="primary"
+                    variant="outlined"
+                    onClick={this.handleBack}
+                  >
+                    Back to Calendar
+                  </Button>
                 </CardContent>
               </Card>
             </div>
-            {/* <Button color="primary" onClick={this.handleBack}>
-            Back to Calendar
-          </Button> */}
           </Grid>
         </Grid>
       </Container>

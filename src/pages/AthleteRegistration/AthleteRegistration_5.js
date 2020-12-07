@@ -61,13 +61,18 @@ class AthleteRegistrationFive extends Component {
   };
 
   handleChangeForChecks = (propertyName) => (event) => {
-    this.setState({
-      ...this.state,
-      other_exercise: {
-        ...this.state.other_exercise,
-        [propertyName]: event.target.checked,
+    this.setState(
+      {
+        ...this.state,
+        other_exercise: {
+          ...this.state.other_exercise,
+          [propertyName]: event.target.checked,
+        },
       },
-    });
+      () => {
+        console.log(this.state);
+      }
+    );
   };
 
   //goes back a page
@@ -82,6 +87,7 @@ class AthleteRegistrationFive extends Component {
           key={index}
           control={
             <Checkbox
+              color="primary"
               value={item.id}
               onChange={this.handleChangeForChecks(item.id)}
               name={item.description}
@@ -94,11 +100,11 @@ class AthleteRegistrationFive extends Component {
     return (
       <Container>
         <div className="opacity">
-          <Typography variant="h4" gutterBottom>
-            More fun stuff!
-          </Typography>
           <Grid container justify="space-evenly">
             <Grid item>
+              <Typography variant="h4" gutterBottom>
+                More fun stuff!
+              </Typography>
               <form onSubmit={this.handleSubmit}>
                 <FormControl>
                   <FormLabel>
@@ -108,7 +114,7 @@ class AthleteRegistrationFive extends Component {
                 </FormControl>
                 <Grid container>
                   <Grid item xs={12}>
-                    <Box m={2}>
+                    <Box mb={2}>
                       <TextField
                         fullWidth
                         placeholder="Describe your life outside of running"
@@ -127,7 +133,7 @@ class AthleteRegistrationFive extends Component {
                 </Grid>
                 <Grid container spacing={2}>
                   <Grid item xs={12}>
-                    <Box m={2}>
+                    <Box mb={2}>
                       <TextField
                         fullWidth
                         placeholder="Any other comments or details you want to share"
@@ -144,16 +150,26 @@ class AthleteRegistrationFive extends Component {
                 </Grid>
 
                 <Box m={2}>
-                  <Button
-                    color="secondary"
-                    variant="outlined"
-                    onClick={this.onBackClick}
-                  >
-                    Back
-                  </Button>
-                  <Button color="secondary" type="submit" variant="outlined">
-                    Submit
-                  </Button>
+                  <Grid container justify="space-evenly">
+                    <Grid item>
+                      <Button
+                        color="secondary"
+                        variant="outlined"
+                        onClick={this.onBackClick}
+                      >
+                        Back
+                      </Button>
+                    </Grid>
+                    <Grid item>
+                      <Button
+                        color="secondary"
+                        type="submit"
+                        variant="outlined"
+                      >
+                        Submit
+                      </Button>
+                    </Grid>
+                  </Grid>
                 </Box>
               </form>
             </Grid>

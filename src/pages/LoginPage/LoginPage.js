@@ -10,7 +10,7 @@ class LoginPage extends Component {
         <LoginForm />
 
         <center>
-          <button
+          {/* <button
             type="button"
             className="btn btn_asLink"
             onClick={() => {
@@ -18,7 +18,7 @@ class LoginPage extends Component {
             }}
           >
             Register
-          </button>
+          </button> */}
         </center>
       </div>
     );

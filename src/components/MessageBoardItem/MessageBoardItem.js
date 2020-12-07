@@ -8,6 +8,9 @@ import { Button, Card, CardContent, Typography, Grid } from '@material-ui/core';
 import FavoriteIcon from '@material-ui/icons/Favorite';
 import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder';
 
+//import for date/time config
+import { DateTime } from 'luxon';
+
 class MessageBoardItem extends Component {
   handleLikes = (e) => {
     console.log('like button clicked!');
@@ -21,11 +24,19 @@ class MessageBoardItem extends Component {
   };
 
   render() {
+    const message_time_posted = DateTime.fromISO(
+      this.props.messages.time_posted
+    );
+    const human_time_posted = message_time_posted.toLocaleString(
+      DateTime.DATETIME_FULL
+    );
     return (
       <Card>
         <CardContent>
           <Typography>{this.props.messages.message}</Typography>
-          <Typography>Posted by: {this.props.messages.first_name}</Typography>
+          <Typography>
+            Posted by: {this.props.messages.first_name} at {human_time_posted}
+          </Typography>
           <Grid container spacing={2}>
             <Grid item>
               <FavoriteBorderIcon

@@ -1,13 +1,14 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
+import { withRouter } from 'react-router-dom';
 import LogOutButton from '../LogOutButton/LogOutButton';
 import './Nav.css';
 import mapStoreToProps from '../../redux/mapStoreToProps';
 
 //material-ui imports
 import { Typography, Box, Container } from '@material-ui/core';
-import { makeStyles, withStyles } from '@material-ui/core/styles';
+import { withStyles } from '@material-ui/core/styles';
 
 const StyledTypography = withStyles((theme) => ({
   root: {
@@ -33,7 +34,7 @@ const Nav = (props) => {
 
   const goHome = (e) => {
     console.log(props.dispatch);
-    // props.history.push('/home');
+    props.history.push('/home');
   };
 
   return (
@@ -77,4 +78,4 @@ const Nav = (props) => {
   );
 };
 
-export default connect(mapStoreToProps)(Nav);
+export default withRouter(connect(mapStoreToProps)(Nav));

@@ -35,10 +35,9 @@ function* postWorkout(action) {
       `/api/workout/add/${action.payload.athlete_id}`,
       action.payload.entire_workout
     );
-    // yield put({
-    //   type: 'GET_WORKOUTS',
-
-    // });
+    yield put({
+      type: 'GET_WORKOUTS',
+    });
   } catch (err) {
     console.log(err);
   }
@@ -57,11 +56,24 @@ function* getWorkoutDetail(action) {
   }
 }
 
+function* completeWorkout(action) {
+  try {
+    //axios call to get all workouts for that specific athlete
+    yield axios.put(`/api/workout/complete/${action.payload}`);
+    yield put({
+      type: 'GET_WORKOUTS',
+    });
+  } catch (err) {
+    console.log(err);
+  }
+}
+
 function* workoutSaga() {
   yield takeLatest('GET_STEPS', getWorkoutSteps);
   yield takeLatest('GET_WORKOUTS', getWorkouts);
   yield takeLatest('POST_WORKOUT', postWorkout);
   yield takeLatest('GET_WORKOUT_DETAIL', getWorkoutDetail);
+  yield takeLatest('MARK_WORKOUT_COMPLETE', completeWorkout);
 }
 
 export default workoutSaga;

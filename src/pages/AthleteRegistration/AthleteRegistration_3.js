@@ -30,9 +30,10 @@ class AthleteRegistrationThree extends Component {
   state = {
     run_history: '',
     avg_weekly_mileage: '',
-    personal_record: {
-      distance: '',
-    },
+    // personal_record: {
+    //   distance: '',
+    // },
+    strava_id: '',
     agree: false,
     race_type: {},
   };
@@ -51,14 +52,33 @@ class AthleteRegistrationThree extends Component {
     });
   };
 
+  handleChangeForAgree = (event) => {
+    if (this.state.agree) {
+      this.setState({
+        ...this.state,
+        agree: false,
+      });
+    } else {
+      this.setState({
+        ...this.state,
+        agree: true,
+      });
+    }
+  };
+
   handleChangeForChecks = (propertyName) => (event) => {
-    this.setState({
-      ...this.state,
-      race_type: {
-        ...this.state.race_type,
-        [propertyName]: event.target.checked,
+    this.setState(
+      {
+        ...this.state,
+        race_type: {
+          ...this.state.race_type,
+          [propertyName]: event.target.checked,
+        },
       },
-    });
+      () => {
+        console.log(this.state);
+      }
+    );
   };
 
   //goes back a page
@@ -103,66 +123,69 @@ class AthleteRegistrationThree extends Component {
                     {this.props.store.errors.registrationMessage}
                   </h3>
                 )}
-
-                <FormControl variant="outlined" fullWidth>
-                  <InputLabel id="rest-day">
-                    How long have you been running?
-                  </InputLabel>
-                  <Select
-                    fullWidth
-                    labelId="run-history"
-                    value={this.state.run_history}
-                    onChange={this.handleInputChangeFor('run_history')}
-                    label="run_history"
-                  >
-                    <MenuItem value="">
-                      <em>None</em>
-                    </MenuItem>
-                    <MenuItem value="no experience">
-                      <em>No experience</em>
-                    </MenuItem>
-                    <MenuItem value="1-2 years">
-                      <em>1-2 years</em>
-                    </MenuItem>
-                    <MenuItem value="2-4 years">
-                      <em>2-4 years</em>
-                    </MenuItem>
-                    <MenuItem value="5+ years">
-                      <em>5+ years</em>
-                    </MenuItem>
-                  </Select>
-                </FormControl>
-                <FormControl variant="outlined" fullWidth>
-                  <InputLabel id="avg-weekly-miles">
-                    How much do you run every week?
-                  </InputLabel>
-                  <Select
-                    fullWidth
-                    labelId="avg-weekly-miles"
-                    value={this.state.avg_weekly_mileage}
-                    onChange={this.handleInputChangeFor('avg_weekly_mileage')}
-                    label="avg_weekly_mileage"
-                  >
-                    <MenuItem value="">
-                      <em>None</em>
-                    </MenuItem>
-                    <MenuItem value="0-5 miles">
-                      <em>0-5 miles</em>
-                    </MenuItem>
-                    <MenuItem value="5-10 miles">
-                      <em>5-10 miles</em>
-                    </MenuItem>
-                    <MenuItem value="10-15 miles">
-                      <em>10-15 miles</em>
-                    </MenuItem>
-                    <MenuItem value="15-20 miles">
-                      <em>15-20 miles</em>
-                    </MenuItem>
-                    <MenuItem value="20+ miles">
-                      <em>20+ miles</em>
-                    </MenuItem>
-                  </Select>
-                </FormControl>
+                <Box mb={2}>
+                  <FormControl variant="outlined" fullWidth>
+                    <InputLabel id="rest-day">
+                      How long have you been running?
+                    </InputLabel>
+                    <Select
+                      fullWidth
+                      labelId="run-history"
+                      value={this.state.run_history}
+                      onChange={this.handleInputChangeFor('run_history')}
+                      label="run_history"
+                    >
+                      <MenuItem value="">
+                        <em>None</em>
+                      </MenuItem>
+                      <MenuItem value="no experience">
+                        <em>No experience</em>
+                      </MenuItem>
+                      <MenuItem value="1-2 years">
+                        <em>1-2 years</em>
+                      </MenuItem>
+                      <MenuItem value="2-4 years">
+                        <em>2-4 years</em>
+                      </MenuItem>
+                      <MenuItem value="5+ years">
+                        <em>5+ years</em>
+                      </MenuItem>
+                    </Select>
+                  </FormControl>
+                </Box>
+                <Box mb={2}>
+                  <FormControl variant="outlined" fullWidth>
+                    <InputLabel id="avg-weekly-miles">
+                      How much do you run every week?
+                    </InputLabel>
+                    <Select
+                      fullWidth
+                      labelId="avg-weekly-miles"
+                      value={this.state.avg_weekly_mileage}
+                      onChange={this.handleInputChangeFor('avg_weekly_mileage')}
+                      label="avg_weekly_mileage"
+                    >
+                      <MenuItem value="">
+                        <em>None</em>
+                      </MenuItem>
+                      <MenuItem value="0-5 miles">
+                        <em>0-5 miles</em>
+                      </MenuItem>
+                      <MenuItem value="5-10 miles">
+                        <em>5-10 miles</em>
+                      </MenuItem>
+                      <MenuItem value="10-15 miles">
+                        <em>10-15 miles</em>
+                      </MenuItem>
+                      <MenuItem value="15-20 miles">
+                        <em>15-20 miles</em>
+                      </MenuItem>
+                      <MenuItem value="20+ miles">
+                        <em>20+ miles</em>
+                      </MenuItem>
+                    </Select>
+                  </FormControl>
+                </Box>
                 <FormControl>
                   <FormLabel>Check all races you have run:</FormLabel>
                   <FormGroup row>{race_experience}</FormGroup>
@@ -184,31 +207,36 @@ class AthleteRegistrationThree extends Component {
             </Select>
           </FormControl> */}
                 <Grid container spacing={2} justify="space-evenly">
-                  <Grid item>
-                    <Typography>
-                      I agree to make my strava account public for my coach to
-                      access data:
-                    </Typography>
-                    <FormGroup>
-                      <FormControlLabel
-                        control={
-                          <Checkbox
-                            checked={this.state.agree === true}
-                            //onChange={this.handleChangeForChecks}
-                            name="agree"
-                            color="primary"
-                          />
-                        }
-                        label="I agree"
+                  <Box m={2}>
+                    <Grid item xs={12}>
+                      <Typography>
+                        I agree to make my strava account public for my coach to
+                        access data:
+                      </Typography>
+                      <FormGroup>
+                        <FormControlLabel
+                          control={
+                            <Checkbox
+                              value={this.state.agree}
+                              onChange={this.handleChangeForAgree}
+                              name="agree"
+                              color="primary"
+                            />
+                          }
+                          label="I agree"
+                        />
+                      </FormGroup>
+                    </Grid>
+                  </Box>
+                  <Box m={2}>
+                    <Grid item xs={12}>
+                      <TextField
+                        variant="outlined"
+                        placeholder="Enter your strava id"
+                        onChange={this.handleInputChangeFor('strava_id')}
                       />
-                    </FormGroup>
-                  </Grid>
-                  <Grid item>
-                    <TextField
-                      variant="outlined"
-                      placeholder="Enter your strava id"
-                    />
-                  </Grid>
+                    </Grid>
+                  </Box>
                 </Grid>
 
                 <Box m={2}>

@@ -31,16 +31,20 @@ class AthleteCalendarTab extends Component {
       type: 'GET_WORKOUTS',
       payload: this.props.store.athletes.athleteDetails.id,
     });
+    // this.props.dispatch({
+    //   type: 'GET_WORKOUT_DETAILS',
+    //   payload: this.props.xxxxx,
+    // })
   }
   handleDetails = (e) => {
-    console.log('details clicked');
+    console.log(this.props.store.workouts.id);
   };
   render() {
     const workouts = this.props.store.workouts.map((item, index) => {
       const date = DateTime.fromISO(item.date);
       const humanDate = date.toLocaleString(DateTime.DATE_SHORT);
       return (
-        <TableRow key={index} onClick={this.handleDetails}>
+        <TableRow key={index}>
           <TableCell>
             <Typography>{humanDate}</Typography>
           </TableCell>
@@ -56,6 +60,9 @@ class AthleteCalendarTab extends Component {
             <Typography>{item.complete_status}</Typography>
           </TableCell>
           <TableCell>
+            <Button onClick={this.handleDetails} color="primary">
+              Details
+            </Button>
             <Button variant="outlined" color="primary">
               <EditIcon />
             </Button>

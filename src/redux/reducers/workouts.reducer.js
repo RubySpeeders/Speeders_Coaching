@@ -6,6 +6,8 @@ const steps = (state = [], action) => {
       return action.payload;
     case 'SET_WORKOUTS':
       return action.payload;
+    case 'SET_WORKOUT_DETAILS':
+      return action.payload;
     default:
       return state;
   }
