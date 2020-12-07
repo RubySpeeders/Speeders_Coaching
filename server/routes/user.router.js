@@ -187,7 +187,6 @@ router.get('/register/athlete/:tempId', (req, res) => {
 router.put('/register/athlete/:tempId', (req, res) => {
   // PUT route code here
   const temporary_key = req.body.temporary_key;
-  console.log(temporary_key);
   const queryText = `SELECT "user".id from "user"
       JOIN "invite" ON "user".id="invite".athlete_id
       WHERE "temporary_key"=$1;`;
@@ -195,7 +194,6 @@ router.put('/register/athlete/:tempId', (req, res) => {
   pool
     .query(queryText, queryArray)
     .then((dbResponse) => {
-      console.log(dbResponse.rows[0].id);
       const athlete_id = dbResponse.rows[0].id;
       const {
         username,
@@ -224,7 +222,6 @@ router.put('/register/athlete/:tempId', (req, res) => {
       pool
         .query(queryText, queryArray)
         .then((dbResponse) => {
-          console.log(dbResponse.rows);
           const {
             rest_day,
             long_run_day,
@@ -283,9 +280,7 @@ router.post('/register/athlete/:tempId', (req, res) => {
     JOIN "user" on "athlete_info".athlete_id="user".id
     JOIN "invite" on "user".id="invite".athlete_id WHERE "temporary_key"=$1;`;
     const queryArray = [req.body.temporary_key];
-    console.log(req.body, req.body.race_type);
     pool.query(queryText, queryArray).then((dbResponse) => {
-      console.log(dbResponse.rows);
       const athlete_info_id = dbResponse.rows[0].id;
       const other_exercise_list = Object.keys(req.body.other_exercise);
       const athlete_exercise_array = [];
@@ -300,7 +295,7 @@ router.post('/register/athlete/:tempId', (req, res) => {
         }
       }
       Promise.all(athlete_exercise_array).then((dbResponse) => {
-        console.log(athlete_info_id);
+        console.log(req.body);
         const race_type_list = Object.keys(req.body.race_type);
         const athlete_race_array = [];
         //iterate through the array of checked off races

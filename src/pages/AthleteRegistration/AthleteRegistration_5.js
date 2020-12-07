@@ -61,13 +61,18 @@ class AthleteRegistrationFive extends Component {
   };
 
   handleChangeForChecks = (propertyName) => (event) => {
-    this.setState({
-      ...this.state,
-      other_exercise: {
-        ...this.state.other_exercise,
-        [propertyName]: event.target.checked,
+    this.setState(
+      {
+        ...this.state,
+        other_exercise: {
+          ...this.state.other_exercise,
+          [propertyName]: event.target.checked,
+        },
       },
-    });
+      () => {
+        console.log(this.state);
+      }
+    );
   };
 
   //goes back a page

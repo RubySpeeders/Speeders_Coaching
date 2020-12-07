@@ -6,14 +6,14 @@
 
 CREATE TABLE "user" (
     "id" SERIAL PRIMARY KEY,
-    "username" VARCHAR (80) UNIQUE NOT NULL,
-    "password" VARCHAR (1000) NOT NULL,
-    "first_name" VARCHAR (80) NOT NULL,
+    "username" VARCHAR (80) UNIQUE,
+    "password" VARCHAR (1000),
+    "first_name" VARCHAR (80)NOT NULL,
     "last_name" VARCHAR (80) NOT NULL,
-    "city" VARCHAR (80) NOT NULL,
+    "city" VARCHAR (80),
     "email" VARCHAR (80) NOT NULL,
-    "DOB" DATE NOT NULL,
-    "gender" VARCHAR (40) NOT NULL,
+    "DOB" DATE,
+    "gender" VARCHAR (40),
     "role_id" INT REFERENCES "roles",
     "strava_id" VARCHAR (80)
 );
@@ -74,16 +74,16 @@ CREATE TABLE "athlete_info" (
     "coach_id" INT REFERENCES "user",
     "rest_day" INT REFERENCES "days_of_week",
     "long_run_day" INT REFERENCES "days_of_week",
-    "speed_work" BOOLEAN NOT NULL,
-    "run_history" VARCHAR (80) NOT NULL,
-    "avg_weekly_mileage" VARCHAR (80) NOT NULL,
-    "injury" BOOLEAN NOT NULL,
-    "injury_description" VARCHAR (1000) NOT NULL,
-    "medication" BOOLEAN NOT NULL,
-    "medication_description" VARCHAR (1000) NOT NULL,
-    "health_risk_comments" VARCHAR (1000) NOT NULL,
-    "life_outside_running" VARCHAR (1000) NOT NULL,
-    "general_comments" VARCHAR (1000) NOT NULL
+    "speed_work" VARCHAR,
+    "run_history" VARCHAR (80),
+    "avg_weekly_mileage" VARCHAR (80),
+    "injury" BOOLEAN,
+    "injury_description" VARCHAR (1000),
+    "medication" BOOLEAN,
+    "medication_description" VARCHAR (1000),
+    "health_risk_comments" VARCHAR (1000),
+    "life_outside_running" VARCHAR (1000),
+    "general_comments" VARCHAR (1000)
 );
 
 CREATE TABLE "invite" (

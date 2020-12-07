@@ -51,18 +51,33 @@ class AthleteRegistrationThree extends Component {
     });
   };
 
-  handleChangeForChecks = (propertyName) => (event) => {
+  handleChangeForAgree = (event) => {
     if (this.state.agree) {
       this.setState({
         ...this.state,
-        [propertyName]: false,
+        agree: false,
       });
     } else {
       this.setState({
         ...this.state,
-        [propertyName]: true,
+        agree: true,
       });
     }
+  };
+
+  handleChangeForChecks = (propertyName) => (event) => {
+    this.setState(
+      {
+        ...this.state,
+        race_type: {
+          ...this.state.race_type,
+          [propertyName]: event.target.checked,
+        },
+      },
+      () => {
+        console.log(this.state);
+      }
+    );
   };
 
   //goes back a page
@@ -202,7 +217,7 @@ class AthleteRegistrationThree extends Component {
                           control={
                             <Checkbox
                               value={this.state.agree}
-                              onChange={this.handleChangeForChecks('agree')}
+                              onChange={this.handleChangeForAgree}
                               name="agree"
                               color="primary"
                             />

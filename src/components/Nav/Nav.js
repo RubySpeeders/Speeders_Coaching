@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
+import { withRouter } from 'react-router-dom';
 import LogOutButton from '../LogOutButton/LogOutButton';
 import './Nav.css';
 import mapStoreToProps from '../../redux/mapStoreToProps';
@@ -77,4 +78,4 @@ const Nav = (props) => {
   );
 };
 
-export default connect(mapStoreToProps)(Nav);
+export default withRouter(connect(mapStoreToProps)(Nav));

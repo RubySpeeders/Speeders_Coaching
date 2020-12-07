@@ -38,7 +38,9 @@ function Sidebar(props) {
 
   return (
     <Grid item>
-      <Button onClick={handleClick}>Open Menu</Button>
+      <Button onClick={handleClick}>
+        <img src="./running-stick-figure.png" alt="running stick figure" />
+      </Button>
       <Menu
         id="simple-menu"
         anchorEl={anchorEl}

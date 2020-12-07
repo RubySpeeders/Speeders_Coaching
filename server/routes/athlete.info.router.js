@@ -9,8 +9,9 @@ const {
 router.get('/', rejectUnauthenticated, (req, res) => {
   const coach_id = req.user.id;
   let queryText = `SELECT * FROM "user"
-  JOIN "athlete_info" ON "user".id="athlete_info".coach_id
-  WHERE "user".id=$1; ORDER BY "last_name";`;
+  JOIN "athlete_info" ON "user".id="athlete_info".athlete_id
+  JOIN "invite" ON "user".id = "invite".athlete_id
+  WHERE "athlete_info".coach_id = $1 AND "invite".status='2' ORDER BY "last_name";`;
   let queryArray = [coach_id];
 
   pool
