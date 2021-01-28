@@ -4,6 +4,14 @@
 
 _Duration: 2 Week Sprint_
 
+Speeders Coaching is an application for coaches and runners!
+
+Coaches can keep track of their athletes and assign workouts and track whether or not the athlete has finished their workouts. Coaches can also post tips to the tips and tricks board.
+
+Athletes can check their workout schedule and mark complete. Athletes can check the tips and tricks board to see answers to FAQ. Athletes must fill out a multi-step registration to give coaches the information to best create a plan to fit their needs.
+
+Both coaches and athletes can view and participate in the message board and encourage each other.
+
 ## Screen Shot
 
 ### Prerequisites
