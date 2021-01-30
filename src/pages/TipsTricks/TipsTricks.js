@@ -8,7 +8,6 @@ import { Grid, Tabs, Tab, Typography } from '@material-ui/core';
 //custom file import
 import TipsTricksItem from '../../components/TipsTricksItem/TipsTricksItem';
 import AddNewTip from '../../components/AddNewTip/AddNewTip';
-import Sidebar from '../../components/Sidebar/Sidebar';
 import PreRunTab from '../../components/PreRunTab/PreRunTab';
 import PostRunTab from '../../components/PostRunTab/PostRunTab';
 import StridesTab from '../../components/StridesTab/StridesTab';
@@ -36,10 +35,7 @@ function TipsTricks(props) {
         Tips &amp; Tricks
       </Typography>
       <Grid container>
-        <Grid item xs={2}>
-          <Sidebar />
-        </Grid>
-        <Grid item xs={10}>
+        <Grid item xs={12}>
           <div className="opacity">
             <Tabs value={selectedTab} onChange={handleTabChange}>
               <Tab label="Pre-run" />

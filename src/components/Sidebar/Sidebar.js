@@ -4,7 +4,7 @@ import { withRouter } from 'react-router-dom';
 import mapStoreToProps from '../../redux/mapStoreToProps';
 
 //Material-UI imports
-import { Grid, Button, Menu, MenuItem } from '@material-ui/core';
+import { Button, Menu, MenuItem } from '@material-ui/core';
 
 function Sidebar(props) {
   //sends coach to the main all athletes page
@@ -37,9 +37,9 @@ function Sidebar(props) {
   };
 
   return (
-    <Grid item>
+    <div>
       <Button onClick={handleClick} color="secondary">
-        Start Running
+        Menu
       </Button>
       <Menu
         id="simple-menu"
@@ -58,8 +58,11 @@ function Sidebar(props) {
         {props.store.user.role_id === 1 && (
           <MenuItem onClick={addAthlete}>Add an Athlete</MenuItem>
         )}
+        <MenuItem onClick={() => props.dispatch({ type: 'LOGOUT' })}>
+          Log Out
+        </MenuItem>
       </Menu>
-    </Grid>
+    </div>
   );
 }
 

@@ -5,7 +5,6 @@ function* getMessages(action) {
   try {
     //axios call to get all messages
     const response = yield axios.get('/api/message');
-    console.log(response.data);
     yield put({
       type: 'SET_MESSAGES',
       payload: response.data,

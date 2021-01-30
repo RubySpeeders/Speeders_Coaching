@@ -12,7 +12,6 @@ import {
   Typography,
   CircularProgress,
 } from '@material-ui/core';
-import Sidebar from '../../components/Sidebar/Sidebar';
 
 //import for date/time config
 import { DateTime } from 'luxon';
@@ -46,10 +45,7 @@ class AthleteWorkoutDetail extends Component {
           {this.props.store.user.first_name} {this.props.store.user.last_name}
         </Typography>
         <Grid container spacing={2}>
-          <Grid item>
-            <Sidebar />
-          </Grid>
-          <Grid item>
+          <Grid item xs={12}>
             <div className="opacity">
               <Card>
                 <CardContent>

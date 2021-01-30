@@ -20,7 +20,6 @@ import AthleteNotesTab from '../../components/AthleteNotesTab/AthleteNotesTab';
 import AddWorkoutTab from '../../components/AddWorkoutTab/AddWorkoutTab';
 import AthleteContactTab from '../../components/AthleteContactTab/AthleteContactTab';
 import AthleteCalendarTab from '../../components/AthleteCalendarTab/AthleteCalendarTab';
-import Sidebar from '../../components/Sidebar/Sidebar';
 import './AthleteDetails.css';
 
 function AthleteDetails(props) {
@@ -44,10 +43,7 @@ function AthleteDetails(props) {
   return (
     <Container>
       <Grid container>
-        <Grid item xs={2}>
-          <Sidebar />
-        </Grid>
-        <Grid item xs={10}>
+        <Grid item xs={12}>
           <div className="opacity">
             <Typography variant="h4" gutterBottom>
               Athlete Details

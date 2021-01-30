@@ -5,7 +5,7 @@ function* getWorkoutSteps(action) {
   try {
     //axios call to get all workout steps
     const response = yield axios.get('/api/workout/steps');
-    console.log(response.data);
+
     yield put({
       type: 'SET_STEPS',
       payload: response.data,
