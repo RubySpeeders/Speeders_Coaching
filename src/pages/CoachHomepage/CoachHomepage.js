@@ -5,11 +5,6 @@ import { withRouter } from 'react-router-dom';
 
 //Material-UI imports
 import {
-  AppBar,
-  Tabs,
-  Button,
-  Card,
-  CardContent,
   Grid,
   Container,
   Typography,
@@ -23,7 +18,6 @@ import {
 
 //file imoprts
 import AthleteInfo from '../../components/AthleteInfo/AthleteInfo';
-import Sidebar from '../../components/Sidebar/Sidebar';
 import './CoachHomepage.css';
 
 class CoachHomepage extends Component {
@@ -36,10 +30,7 @@ class CoachHomepage extends Component {
     return (
       <Container>
         <Grid container spacing={4}>
-          <Grid item>
-            <Sidebar />
-          </Grid>
-          <Grid item>
+          <Grid item xs={12}>
             <div className="opacity">
               <Typography variant="h4" component="h3">
                 Your Athletes

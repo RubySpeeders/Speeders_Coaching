@@ -295,7 +295,6 @@ router.post('/register/athlete/:tempId', (req, res) => {
         }
       }
       Promise.all(athlete_exercise_array).then((dbResponse) => {
-        console.log(req.body);
         const race_type_list = Object.keys(req.body.race_type);
         const athlete_race_array = [];
         //iterate through the array of checked off races

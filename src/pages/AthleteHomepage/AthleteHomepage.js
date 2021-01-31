@@ -22,7 +22,7 @@ import {
 } from '@material-ui/core';
 
 //custom file import
-import Sidebar from '../../components/Sidebar/Sidebar';
+
 import AthleteWorkoutTableItem from '../../components/AthleteWorkoutTableItem/AthleteWorkoutTableItem';
 
 class AthleteHomepage extends Component {
@@ -48,10 +48,7 @@ class AthleteHomepage extends Component {
     return (
       <Container>
         <Grid container spacing={4}>
-          <Grid item xs={2}>
-            <Sidebar />
-          </Grid>
-          <Grid item xs={10}>
+          <Grid item xs={12}>
             <div className="opacity">
               <Card>
                 <CardContent>

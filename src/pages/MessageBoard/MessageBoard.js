@@ -16,7 +16,6 @@ import {
 
 //custom file import
 import MessageBoardItem from '../../components/MessageBoardItem/MessageBoardItem';
-import Sidebar from '../../components/Sidebar/Sidebar';
 
 class MessageBoard extends Component {
   state = {
@@ -55,10 +54,7 @@ class MessageBoard extends Component {
           </Grid>
         </Grid>
         <Grid container justify="space-evenly">
-          <Grid item xs={2}>
-            <Sidebar />
-          </Grid>
-          <Grid item xs={10}>
+          <Grid item xs={12}>
             <div className="opacity">
               <Grid container spacing={2}>
                 <Grid item xs={12}>
