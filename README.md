@@ -45,7 +45,7 @@ Both coaches and athletes can view and participate in the message board and enco
 
 1. You must register as a coach or an athlete. Only coaches have the ability to invite athletes to sign up.
 2. Once a coach signs in, they will see a list of their athletes. You can click on the athletes to see more information about each athlete.
-3. One of the tabs for the athlete details is `Assign a Workout` which is where a coach would assign a workout to an athlete.
+3. One of the tabs for the athlete details is `Assign Workout` which is where a coach would assign a workout to an athlete.
 4. Click on the `Menu` button in the top right corner to go to Tips & Tricks or the Message Board.
 5. Coaches can post a new tip under the appropriate category.
 6. Anyone can post on the message board!
