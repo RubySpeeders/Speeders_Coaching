@@ -5,9 +5,6 @@ import { withRouter } from 'react-router-dom';
 
 //Material-UI imports
 import {
-  AppBar,
-  Tabs,
-  Button,
   Card,
   CardContent,
   Grid,

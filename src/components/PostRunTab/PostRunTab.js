@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import mapStoreToProps from '../../redux/mapStoreToProps';
 
 //MATERIAL-UI imports
-import { Box, Grid, TextField, Typography } from '@material-ui/core';
+import { Typography } from '@material-ui/core';
 
 //custom file imports
 import TipsTricksItem from '../TipsTricksItem/TipsTricksItem';

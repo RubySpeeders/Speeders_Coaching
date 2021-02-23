@@ -3,16 +3,7 @@ import { connect, useDispatch } from 'react-redux';
 import mapStoreToProps from '../../redux/mapStoreToProps';
 
 //Material-UI
-import {
-  Box,
-  Tabs,
-  Tab,
-  Container,
-  Grid,
-  TextField,
-  Button,
-  Typography,
-} from '@material-ui/core';
+import { Box, Tabs, Tab, Container, Grid, Typography } from '@material-ui/core';
 
 //custom file imports
 import AthleteDetailsTab from '../../components/AthleteDetailsTab/AthleteDetailsTab';

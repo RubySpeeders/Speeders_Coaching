@@ -8,8 +8,6 @@ import Swal from 'sweetalert2';
 //MATERIAL-UI imports
 import {
   Box,
-  Card,
-  CardContent,
   Container,
   Button,
   Typography,

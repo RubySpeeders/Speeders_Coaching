@@ -4,13 +4,10 @@ import mapStoreToProps from '../../redux/mapStoreToProps';
 
 //MATERIAL-UI imports
 import {
-  Box,
   Button,
   Card,
   CardActions,
   CardContent,
-  Grid,
-  TextField,
   Typography,
 } from '@material-ui/core';
 import EditIcon from '@material-ui/icons/Edit';

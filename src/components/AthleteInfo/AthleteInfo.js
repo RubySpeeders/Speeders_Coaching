@@ -3,14 +3,7 @@ import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 
 //Material-UI imports
-import {
-  Button,
-  Card,
-  CardContent,
-  Typography,
-  TableCell,
-  TableRow,
-} from '@material-ui/core';
+import { Button, Typography, TableCell, TableRow } from '@material-ui/core';
 import DeleteIcon from '@material-ui/icons/Delete';
 
 class AthleteInfo extends Component {

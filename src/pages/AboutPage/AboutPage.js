@@ -1,7 +1,7 @@
 import React from 'react';
 
 //MATERIAL-UI imports
-import { Typography, Grid, Container, Box } from '@material-ui/core';
+import { Typography } from '@material-ui/core';
 
 // This is one of our simplest components
 // It doesn't have local state, so it can be a function component.

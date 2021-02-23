@@ -6,7 +6,7 @@ import mapStoreToProps from '../../redux/mapStoreToProps';
 import { Grid, Tabs, Tab, Typography } from '@material-ui/core';
 
 //custom file import
-import TipsTricksItem from '../../components/TipsTricksItem/TipsTricksItem';
+
 import AddNewTip from '../../components/AddNewTip/AddNewTip';
 import PreRunTab from '../../components/PreRunTab/PreRunTab';
 import PostRunTab from '../../components/PostRunTab/PostRunTab';

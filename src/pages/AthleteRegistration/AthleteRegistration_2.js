@@ -4,9 +4,6 @@ import mapStoreToProps from '../../redux/mapStoreToProps';
 
 //MATERIAL-UI imports
 import {
-  Container,
-  Card,
-  CardContent,
   Button,
   Grid,
   Select,

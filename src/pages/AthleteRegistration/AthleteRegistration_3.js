@@ -5,8 +5,6 @@ import mapStoreToProps from '../../redux/mapStoreToProps';
 //MATERIAL-UI imports
 import {
   Container,
-  Card,
-  CardContent,
   Typography,
   Button,
   Box,
@@ -102,13 +100,13 @@ class AthleteRegistrationThree extends Component {
         />
       );
     });
-    const races = this.props.store.races.map((item, index) => {
-      return (
-        <MenuItem value={item.id} key={index}>
-          {item.description}
-        </MenuItem>
-      );
-    });
+    // const races = this.props.store.races.map((item, index) => {
+    //   return (
+    //     <MenuItem value={item.id} key={index}>
+    //       {item.description}
+    //     </MenuItem>
+    //   );
+    // });
     return (
       <Container>
         <Grid container justify="space-evenly">

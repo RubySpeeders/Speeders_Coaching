@@ -4,7 +4,6 @@ import mapStoreToProps from '../../redux/mapStoreToProps';
 //Material-UI
 import {
   Container,
-  Box,
   Grid,
   Card,
   CardContent,

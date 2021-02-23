@@ -34,7 +34,6 @@ router.get('/details/:id', rejectUnauthenticated, (req, res) => {
   pool
     .query(queryText, [req.params.id])
     .then((result) => {
-      console.log(result.rows);
       if (result.rows.length < 1) {
         res.sendStatus(204);
       }

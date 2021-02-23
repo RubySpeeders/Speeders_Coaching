@@ -6,7 +6,6 @@ import { withRouter } from 'react-router-dom';
 //Material-UI
 //MATERIAL-UI imports
 import {
-  Box,
   Button,
   Card,
   CardActions,
@@ -15,7 +14,7 @@ import {
   TextField,
   Typography,
 } from '@material-ui/core';
-import { makeStyles, withStyles } from '@material-ui/core/styles';
+import { withStyles } from '@material-ui/core/styles';
 import EditIcon from '@material-ui/icons/Edit';
 import DeleteIcon from '@material-ui/icons/Delete';
 import SaveAltIcon from '@material-ui/icons/SaveAlt';

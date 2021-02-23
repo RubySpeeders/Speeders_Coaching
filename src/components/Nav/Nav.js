@@ -1,20 +1,11 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
-import LogOutButton from '../LogOutButton/LogOutButton';
 import './Nav.css';
 import mapStoreToProps from '../../redux/mapStoreToProps';
 
 //material-ui imports
-import {
-  Typography,
-  Container,
-  Button,
-  Menu,
-  MenuItem,
-  Box,
-} from '@material-ui/core';
+import { Typography, Container, Box } from '@material-ui/core';
 import { withStyles } from '@material-ui/core/styles';
 import Sidebar from '../Sidebar/Sidebar';
 

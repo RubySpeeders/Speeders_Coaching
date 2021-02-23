@@ -5,22 +5,7 @@ import { withRouter } from 'react-router-dom';
 import { DateTime } from 'luxon';
 
 //Material-UI imports
-import {
-  AppBar,
-  Tabs,
-  Button,
-  Card,
-  CardContent,
-  Grid,
-  Container,
-  Typography,
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TableRow,
-  TableContainer,
-} from '@material-ui/core';
+import { Button, Typography, TableCell, TableRow } from '@material-ui/core';
 
 class AthleteWorkoutTableItem extends Component {
   handleDetails = (e) => {

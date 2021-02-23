@@ -1,15 +1,7 @@
 import React, { Component } from 'react';
 
 //Material-UI imports
-import {
-  Button,
-  Grid,
-  Container,
-  Card,
-  CardContent,
-  Typography,
-  CircularProgress,
-} from '@material-ui/core';
+import { Grid, Typography } from '@material-ui/core';
 
 class AthleteWorkoutDetailItem extends Component {
   render() {

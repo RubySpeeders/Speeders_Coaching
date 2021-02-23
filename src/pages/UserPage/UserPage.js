@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import LogOutButton from '../../components/LogOutButton/LogOutButton';
 import mapStoreToProps from '../../redux/mapStoreToProps';
 
 //MATERIAL-UI imports

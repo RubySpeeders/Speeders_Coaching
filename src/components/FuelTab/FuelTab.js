@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import mapStoreToProps from '../../redux/mapStoreToProps';
 
 //MATERIAL-UI imports
-import { Box, TextField, Typography } from '@material-ui/core';
+import { Typography } from '@material-ui/core';
 
 //custom file imports
 import TipsTricksItem from '../TipsTricksItem/TipsTricksItem';
@@ -13,6 +13,8 @@ class FuelTab extends Component {
     const tips = this.props.store.tips.map((item, index) => {
       if (item.type === 5) {
         return <TipsTricksItem key={index} item={item} />;
+      } else {
+        return <></>;
       }
     });
     return (
